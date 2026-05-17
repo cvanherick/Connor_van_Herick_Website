@@ -25,13 +25,13 @@ const About = () => {
           className="card max-w-3xl mx-auto p-12 text-lg leading-relaxed text-slate-200"
         >
           <p className="mb-8 text-xl">
-            Computer Science student at UC Berkeley with experience leading machine learning projects, building secure systems, and designing scalable software products.
+            Computer Science student at UC Berkeley targeting full-time software engineering and machine learning engineering roles after graduation.
           </p>
           <p className="mb-8 text-xl">
-            My work spans predictive modeling, AI-driven decision systems, cryptographic infrastructure, and full-stack product thinking.
+            My work spans machine learning engineering, predictive modeling, secure systems, interpreters, computer architecture, and product-minded software.
           </p>
           <p className="text-xl">
-            I'm especially interested in the future of intelligent systems, startups, and human-AI collaboration.
+            I'm especially interested in building reliable ML systems and software that turns complex data into useful decisions.
           </p>
         </motion.div>
 
@@ -82,4 +82,3 @@ const About = () => {
 }
 
 export default About
-

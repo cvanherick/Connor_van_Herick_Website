@@ -1,42 +1,44 @@
 import { motion } from 'framer-motion'
-import { Github, ExternalLink } from 'lucide-react'
+import { ExternalLink, Github } from 'lucide-react'
 import { Project } from '../types'
 
 const projects: Project[] = [
   {
-    title: 'Secure File Sharing System',
-    description: 'Built secure encrypted file storage and sharing system with invitation-based access and hierarchical revocation.',
-    tech: ['Go', 'Cryptography', 'System Design', 'Access Control'],
-    impact: '50+ adversarial tests passed • Production-ready security',
-    github: 'https://github.com/secure-file-system',
-  },
-  {
     title: 'Retail ML Forecasting Dashboard',
-    description: 'Predictive staffing forecasts for 80+ stores using advanced ensemble models.',
-    tech: ['Python', 'TensorFlow', 'XGBoost', 'Databricks'],
-    impact: 'Deployed across Arc\'teryx retail chain • Operational impact',
-    github: 'https://github.com/retail-forecasting',
+    description: 'Led development of predictive staffing forecasts using retail traffic, sales, seasonality, and external-factor features.',
+    tech: ['Python', 'TensorFlow', 'XGBoost', 'Databricks', 'SARIMAX'],
+    impact: 'Forecasting for 80+ Arc\'teryx stores • 9-person ML team lead',
   },
   {
-    title: 'Procedural Tile World + Enemy AI',
-    description: 'Procedural world generation with seeded maps and DFS pathfinding enemy AI.',
-    tech: ['Java', 'DFS', 'OOP'],
-    impact: 'Complete game engine • Scalable AI architecture',
-    github: 'https://github.com/tile-world-engine',
+    title: 'Treatment Outcome Prediction',
+    description: 'Modeled behavioral health treatment outcomes from county patient records using ensemble methods and interpretable ML.',
+    tech: ['Python', 'LightGBM', 'Random Forests', 'Neural Networks', 'SHAP'],
+    impact: '46K+ patient records • AUC 0.85',
+  },
+  {
+    title: 'Vision-Guided Robotic Game Player',
+    description: 'Built a ROS 2 autonomy stack that lets a UR7e robot arm perceive, plan, and place physical game pieces.',
+    tech: ['Python', 'ROS 2', 'MoveIt 2', 'RealSense', 'NumPy'],
+    impact: 'End-to-end hardware pipeline • Perception, planning, control',
+    demo: 'https://sites.google.com/berkeley.edu/blokushumanvsrobot/intro?authuser=0',
+  },
+  {
+    title: 'Secure File Sharing System',
+    description: 'Built encrypted file storage and sharing with invitation-based access, secure user state, and hierarchical revocation.',
+    tech: ['Go', 'Cryptography', 'System Design', 'Access Control'],
+    impact: '50+ adversarial tests passed • Security-focused systems design',
+  },
+  {
+    title: 'Performance Attribution Dashboard',
+    description: 'Created an interactive portfolio analytics app for Brinson-Fachler attribution using uploaded portfolio snapshots.',
+    tech: ['Python', 'Dash', 'Plotly', 'Pandas', 'DuckDB'],
+    impact: 'Single-page analytics tool • Local data processing + visualizations',
   },
   {
     title: 'RISC-V CPU Design',
-    description: 'Pipelined 32-register CPU with forwarding, hazard detection and full ISA implementation.',
-    tech: ['C', 'Verilog', 'Logisim'],
-    impact: 'Functional 5-stage pipeline • Verified design',
-    github: 'https://github.com/riscv-cpu',
-  },
-  {
-    title: 'Scheme Interpreter',
-    description: 'Full Scheme interpreter with tail recursion, closures, and special forms support.',
-    tech: ['Python', 'Language Design', 'Parsing'],
-    impact: 'Complete Scheme subset • Educational tool',
-    github: 'https://github.com/scheme-interpreter',
+    description: 'Designed a RISC-V CPU datapath with ALU, register file, memory, immediate generation, and control logic.',
+    tech: ['Logisim', 'RISC-V', 'Digital Logic', 'C'],
+    impact: 'Functional CPU components • Unit and integration test coverage',
   },
 ]
 
@@ -54,7 +56,7 @@ const Projects = () => {
             Projects
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Technical depth through production-grade systems and ML projects.
+            Selected work across machine learning, robotics, systems, and data products.
           </p>
         </motion.div>
 
@@ -94,7 +96,7 @@ const Projects = () => {
                   {project.impact}
                 </p>
                 
-                {/* Buttons */}
+                {/* Links */}
                 <div className="flex gap-4 pt-4">
                   {project.github && (
                     <a href={project.github} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-slate-900/50 hover:bg-slate-800/80 border border-slate-700/50 text-slate-300 hover:text-accent transition-all group-hover:scale-105 flex-1 justify-center">
@@ -102,10 +104,18 @@ const Projects = () => {
                       Code
                     </a>
                   )}
-                  <a href="#" className="flex items-center gap-2 p-4 rounded-2xl bg-gradient-to-r from-accent to-blue-500 hover:from-blue-500 hover:to-accent text-white font-medium shadow-lg hover:shadow-accent/30 transition-all group-hover:scale-105 flex-1 justify-center">
-                    <ExternalLink size={20} />
-                    Live
-                  </a>
+                  {project.demo && (
+                    <a href={project.demo} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-gradient-to-r from-accent to-blue-500 hover:from-blue-500 hover:to-accent text-white font-medium shadow-lg hover:shadow-accent/30 transition-all group-hover:scale-105 flex-1 justify-center">
+                      <ExternalLink size={20} />
+                      Project Site
+                    </a>
+                  )}
+                  {!project.github && !project.demo && (
+                    <span className="flex items-center gap-2 p-4 rounded-2xl bg-slate-900/50 border border-slate-700/50 text-slate-400 flex-1 justify-center">
+                      <Github size={20} />
+                      Repo cleanup in progress
+                    </span>
+                  )}
                 </div>
               </div>
             </motion.div>

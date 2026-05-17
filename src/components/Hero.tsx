@@ -41,7 +41,7 @@ const Hero = () => {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="text-2xl md:text-3xl font-medium text-slate-200 mb-6 max-w-2xl mx-auto leading-relaxed"
         >
-          Computer Science @ UC Berkeley
+          UC Berkeley CS | Machine Learning Engineer Intern @ LendingClub
         </motion.p>
 
         <motion.p 
@@ -50,7 +50,7 @@ const Hero = () => {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="text-xl md:text-2xl text-slate-400 mb-12 max-w-xl mx-auto leading-relaxed"
         >
-          Building machine learning systems, intelligent products, and scalable software.
+          Building production-minded software and machine learning systems.
         </motion.p>
 
         <motion.p 
@@ -59,7 +59,7 @@ const Hero = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-lg text-slate-500 mb-12 max-w-2xl mx-auto leading-relaxed italic"
         >
-          Machine learning lead, systems builder, and product-focused engineer with experience deploying predictive models across 80+ retail stores.
+          Targeting full-time software engineering and machine learning engineering roles after graduation.
         </motion.p>
 
         <motion.div 
@@ -68,9 +68,9 @@ const Hero = () => {
           transition={{ delay: 0.6, duration: 0.8 }}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20"
         >
-          <Link to="projects" smooth={true} duration={800}>
+          <Link to="experience" smooth={true} duration={800}>
             <motion.button className="btn btn-primary group flex items-center gap-2 px-8 py-4 text-lg">
-              View Projects
+              View Experience
               <ArrowDown size={20} className="group-hover:translate-y-1 transition-transform" />
             </motion.button>
           </Link>

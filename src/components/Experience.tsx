@@ -1,7 +1,17 @@
 import { motion } from 'framer-motion'
-import { BrainCog, Users, Briefcase } from 'lucide-react'
+import { BrainCog, BriefcaseBusiness, Users, Briefcase } from 'lucide-react'
 
 const experiences = [
+  {
+    title: 'Machine Learning Engineer Intern',
+    company: 'LendingClub — Collections Strategy',
+    duration: 'Summer 2026',
+    bullets: [
+      'Contributing to machine learning engineering work on the Collections Strategy team',
+      'Working at the intersection of predictive modeling, financial technology, and production decision systems',
+      'Building practical experience with ML systems in a regulated, business-critical environment',
+    ]
+  },
   {
     title: 'Machine Learning Project Lead',
     company: "Arc'teryx — Data Science Society @ UC Berkeley",
@@ -49,7 +59,7 @@ const Experience = () => {
             Experience
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Professional experience leading ML teams and delivering production impact.
+            Applied machine learning, data science, and technical leadership experience.
           </p>
         </motion.div>
 
@@ -72,9 +82,10 @@ const Experience = () => {
                 index === 1 ? 'bg-gradient-to-r from-green-500 to-emerald-500 shadow-green-500/30' :
                 'bg-gradient-to-r from-orange-500 to-amber-500 shadow-orange-500/30'
               }`}>
-                {index === 0 && <BrainCog size={32} className="text-white" />}
-                {index === 1 && <Users size={32} className="text-white" />}
-                {index === 2 && <Briefcase size={32} className="text-white" />}
+                {index === 0 && <BriefcaseBusiness size={32} className="text-white" />}
+                {index === 1 && <BrainCog size={32} className="text-white" />}
+                {index === 2 && <Users size={32} className="text-white" />}
+                {index === 3 && <Briefcase size={32} className="text-white" />}
               </div>
 
               <div className={`card p-8 lg:p-10 shadow-2xl hover:shadow-accent/20 transition-all duration-500 hover:-translate-y-3 rounded-3xl backdrop-blur-xl border border-slate-800/50`}>
@@ -104,4 +115,3 @@ const Experience = () => {
 }
 
 export default Experience
-

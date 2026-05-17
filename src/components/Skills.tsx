@@ -15,16 +15,20 @@ const skills = [
   { name: 'LightGBM', icon: BrainCog, category: 'ML/Data' },
   { name: 'Pandas', icon: Database, category: 'ML/Data' },
   { name: 'NumPy', icon: Layers, category: 'ML/Data' },
+  { name: 'SHAP', icon: BrainCog, category: 'ML/Data' },
   
   // Systems
   { name: 'Cryptography', icon: Lock, category: 'Systems' },
   { name: 'CPU Arch', icon: Zap, category: 'Systems' },
   { name: 'System Design', icon: Layers, category: 'Systems' },
+  { name: 'ROS 2', icon: Layers, category: 'Systems' },
   
   // Tools
   { name: 'Git', icon: Github, category: 'Tools' },
   { name: 'Databricks', icon: Terminal, category: 'Tools' },
   { name: 'Docker', icon: Layers, category: 'Tools' },
+  { name: 'Dash / Plotly', icon: Database, category: 'Tools' },
+  { name: 'DuckDB', icon: Database, category: 'Tools' },
 ]
 
 const Skills = () => {
@@ -112,4 +116,3 @@ const SkillBadge = ({ skill, index }: { skill: Skill, index: number }) => (
 )
 
 export default Skills
-
