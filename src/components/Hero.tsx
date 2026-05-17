@@ -26,6 +26,19 @@ const Hero = () => {
       </div>
 
       <div className="max-w-4xl text-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mx-auto mb-8 h-36 w-36 md:h-44 md:w-44 rounded-full border border-white/20 bg-slate-900/60 p-1 shadow-2xl shadow-accent/20"
+        >
+          <img
+            src="./assets/headshot.jpeg"
+            alt="Connor van Herick"
+            className="h-full w-full rounded-full object-cover object-[50%_22%]"
+          />
+        </motion.div>
+
         <motion.h1 
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,7 +97,7 @@ const Hero = () => {
             Resume
           </motion.a>
           <motion.a 
-            href="https://linkedin.com/in/connorvanherick" 
+            href="https://www.linkedin.com/in/connor-vanherick/" 
             target="_blank" 
             rel="noopener"
             className="btn btn-secondary group flex items-center gap-2 px-8 py-4 text-lg"

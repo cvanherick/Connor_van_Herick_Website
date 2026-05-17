@@ -60,7 +60,7 @@ const Navbar = () => {
               </Link>
             ))}
             <a 
-              href="https://linkedin.com/in/connorvanherick" 
+              href="https://www.linkedin.com/in/connor-vanherick/" 
               target="_blank" 
               rel="noopener"
               className="ml-4 px-6 py-2 bg-gradient-to-r from-accent to-blue-500 hover:from-blue-500 hover:to-accent text-white font-semibold rounded-xl shadow-lg hover:shadow-accent/30 hover:scale-[1.02] transition-all duration-300"
@@ -102,7 +102,7 @@ const Navbar = () => {
                 </Link>
               ))}
               <a 
-                href="https://linkedin.com/in/connorvanherick" 
+                href="https://www.linkedin.com/in/connor-vanherick/" 
                 target="_blank" 
                 rel="noopener"
                 className="py-3 px-4 bg-gradient-to-r from-accent to-blue-500 hover:from-blue-500 hover:to-accent text-white font-semibold rounded-xl shadow-lg"

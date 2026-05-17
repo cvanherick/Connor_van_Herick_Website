@@ -1,11 +1,22 @@
 import { motion } from 'framer-motion'
 import { BrainCog, BriefcaseBusiness, Users, Briefcase } from 'lucide-react'
 
-const experiences = [
+interface ExperienceItem {
+  title: string
+  company: string
+  duration: string
+  bullets: string[]
+  logo?: string
+  logoAlt?: string
+}
+
+const experiences: ExperienceItem[] = [
   {
     title: 'Machine Learning Engineer Intern',
     company: 'LendingClub — Collections Strategy',
     duration: 'Summer 2026',
+    logo: './assets/lendingclub-logo.svg',
+    logoAlt: 'LendingClub logo',
     bullets: [
       'Contributing to machine learning engineering work on the Collections Strategy team',
       'Working at the intersection of predictive modeling, financial technology, and production decision systems',
@@ -41,6 +52,16 @@ const experiences = [
       'Leadership in high-pressure outdoor education environments',
       'Led teams of 20+ campers in wilderness settings',
       'Developed crisis management and team coordination skills',
+    ]
+  },
+  {
+    title: 'Membership Officer & Incoming Treasurer',
+    company: 'UC Berkeley Climbing Club',
+    duration: '2025 – 2027',
+    bullets: [
+      'Served as Membership Officer for the 2025-2026 school year',
+      'Incoming Treasurer for the 2026-2027 school year',
+      'Supported club operations, member coordination, and student community building',
     ]
   },
 ]
@@ -82,10 +103,18 @@ const Experience = () => {
                 index === 1 ? 'bg-gradient-to-r from-green-500 to-emerald-500 shadow-green-500/30' :
                 'bg-gradient-to-r from-orange-500 to-amber-500 shadow-orange-500/30'
               }`}>
-                {index === 0 && <BriefcaseBusiness size={32} className="text-white" />}
+                {exp.logo && (
+                  <img
+                    src={exp.logo}
+                    alt={exp.logoAlt ?? `${exp.company} logo`}
+                    className="h-12 w-12 object-contain"
+                  />
+                )}
+                {!exp.logo && index === 0 && <BriefcaseBusiness size={32} className="text-white" />}
                 {index === 1 && <BrainCog size={32} className="text-white" />}
                 {index === 2 && <Users size={32} className="text-white" />}
                 {index === 3 && <Briefcase size={32} className="text-white" />}
+                {index === 4 && <Users size={32} className="text-white" />}
               </div>
 
               <div className={`card p-8 lg:p-10 shadow-2xl hover:shadow-accent/20 transition-all duration-500 hover:-translate-y-3 rounded-3xl backdrop-blur-xl border border-slate-800/50`}>

@@ -1,0 +1,21 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">LendingClub logo mark</title>
+  <rect width="512" height="512" fill="transparent"/>
+  <g fill="#ef4129">
+    <rect x="136" y="136" width="45" height="45" rx="2"/>
+    <rect x="201" y="136" width="45" height="45" rx="2"/>
+    <rect x="266" y="136" width="45" height="45" rx="2"/>
+    <rect x="331" y="136" width="45" height="45" rx="2"/>
+    <rect x="136" y="201" width="45" height="45" rx="2"/>
+    <rect x="266" y="201" width="45" height="45" rx="2"/>
+    <rect x="331" y="201" width="45" height="45" rx="2"/>
+    <rect x="136" y="266" width="45" height="45" rx="2"/>
+    <rect x="201" y="266" width="45" height="45" rx="2"/>
+    <rect x="266" y="266" width="45" height="45" rx="2"/>
+    <rect x="331" y="266" width="45" height="45" rx="2"/>
+    <rect x="136" y="331" width="45" height="45" rx="2"/>
+    <rect x="201" y="331" width="45" height="45" rx="2"/>
+    <rect x="266" y="331" width="45" height="45" rx="2"/>
+    <rect x="331" y="331" width="45" height="45" rx="2"/>
+  </g>
+</svg>

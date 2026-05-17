@@ -8,6 +8,8 @@ const projects: Project[] = [
     description: 'Led development of predictive staffing forecasts using retail traffic, sales, seasonality, and external-factor features.',
     tech: ['Python', 'TensorFlow', 'XGBoost', 'Databricks', 'SARIMAX'],
     impact: 'Forecasting for 80+ Arc\'teryx stores • 9-person ML team lead',
+    logo: './assets/arcteryx-logo.png',
+    logoAlt: 'Arc\'teryx logo',
   },
   {
     title: 'Treatment Outcome Prediction',
@@ -74,7 +76,15 @@ const Projects = () => {
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-48 rounded-t-3xl" />
               
-              <div className="relative h-48 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-blue-900/20 transition-all duration-700" />
+              <div className="relative h-48 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-blue-900/20 transition-all duration-700 flex items-center justify-center">
+                {project.logo && (
+                  <img
+                    src={project.logo}
+                    alt={project.logoAlt ?? `${project.title} logo`}
+                    className="h-24 w-24 object-contain invert opacity-80 drop-shadow-2xl transition-all duration-500 group-hover:scale-110 group-hover:opacity-100"
+                  />
+                )}
+              </div>
               
               <div className="p-8 relative z-10">
                 <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-accent transition-colors duration-300">

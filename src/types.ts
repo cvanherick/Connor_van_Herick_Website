@@ -5,6 +5,8 @@ export interface Project {
   impact: string;
   github?: string;
   demo?: string;
+  logo?: string;
+  logoAlt?: string;
 }
 
 export interface Experience {
@@ -13,4 +15,3 @@ export interface Experience {
   duration: string;
   description: string;
 }
-
