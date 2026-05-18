@@ -41,6 +41,8 @@ const projects: Project[] = [
     description: 'Designed a RISC-V CPU datapath with ALU, register file, memory, immediate generation, and control logic.',
     tech: ['Logisim', 'RISC-V', 'Digital Logic', 'C'],
     impact: 'Functional CPU components • Unit and integration test coverage',
+    github: 'https://github.com/cvanherick/riscv-cpu-logisim',
+    demo: './case-studies/riscv-cpu.html',
   },
 ]
 
