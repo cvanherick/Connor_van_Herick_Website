@@ -4,14 +4,6 @@ import { Project } from '../types'
 
 const projects: Project[] = [
   {
-    title: 'Retail ML Forecasting Dashboard',
-    description: 'Led development of predictive staffing forecasts using retail traffic, sales, seasonality, and external-factor features.',
-    tech: ['Python', 'TensorFlow', 'XGBoost', 'Databricks', 'SARIMAX'],
-    impact: 'Forecasting for 80+ Arc\'teryx stores • 9-person ML team lead',
-    logo: './assets/arcteryx-logo.png',
-    logoAlt: 'Arc\'teryx logo',
-  },
-  {
     title: 'Treatment Outcome Prediction',
     description: 'Modeled behavioral health treatment outcomes from county patient records using ensemble methods and interpretable ML.',
     tech: ['Python', 'LightGBM', 'Random Forests', 'Neural Networks', 'SHAP'],

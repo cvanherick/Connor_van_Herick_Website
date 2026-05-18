@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { BrainCog, BriefcaseBusiness, Users, Briefcase } from 'lucide-react'
+import { BrainCog, Briefcase, BriefcaseBusiness, Users } from 'lucide-react'
 
 interface ExperienceItem {
   title: string
@@ -18,15 +18,17 @@ const experiences: ExperienceItem[] = [
     logo: './assets/lendingclub-logo.svg',
     logoAlt: 'LendingClub logo',
     bullets: [
-      'Contributing to machine learning engineering work on the Collections Strategy team',
+      'Incoming Machine Learning Engineer Intern on the Collections Strategy team',
       'Working at the intersection of predictive modeling, financial technology, and production decision systems',
-      'Building practical experience with ML systems in a regulated, business-critical environment',
+      'Focused on practical ML systems in a regulated, business-critical environment',
     ]
   },
   {
     title: 'Machine Learning Project Lead',
     company: "Arc'teryx — Data Science Society @ UC Berkeley",
     duration: 'Jan 2025 – May 2025',
+    logo: './assets/arcteryx-logo.png',
+    logoAlt: 'Arc\'teryx logo',
     bullets: [
       'Led 9-person team building predictive ML models for retail labor allocation',
       'Supported 80+ North American stores with operational staffing insights',
@@ -84,48 +86,49 @@ const Experience = () => {
           </p>
         </motion.div>
 
-        <div className="lg:grid lg:grid-cols-12 relative">
-          {/* Vertical timeline */}
-          <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-slate-800 via-accent/50 to-slate-800 z-0"></div>
-          
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.title}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`lg:col-span-6 mb-16 lg:mb-24 ${index % 2 === 0 ? 'lg:pr-12' : 'lg:pl-12 lg:text-right'}`}
+              className="card group overflow-hidden rounded-3xl hover:shadow-2xl hover:shadow-accent/20 transition-all duration-700 hover:-translate-y-4 overflow-clip"
+              whileHover={{ y: -16 }}
             >
-              {/* Timeline dot */}
-              <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mx-auto lg:mx-0 shadow-2xl mb-8 z-10 ${
-                index === 0 ? 'bg-gradient-to-r from-accent to-blue-500 shadow-accent/30' :
-                index === 1 ? 'bg-gradient-to-r from-green-500 to-emerald-500 shadow-green-500/30' :
-                'bg-gradient-to-r from-orange-500 to-amber-500 shadow-orange-500/30'
-              }`}>
+              <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-44 rounded-t-3xl" />
+
+              <div className="relative h-44 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-blue-900/20 transition-all duration-700 flex items-center justify-center">
                 {exp.logo && (
-                  <img
-                    src={exp.logo}
-                    alt={exp.logoAlt ?? `${exp.company} logo`}
-                    className="h-12 w-12 object-contain"
-                  />
+                  <div className="h-24 w-24 rounded-3xl bg-white/95 flex items-center justify-center p-5 shadow-2xl transition-all duration-500 group-hover:scale-110">
+                    <img
+                      src={exp.logo}
+                      alt={exp.logoAlt ?? `${exp.company} logo`}
+                      className={`h-full w-full object-contain ${exp.company.includes("Arc'teryx") ? 'invert-0' : ''}`}
+                    />
+                  </div>
                 )}
-                {!exp.logo && index === 0 && <BriefcaseBusiness size={32} className="text-white" />}
-                {index === 1 && <BrainCog size={32} className="text-white" />}
-                {index === 2 && <Users size={32} className="text-white" />}
-                {index === 3 && <Briefcase size={32} className="text-white" />}
-                {index === 4 && <Users size={32} className="text-white" />}
+                {!exp.logo && (
+                  <div className="h-24 w-24 rounded-3xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent shadow-2xl transition-all duration-500 group-hover:scale-110">
+                    {index === 2 && <Users size={44} />}
+                    {index === 3 && <Briefcase size={44} />}
+                    {index === 4 && <Users size={44} />}
+                    {index > 4 && <BriefcaseBusiness size={44} />}
+                  </div>
+                )}
               </div>
 
-              <div className={`card p-8 lg:p-10 shadow-2xl hover:shadow-accent/20 transition-all duration-500 hover:-translate-y-3 rounded-3xl backdrop-blur-xl border border-slate-800/50`}>
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
-                  <h3 className="text-3xl font-bold text-white mb-2 lg:mb-0">{exp.title}</h3>
-                  <div className="flex items-center gap-4 text-slate-400 mt-2 lg:mt-0">
-                    <span className="font-medium text-slate-200">{exp.company}</span>
-                    <span>•</span>
+              <div className="p-8 relative z-10">
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 text-accent font-semibold mb-3">
+                    <BrainCog size={18} />
                     <span>{exp.duration}</span>
                   </div>
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-accent transition-colors duration-300">{exp.title}</h3>
+                  <p className="text-slate-300 font-medium leading-relaxed">{exp.company}</p>
                 </div>
+
                 <ul className="space-y-3 text-slate-300 leading-relaxed">
                   {exp.bullets.map((bullet, bIndex) => (
                     <li key={bIndex} className="flex items-start gap-3">
