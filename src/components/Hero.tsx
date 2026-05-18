@@ -26,19 +26,6 @@ const Hero = () => {
       </div>
 
       <div className="max-w-4xl text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mx-auto mb-8 h-36 w-36 md:h-44 md:w-44 rounded-full border border-white/20 bg-slate-900/60 p-1 shadow-2xl shadow-accent/20"
-        >
-          <img
-            src="./assets/headshot.jpeg"
-            alt="Connor van Herick"
-            className="h-full w-full rounded-full object-cover object-[50%_22%]"
-          />
-        </motion.div>
-
         <motion.h1 
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -81,9 +68,9 @@ const Hero = () => {
           transition={{ delay: 0.6, duration: 0.8 }}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20"
         >
-          <Link to="experience" smooth={true} duration={800}>
+          <Link to="about" smooth={true} duration={800}>
             <motion.button className="btn btn-primary group flex items-center gap-2 px-8 py-4 text-lg">
-              View Experience
+              About Me
               <ArrowDown size={20} className="group-hover:translate-y-1 transition-transform" />
             </motion.button>
           </Link>
@@ -117,7 +104,7 @@ const Hero = () => {
             <motion.a href="https://github.com/connorvanherick" target="_blank" rel="noopener" className="w-14 h-14 bg-slate-800/50 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
               <Github size={24} />
             </motion.a>
-            <motion.a href="mailto:connor@connorvanherick.com" className="w-14 h-14 bg-slate-800/50 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
+            <motion.a href="mailto:cvanherick@berkeley.edu" className="w-14 h-14 bg-slate-800/50 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
               <Mail size={24} />
             </motion.a>
           </div>

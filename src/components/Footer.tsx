@@ -18,11 +18,14 @@ const Footer = () => {
           <div className="text-center">
             <h4 className="text-lg font-bold text-slate-200 mb-6">Links</h4>
             <div className="space-y-3">
-              <Link to="projects" smooth={true} duration={800} className="block text-slate-400 hover:text-accent transition-colors font-medium">
-                Projects
+              <Link to="about" smooth={true} duration={800} className="block text-slate-400 hover:text-accent transition-colors font-medium">
+                About
               </Link>
               <Link to="experience" smooth={true} duration={800} className="block text-slate-400 hover:text-accent transition-colors font-medium">
                 Experience
+              </Link>
+              <Link to="projects" smooth={true} duration={800} className="block text-slate-400 hover:text-accent transition-colors font-medium">
+                Projects
               </Link>
               <Link to="contact" smooth={true} duration={800} className="block text-slate-400 hover:text-accent transition-colors font-medium">
                 Contact
@@ -39,7 +42,7 @@ const Footer = () => {
               <a href="https://github.com/connorvanherick" target="_blank" rel="noopener" className="w-16 h-16 bg-slate-900/50 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent hover:scale-110 transition-all duration-300 group border border-slate-800/50 hover:border-accent/50">
                 <Github size={24} className="group-hover:rotate-12" />
               </a>
-              <a href="mailto:connor@connorvanherick.com" className="w-16 h-16 bg-slate-900/50 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent hover:scale-110 transition-all duration-300 group border border-slate-800/50 hover:border-accent/50">
+              <a href="mailto:cvanherick@berkeley.edu" className="w-16 h-16 bg-slate-900/50 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent hover:scale-110 transition-all duration-300 group border border-slate-800/50 hover:border-accent/50">
                 <Mail size={24} className="group-hover:rotate-12" />
               </a>
             </div>
@@ -54,4 +57,3 @@ const Footer = () => {
 }
 
 export default Footer
-

@@ -43,6 +43,8 @@ const experiences: ExperienceItem[] = [
     company: 'Santa Clara County',
     duration: 'Aug 2024 – Dec 2024',
     note: 'NDA project',
+    logo: './assets/santa-clara-county-seal.svg',
+    logoAlt: 'Santa Clara County seal',
     bullets: [
       'Treatment outcome prediction on 46K+ patient records (AUC 0.85)',
       'LightGBM / Random Forests / Neural Networks',

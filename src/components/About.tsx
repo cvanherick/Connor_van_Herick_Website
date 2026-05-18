@@ -3,44 +3,62 @@ import { GraduationCap, Code2, BrainCog, TrendingUp } from 'lucide-react'
 
 const About = () => {
   return (
-    <section id="about" className="py-32 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section id="about" className="py-28 px-6 bg-slate-950/50">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-24"
+          className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent mb-6">
             About
           </h2>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="card max-w-3xl mx-auto p-12 text-lg leading-relaxed text-slate-200"
-        >
-          <p className="mb-8 text-xl">
-            Computer Science student at UC Berkeley targeting full-time software engineering and machine learning engineering roles after graduation.
-          </p>
-          <p className="mb-8 text-xl">
-            My work spans machine learning engineering, predictive modeling, secure systems, interpreters, computer architecture, and product-minded software.
-          </p>
-          <p className="text-xl">
-            I'm especially interested in building reliable ML systems and software that turns complex data into useful decisions.
-          </p>
-        </motion.div>
+        <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mx-auto w-full max-w-sm"
+          >
+            <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900/60 p-2 shadow-2xl shadow-accent/20">
+              <img
+                src="./assets/headshot.jpeg"
+                alt="Connor van Herick"
+                className="aspect-[4/5] w-full rounded-2xl object-cover object-[50%_28%]"
+              />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-lg leading-relaxed text-slate-200"
+          >
+            <p className="text-2xl leading-relaxed text-slate-100">
+              Hi! I'm Connor, a UC Berkeley student studying Data Science and Computer Science, passionate about building large-scale backend systems and machine learning pipelines that are reliable, efficient, and maintainable.
+            </p>
+            <p className="mt-6 text-xl leading-relaxed text-slate-300">
+              I enjoy tackling complex technical challenges by designing clean abstractions, implementing end-to-end solutions, and ensuring models and systems perform robustly in the real world.
+            </p>
+            <p className="mt-6 text-xl leading-relaxed text-slate-300">
+              Outside of tech, I love climbing, skiing, and exploring new places - activities that keep me curious, grounded, and comfortable pushing beyond my limits. Feel free to connect or reach out at <a href="mailto:cvanherick@berkeley.edu" className="font-semibold text-accent hover:text-blue-300 transition-colors">cvanherick@berkeley.edu</a>.
+            </p>
+          </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid md:grid-cols-4 gap-8 mt-24"
+          className="grid md:grid-cols-4 gap-8 mt-20"
         >
           <div className="card p-8 text-center group hover:lift">
             <GraduationCap size={56} className="mx-auto mb-6 text-accent group-hover:scale-110 transition-transform duration-300" />

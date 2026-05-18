@@ -13,10 +13,10 @@ function App() {
     <div className="relative bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 min-h-screen">
       <Navbar />
       <Hero />
+      <About />
       <Experience />
       <Projects />
       <Skills />
-      <About />
       <WhatImBuilding />
       <Contact />
       <Footer />

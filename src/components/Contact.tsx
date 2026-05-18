@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Mail, MapPin } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 import { useState } from 'react'
 
 const Contact = () => {
@@ -48,8 +48,20 @@ const Contact = () => {
               </div>
               <div>
                 <h4 className="text-xl font-bold mb-2">Email</h4>
-                <a href="mailto:connor@connorvanherick.com" className="text-slate-300 hover:text-accent transition-colors font-medium break-all">
-                  connor@connorvanherick.com
+                <a href="mailto:cvanherick@berkeley.edu" className="text-slate-300 hover:text-accent transition-colors font-medium break-all">
+                  cvanherick@berkeley.edu
+                </a>
+              </div>
+            </div>
+
+            <div className="card p-8 flex items-start gap-4 hover:lift">
+              <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                <Phone size={24} className="text-accent" />
+              </div>
+              <div>
+                <h4 className="text-xl font-bold mb-2">Phone</h4>
+                <a href="tel:+15109902593" className="text-slate-300 hover:text-accent transition-colors font-medium">
+                  (510) 990-2593
                 </a>
               </div>
             </div>
@@ -126,4 +138,3 @@ const Contact = () => {
 }
 
 export default Contact
-

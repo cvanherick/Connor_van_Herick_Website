@@ -4,12 +4,6 @@ import { Project } from '../types'
 
 const projects: Project[] = [
   {
-    title: 'Treatment Outcome Prediction',
-    description: 'Modeled behavioral health treatment outcomes from county patient records using ensemble methods and interpretable ML.',
-    tech: ['Python', 'LightGBM', 'Random Forests', 'Neural Networks', 'SHAP'],
-    impact: '46K+ patient records • AUC 0.85',
-  },
-  {
     title: 'Vision-Guided Robotic Game Player',
     description: 'Built a ROS 2 autonomy stack that lets a UR7e robot arm perceive, plan, and place physical game pieces.',
     tech: ['Python', 'ROS 2', 'MoveIt 2', 'RealSense', 'NumPy'],
