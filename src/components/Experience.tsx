@@ -5,6 +5,7 @@ interface ExperienceItem {
   title: string
   company: string
   duration: string
+  note?: string
   bullets: string[]
   logo?: string
   logoAlt?: string
@@ -27,6 +28,7 @@ const experiences: ExperienceItem[] = [
     title: 'Machine Learning Project Lead',
     company: "Arc'teryx — Data Science Society @ UC Berkeley",
     duration: 'Jan 2025 – May 2025',
+    note: 'NDA project',
     logo: './assets/arcteryx-logo.png',
     logoAlt: 'Arc\'teryx logo',
     bullets: [
@@ -40,6 +42,7 @@ const experiences: ExperienceItem[] = [
     title: 'Data Science Consultant',
     company: 'Santa Clara County',
     duration: 'Aug 2024 – Dec 2024',
+    note: 'NDA project',
     bullets: [
       'Treatment outcome prediction on 46K+ patient records (AUC 0.85)',
       'LightGBM / Random Forests / Neural Networks',
@@ -127,6 +130,11 @@ const Experience = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-accent transition-colors duration-300">{exp.title}</h3>
                   <p className="text-slate-300 font-medium leading-relaxed">{exp.company}</p>
+                  {exp.note && (
+                    <p className="mt-4 inline-flex rounded-xl border border-accent/30 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">
+                      {exp.note}
+                    </p>
+                  )}
                 </div>
 
                 <ul className="space-y-3 text-slate-300 leading-relaxed">
