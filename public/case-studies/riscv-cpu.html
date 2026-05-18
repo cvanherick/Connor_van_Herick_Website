@@ -192,7 +192,7 @@
       <a class="back" href="../">← Back to portfolio</a>
 
       <div class="hero">
-        <div class="eyebrow">Computer Architecture Case Study</div>
+        <div class="eyebrow">Computer Architecture</div>
         <h1>RISC-V CPU Design in Logisim Evolution</h1>
         <p class="lede">
           I built a RISC-V processor datapath with reusable Logisim subcircuits,
@@ -200,10 +200,9 @@
           control, and trace-based verification against Venus reference output.
         </p>
         <div class="notice">
-          This project was completed as UC Berkeley CS61C coursework. To avoid
-          turning the public internet into a course-solution archive, this page
-          explains the architecture, verification approach, and engineering
-          takeaways while the full implementation remains private.
+          This page summarizes the system design and verification strategy. The
+          implementation repository is private because the project was completed
+          as UC Berkeley CS61C coursework.
         </div>
       </div>
 
@@ -240,31 +239,31 @@
       </section>
 
       <section>
-        <h2>Fast Review Path</h2>
+        <h2>System Design</h2>
         <p>
-          For a recruiter or technical reviewer, the strongest signal is the
-          combination of system decomposition and verification. The private repo
-          contains a reviewer guide, architecture notes, the top-level CPU
-          circuit, control logic, custom assembly tests, and a GitHub Actions
-          workflow that runs the CPU test suite.
+          I approached the CPU as a set of composable hardware modules with
+          narrow responsibilities. The top-level datapath wires those modules
+          together, while the control logic maps instruction fields into the
+          signals that select ALU operations, register writes, memory behavior,
+          branch decisions, and next-PC updates.
         </p>
         <div class="two-col">
           <div class="card">
-            <h3>What I Would Show First</h3>
+            <h3>Core Components</h3>
             <ul>
-              <li>The top-level processor datapath</li>
-              <li>Instruction decode and control signals</li>
-              <li>Custom RISC-V assembly tests</li>
-              <li>Trace diffs against Venus reference output</li>
+              <li>Top-level processor datapath</li>
+              <li>Instruction decode and control generation</li>
+              <li>ALU and register file</li>
+              <li>Immediate, branch, load, and store logic</li>
             </ul>
           </div>
           <div class="card">
-            <h3>Skills Demonstrated</h3>
+            <h3>Engineering Focus</h3>
             <ul>
-              <li>Computer architecture and RISC-V execution</li>
-              <li>Stateful debugging across clock cycles</li>
-              <li>Unit and integration test design</li>
-              <li>Breaking a complex system into testable components</li>
+              <li>Clear module boundaries</li>
+              <li>Stateful debugging across cycles</li>
+              <li>Reference-based verification</li>
+              <li>Custom tests for instruction behavior</li>
             </ul>
           </div>
         </div>
@@ -341,11 +340,9 @@ Logisim test harnesses ----> top-level CPU circuit
       <section>
         <h2>Implementation Access</h2>
         <p>
-          The full implementation is kept in a private repository. I can discuss
-          the design in interviews and share access selectively when appropriate.
-          This public page is intended to provide enough context to evaluate the
-          scope, technical depth, and verification strategy without publishing a
-          complete course solution.
+          The full implementation is kept in a private repository because it is
+          based on course project work. I can discuss the design in interviews
+          and share access selectively when appropriate.
         </p>
       </section>
 
