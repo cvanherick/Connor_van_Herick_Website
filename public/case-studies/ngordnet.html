@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ngordnet Language Explorer | Connor van Herick</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #07111f; color: #f8faf4; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: linear-gradient(120deg, rgba(20,184,166,.12), transparent 36%, rgba(245,158,11,.1) 72%, transparent), linear-gradient(180deg, #07111f 0%, #081827 46%, #0d1f26 100%); }
+      main { width: min(1040px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 72px; }
+      a { color: #14b8a6; }
+      .back { display: inline-flex; margin-bottom: 48px; color: #f8faf4; text-decoration: none; font-weight: 700; }
+      .hero { display: grid; gap: 28px; padding-bottom: 56px; }
+      .eyebrow { color: #f59e0b; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; }
+      h1 { max-width: 860px; margin: 0; color: #f8faf4; font-size: clamp(2.4rem, 7vw, 5.2rem); line-height: .96; }
+      .lede { max-width: 780px; margin: 0; color: rgba(248,250,244,.75); font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.7; }
+      .notice { max-width: 760px; padding: 18px 20px; border: 1px solid rgba(245,158,11,.32); border-radius: 8px; background: rgba(245,158,11,.1); color: rgba(248,250,244,.86); line-height: 1.55; }
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 8px 0 56px; }
+      .stat, .card { border: 1px solid rgba(248,250,244,.12); border-radius: 8px; background: rgba(15,31,46,.7); }
+      .stat { min-height: 126px; padding: 22px; }
+      .stat strong { display: block; color: #f8faf4; font-size: 1.6rem; margin-bottom: 8px; }
+      .stat span, p, li { color: rgba(248,250,244,.72); line-height: 1.72; font-size: 1.02rem; }
+      section { padding: 40px 0; border-top: 1px solid rgba(248,250,244,.12); }
+      h2 { margin: 0 0 18px; color: #f8faf4; font-size: clamp(1.6rem, 4vw, 2.4rem); }
+      ul { padding-left: 1.2rem; }
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+      .card { padding: 24px; }
+      .card h3 { margin: 0 0 12px; color: #14b8a6; }
+      footer { padding-top: 40px; color: rgba(248,250,244,.45); font-size: .95rem; }
+      @media (max-width: 760px) { .grid, .two-col { grid-template-columns: 1fr; } main { padding-top: 28px; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="../">Back to portfolio</a>
+      <div class="hero">
+        <div class="eyebrow">CS61B Project</div>
+        <h1>Ngordnet Language Explorer</h1>
+        <p class="lede">
+          I built a Java language-data application that combines Google NGram
+          frequency data with WordNet graph relationships to answer historical
+          usage and hyponym queries through web handlers.
+        </p>
+        <div class="notice">
+          The code is private due to academic integrity. I can share or discuss
+          the implementation directly with recruiters or interviewers where
+          appropriate.
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="stat"><strong>Java</strong><span>Object-oriented data structures and query handlers.</span></div>
+        <div class="stat"><strong>Graphs</strong><span>WordNet synset and hyponym traversal over directed relationships.</span></div>
+        <div class="stat"><strong>Data</strong><span>Time-series aggregation over NGram frequency datasets.</span></div>
+      </div>
+
+      <section>
+        <h2>What I Built</h2>
+        <p>
+          The project loads word-frequency data into reusable time-series
+          structures, parses WordNet synsets and hyponym relationships into a
+          graph, and exposes query handlers that combine both sources to return
+          useful language information.
+        </p>
+      </section>
+
+      <section>
+        <h2>Skills Demonstrated</h2>
+        <div class="two-col">
+          <div class="card">
+            <h3>Data Structures</h3>
+            <ul>
+              <li>Maps, sets, lists, and graph adjacency structures</li>
+              <li>Time-series range operations and aggregation</li>
+              <li>Parsing structured text datasets</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Software Design</h3>
+            <ul>
+              <li>Separated loaders, models, and web query handlers</li>
+              <li>JUnit tests for core behavior</li>
+              <li>Integrated browser-facing endpoints with backend logic</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <footer>© 2026 Connor van Herick. Code private for academic integrity and shareable on request where appropriate.</footer>
+    </main>
+  </body>
+</html>

@@ -21,6 +21,9 @@ const Footer = () => {
               <Link to="about" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 About
               </Link>
+              <Link to="coursework" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
+                Coursework
+              </Link>
               <Link to="experience" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 Experience
               </Link>

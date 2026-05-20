@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Bot, Cpu, ExternalLink, Gamepad2, Github, LockKeyhole, Shield, TrendingUp } from 'lucide-react'
+import { Bot, Cpu, ExternalLink, Gamepad2, Github, LockKeyhole, Map, Network, Search, Shield, TrendingUp, Users } from 'lucide-react'
 import { Project } from '../types'
 
 const projects: Project[] = [
@@ -9,6 +9,29 @@ const projects: Project[] = [
     tech: ['Python', 'ROS 2', 'MoveIt 2', 'RealSense', 'NumPy'],
     impact: 'End-to-end hardware pipeline • Perception, planning, control',
     demo: 'https://sites.google.com/berkeley.edu/blokushumanvsrobot/intro?authuser=0',
+  },
+  {
+    title: 'Cadre Agent Team Framework',
+    description: 'Designed a YAML-driven framework for composing AI agent teams with schemas, skills, templates, validation, and evaluation workflows.',
+    tech: ['Python', 'YAML', 'JSON Schema', 'Testing', 'AI Systems'],
+    impact: 'Spec-driven agent architecture • Validation and eval workflows',
+    demo: './case-studies/cadre.html',
+  },
+  {
+    title: 'Ngordnet Language Explorer',
+    description: 'Built a Java web app for exploring historical word usage and WordNet hyponym relationships using graphs, time series, and query handlers.',
+    tech: ['Java', 'Graphs', 'Time Series', 'Web Handlers', 'JUnit'],
+    impact: 'CS61B project • NGram + WordNet query engine',
+    demo: './case-studies/ngordnet.html',
+    accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
+  },
+  {
+    title: 'Build Your Own World',
+    description: 'Created a tile-based Java game with procedural world generation, movement, line-of-sight behavior, enemies, and save/load support.',
+    tech: ['Java', 'Procedural Generation', 'Game Systems', 'OOP', 'Testing'],
+    impact: 'CS61B project • Persistent interactive world engine',
+    demo: './case-studies/byow.html',
+    accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
   },
   {
     title: 'Snek Game Engine',
@@ -50,11 +73,15 @@ const projects: Project[] = [
 
 const projectIcon = (title: string) => {
   if (title.includes('Robotic')) return Bot
+  if (title.includes('Cadre')) return Users
+  if (title.includes('Ngordnet')) return Search
+  if (title.includes('World')) return Map
   if (title.includes('Snek')) return Gamepad2
   if (title.includes('CS61Classify')) return Cpu
   if (title.includes('Secure')) return Shield
   if (title.includes('RISC-V')) return Cpu
-  return TrendingUp
+  if (title.includes('Attribution')) return TrendingUp
+  return Network
 }
 
 const Projects = () => {
