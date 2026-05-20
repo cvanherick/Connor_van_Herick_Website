@@ -29,9 +29,9 @@ const projects: Project[] = [
     title: 'Build Your Own World',
     description: 'Created a tile-based Java game with procedural world generation, movement, line-of-sight behavior, enemies, and save/load support.',
     tech: ['Java', 'Procedural Generation', 'Game Systems', 'OOP', 'Testing'],
-    impact: 'CS61B project • Persistent interactive world engine',
+    impact: 'CS61B project • Playable browser demo included',
     demo: './case-studies/byow.html',
-    accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
+    accessNote: 'Original Java code can be shared directly; playable demo source is included on the project page.',
   },
   {
     title: 'Snek Game Engine',
