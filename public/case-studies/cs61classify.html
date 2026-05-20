@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS61Classify | Connor van Herick</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #07111f;
+        color: #f8faf4;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          linear-gradient(120deg, rgba(20, 184, 166, 0.12), transparent 36%, rgba(245, 158, 11, 0.1) 72%, transparent),
+          linear-gradient(180deg, #07111f 0%, #081827 46%, #0d1f26 100%);
+      }
+
+      main {
+        width: min(1040px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 48px 0 72px;
+      }
+
+      a {
+        color: #14b8a6;
+      }
+
+      .back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 48px;
+        color: #f8faf4;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .hero {
+        display: grid;
+        gap: 28px;
+        padding-bottom: 56px;
+      }
+
+      .eyebrow {
+        color: #f59e0b;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+      }
+
+      h1 {
+        max-width: 820px;
+        margin: 0;
+        color: #f8faf4;
+        font-size: clamp(2.4rem, 7vw, 5.2rem);
+        line-height: 0.96;
+      }
+
+      .lede {
+        max-width: 760px;
+        margin: 0;
+        color: rgba(248, 250, 244, 0.75);
+        font-size: clamp(1.1rem, 2vw, 1.35rem);
+        line-height: 1.7;
+      }
+
+      .notice {
+        max-width: 760px;
+        padding: 18px 20px;
+        border: 1px solid rgba(245, 158, 11, 0.32);
+        border-radius: 8px;
+        background: rgba(245, 158, 11, 0.1);
+        color: rgba(248, 250, 244, 0.86);
+        line-height: 1.55;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin: 8px 0 56px;
+      }
+
+      .stat,
+      .card {
+        border: 1px solid rgba(248, 250, 244, 0.12);
+        border-radius: 8px;
+        background: rgba(15, 31, 46, 0.7);
+      }
+
+      .stat {
+        min-height: 126px;
+        padding: 22px;
+      }
+
+      .stat strong {
+        display: block;
+        color: #f8faf4;
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+      }
+
+      .stat span,
+      p,
+      li {
+        color: rgba(248, 250, 244, 0.72);
+        line-height: 1.72;
+        font-size: 1.02rem;
+      }
+
+      section {
+        padding: 40px 0;
+        border-top: 1px solid rgba(248, 250, 244, 0.12);
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        color: #f8faf4;
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+      }
+
+      ul {
+        padding-left: 1.2rem;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .card h3 {
+        margin: 0 0 12px;
+        color: #14b8a6;
+      }
+
+      code {
+        color: #f59e0b;
+      }
+
+      footer {
+        padding-top: 40px;
+        color: rgba(248, 250, 244, 0.45);
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 760px) {
+        .grid,
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+
+        main {
+          padding-top: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="../">Back to portfolio</a>
+
+      <div class="hero">
+        <div class="eyebrow">CS61C Project 2</div>
+        <h1>CS61Classify in RISC-V Assembly</h1>
+        <p class="lede">
+          I implemented the low-level routines behind a small neural-network
+          classifier in RISC-V assembly, including matrix multiplication,
+          vector operations, activation functions, binary matrix file I/O, and
+          the top-level inference pipeline.
+        </p>
+        <div class="notice">
+          The code is private due to academic integrity. I can share or discuss
+          the implementation directly with recruiters or interviewers where
+          appropriate.
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="stat">
+          <strong>RISC-V</strong>
+          <span>Assembly implementations of math, I/O, control flow, and error handling.</span>
+        </div>
+        <div class="stat">
+          <strong>ML Pipeline</strong>
+          <span>Matrix operations and ReLU/argmax inference behavior for classification.</span>
+        </div>
+        <div class="stat">
+          <strong>Tested</strong>
+          <span>Unit and coverage tests for individual routines and chained execution.</span>
+        </div>
+      </div>
+
+      <section>
+        <h2>What I Built</h2>
+        <p>
+          CS61Classify connects several low-level routines into a working
+          classifier. I implemented assembly functions for absolute value,
+          ReLU, argmax, dot product, matrix multiplication, matrix read/write,
+          and the classify pipeline that ties model weights and input matrices
+          into an end-to-end prediction.
+        </p>
+        <p>
+          The project required careful register discipline, stack management,
+          pointer arithmetic, heap allocation, file handling, and defensive
+          error paths in a setting where small mistakes can corrupt program
+          state silently.
+        </p>
+      </section>
+
+      <section>
+        <h2>Engineering Focus</h2>
+        <div class="two-col">
+          <div class="card">
+            <h3>Assembly Routines</h3>
+            <ul>
+              <li><code>dot</code>, <code>matmul</code>, <code>relu</code>, and <code>argmax</code></li>
+              <li>Binary matrix read/write helpers</li>
+              <li>Classification orchestration</li>
+              <li>Error handling for invalid dimensions and file operations</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>What It Demonstrates</h3>
+            <ul>
+              <li>Low-level debugging under strict calling conventions</li>
+              <li>Understanding ML computation beneath Python libraries</li>
+              <li>Modular testing of assembly routines</li>
+              <li>End-to-end reasoning across memory, files, and math</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Why It Matters</h2>
+        <p>
+          This project connects machine learning with computer systems at the
+          lowest practical level. It shows that I can reason about ML workloads
+          not just as library calls, but as memory layout, arithmetic kernels,
+          calling conventions, and execution flow.
+        </p>
+      </section>
+
+      <footer>
+        © 2026 Connor van Herick. Code private for academic integrity and shareable on request where appropriate.
+      </footer>
+    </main>
+  </body>
+</html>

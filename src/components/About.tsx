@@ -48,7 +48,7 @@ const About = () => {
               I enjoy tackling complex technical challenges by designing clean abstractions, implementing end-to-end solutions, and ensuring models and systems perform robustly in the real world.
             </p>
             <p className="mt-6 text-xl leading-relaxed text-cream/75">
-              Outside of tech, I love climbing, skiing, and exploring new places - activities that keep me curious, grounded, and comfortable pushing beyond my limits. Feel free to connect or reach out at <a href="mailto:cvanherick@berkeley.edu" className="font-semibold text-accent hover:text-secondary transition-colors">cvanherick@berkeley.edu</a>.
+              Outside of tech, I love climbing, skiing, and exploring new places! Thesse activities help me stay curious, grounded, and comfortable pushing beyond my limits. Feel free to connect or reach out at <a href="mailto:cvanherick@berkeley.edu" className="font-semibold text-accent hover:text-secondary transition-colors">cvanherick@berkeley.edu</a>.
             </p>
           </motion.div>
         </div>

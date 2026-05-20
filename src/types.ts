@@ -7,6 +7,7 @@ export interface Project {
   demo?: string;
   logo?: string;
   logoAlt?: string;
+  accessNote?: string;
 }
 
 export interface Experience {

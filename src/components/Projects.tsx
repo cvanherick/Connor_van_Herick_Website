@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ExternalLink, Github } from 'lucide-react'
+import { Bot, Cpu, ExternalLink, Gamepad2, Github, LockKeyhole, Shield, TrendingUp } from 'lucide-react'
 import { Project } from '../types'
 
 const projects: Project[] = [
@@ -9,6 +9,22 @@ const projects: Project[] = [
     tech: ['Python', 'ROS 2', 'MoveIt 2', 'RealSense', 'NumPy'],
     impact: 'End-to-end hardware pipeline • Perception, planning, control',
     demo: 'https://sites.google.com/berkeley.edu/blokushumanvsrobot/intro?authuser=0',
+  },
+  {
+    title: 'Snek Game Engine',
+    description: 'Implemented a C version of Snake with board parsing, state updates, snake growth, collision handling, and file-based integration tests.',
+    tech: ['C', 'Memory Management', 'Game State', 'Testing'],
+    impact: '21 integration boards • Unit tests + Valgrind-ready memory checks',
+    demo: './case-studies/snek.html',
+    accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
+  },
+  {
+    title: 'CS61Classify',
+    description: 'Built RISC-V assembly routines for a small neural-network classifier, including matrix operations, activation functions, file I/O, and inference orchestration.',
+    tech: ['RISC-V Assembly', 'Neural Networks', 'Matrix Math', 'Venus'],
+    impact: 'Assembly ML pipeline • Unit and coverage tests',
+    demo: './case-studies/cs61classify.html',
+    accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
   },
   {
     title: 'Secure File Sharing System',
@@ -28,8 +44,18 @@ const projects: Project[] = [
     tech: ['Logisim', 'RISC-V', 'Digital Logic', 'C'],
     impact: 'Functional CPU components • Unit and integration test coverage',
     demo: './case-studies/riscv-cpu.html',
+    accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
   },
 ]
+
+const projectIcon = (title: string) => {
+  if (title.includes('Robotic')) return Bot
+  if (title.includes('Snek')) return Gamepad2
+  if (title.includes('CS61Classify')) return Cpu
+  if (title.includes('Secure')) return Shield
+  if (title.includes('RISC-V')) return Cpu
+  return TrendingUp
+}
 
 const Projects = () => {
   return (
@@ -51,71 +77,89 @@ const Projects = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="card group overflow-hidden rounded-3xl hover:shadow-2xl hover:shadow-accent/20 transition-all duration-700 hover:-translate-y-4 overflow-clip"
-              whileHover={{ y: -20 }}
-            >
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-48 rounded-t-3xl" />
-              
-              <div className="relative h-48 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-secondary/10 transition-all duration-700 flex items-center justify-center">
-                {project.logo && (
-                  <img
-                    src={project.logo}
-                    alt={project.logoAlt ?? `${project.title} logo`}
-                    className="h-24 w-24 object-contain invert opacity-80 drop-shadow-2xl transition-all duration-500 group-hover:scale-110 group-hover:opacity-100"
-                  />
-                )}
-              </div>
-              
-              <div className="p-8 relative z-10">
-                <h3 className="text-2xl font-bold mb-4 text-cream group-hover:text-accent transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-cream/65 mb-6 leading-relaxed">{project.description}</p>
-                
-                {/* Tech badges */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech, tIndex) => (
-                    <span key={tIndex} className="px-4 py-2 bg-cream/5 backdrop-blur-sm rounded-2xl text-sm font-medium border border-cream/10 hover:bg-cream/10 transition-all group-hover:border-accent/50">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                
-                {/* Impact */}
-                <p className="font-semibold text-accent text-xl mb-6 bg-accent/5 px-4 py-2 rounded-xl">
-                  {project.impact}
-                </p>
-                
-                {/* Links */}
-                <div className="flex gap-4 pt-4">
-                  {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 hover:bg-cream/10 border border-cream/10 text-cream/70 hover:text-accent transition-all group-hover:scale-105 flex-1 justify-center">
-                      <Github size={20} />
-                      Code
-                    </a>
-                  )}
-                  {project.demo && (
-                    <a href={project.demo} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-gradient-to-r from-accent to-secondary hover:from-secondary hover:to-accent text-primary font-semibold shadow-lg hover:shadow-accent/30 transition-all group-hover:scale-105 flex-1 justify-center">
-                      <ExternalLink size={20} />
-                      Project Site
-                    </a>
-                  )}
-                  {!project.github && !project.demo && (
-                    <span className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 border border-cream/10 text-cream/55 flex-1 justify-center">
-                      <Github size={20} />
-                      Repo cleanup in progress
-                    </span>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+            (() => {
+              const Icon = projectIcon(project.title)
+
+              return (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="card group overflow-hidden rounded-3xl hover:shadow-2xl hover:shadow-accent/20 transition-all duration-700 hover:-translate-y-4 overflow-clip"
+                  whileHover={{ y: -20 }}
+                >
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-48 rounded-t-3xl" />
+
+                  <div className="relative h-48 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-secondary/10 transition-all duration-700 flex items-center justify-center">
+                    {project.logo && (
+                      <img
+                        src={project.logo}
+                        alt={project.logoAlt ?? `${project.title} logo`}
+                        className="h-24 w-24 object-contain invert opacity-80 drop-shadow-2xl transition-all duration-500 group-hover:scale-110 group-hover:opacity-100"
+                      />
+                    )}
+                    {!project.logo && (
+                      <div className="h-24 w-24 rounded-3xl bg-gradient-to-br from-accent/20 to-secondary/15 border border-cream/10 flex items-center justify-center text-accent shadow-2xl transition-all duration-500 group-hover:scale-110">
+                        <Icon size={44} />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="p-8 relative z-10">
+                    <h3 className="text-2xl font-bold mb-4 text-cream group-hover:text-accent transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    <p className="text-cream/65 mb-6 leading-relaxed">{project.description}</p>
+
+                    {/* Tech badges */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech.map((tech, tIndex) => (
+                        <span key={tIndex} className="px-4 py-2 bg-cream/5 backdrop-blur-sm rounded-2xl text-sm font-medium border border-cream/10 hover:bg-cream/10 transition-all group-hover:border-accent/50">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Impact */}
+                    <p className="font-semibold text-accent text-xl mb-6 bg-accent/5 px-4 py-2 rounded-xl">
+                      {project.impact}
+                    </p>
+
+                    {project.accessNote && (
+                      <p className="mb-6 flex items-start gap-2 rounded-xl border border-secondary/25 bg-secondary/10 px-4 py-3 text-sm font-medium leading-relaxed text-cream/75">
+                        <LockKeyhole size={16} className="mt-0.5 flex-shrink-0 text-secondary" />
+                        {project.accessNote}
+                      </p>
+                    )}
+
+                    {/* Links */}
+                    <div className="flex gap-4 pt-4">
+                      {project.github && (
+                        <a href={project.github} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 hover:bg-cream/10 border border-cream/10 text-cream/70 hover:text-accent transition-all group-hover:scale-105 flex-1 justify-center">
+                          <Github size={20} />
+                          Code
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a href={project.demo} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-gradient-to-r from-accent to-secondary hover:from-secondary hover:to-accent text-primary font-semibold shadow-lg hover:shadow-accent/30 transition-all group-hover:scale-105 flex-1 justify-center">
+                          <ExternalLink size={20} />
+                          Project Site
+                        </a>
+                      )}
+                      {!project.github && !project.demo && (
+                        <span className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 border border-cream/10 text-cream/55 flex-1 justify-center">
+                          <Github size={20} />
+                          Repo cleanup in progress
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })()
           ))}
         </div>
       </div>
