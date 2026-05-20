@@ -33,7 +33,7 @@ const skills = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-32 px-6 bg-slate-950/30">
+    <section id="skills" className="py-32 px-6 bg-primary/35">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -41,10 +41,10 @@ const Skills = () => {
           viewport={{ once: true }}
           className="text-center mb-24"
         >
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent mb-6">
+          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
             Skills
           </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-cream/60 max-w-2xl mx-auto">
             Technical foundation across ML, systems, and production tools
           </p>
         </motion.div>
@@ -105,11 +105,11 @@ const SkillBadge = ({ skill, index }: { skill: Skill, index: number }) => (
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: index * 0.03 }}
     whileHover={{ scale: 1.15, y: -8, boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.4)' }}
-    className="group relative p-6 bg-gradient-to-br from-slate-900/50 to-slate-900/20 backdrop-blur-xl border border-slate-700/50 rounded-2xl hover:border-accent/50 hover:from-accent/5 hover:to-blue-900/10 transition-all duration-500 cursor-pointer overflow-hidden"
+    className="group relative p-6 bg-gradient-to-br from-surface/70 to-primary/30 backdrop-blur-xl border border-cream/10 rounded-2xl hover:border-accent/50 hover:from-accent/10 hover:to-secondary/10 transition-all duration-500 cursor-pointer overflow-hidden"
   >
-    <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-blue-500/10 scale-0 group-hover:scale-100 transition-transform duration-700 rounded-2xl" />
+    <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-secondary/10 scale-0 group-hover:scale-100 transition-transform duration-700 rounded-2xl" />
     <skill.icon size={36} className="text-accent group-hover:scale-110 transition-transform duration-300 flex-shrink-0 relative z-10" />
-    <span className="block font-semibold text-lg mt-3 text-white relative z-10 group-hover:text-accent transition-colors">
+    <span className="block font-semibold text-lg mt-3 text-cream relative z-10 group-hover:text-accent transition-colors">
       {skill.name}
     </span>
   </motion.div>

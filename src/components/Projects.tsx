@@ -41,10 +41,10 @@ const Projects = () => {
           viewport={{ once: true }}
           className="text-center mb-24"
         >
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent mb-6">
+          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
             Projects
           </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-cream/60 max-w-2xl mx-auto">
             Selected work across machine learning, robotics, systems, and data products.
           </p>
         </motion.div>
@@ -63,7 +63,7 @@ const Projects = () => {
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-48 rounded-t-3xl" />
               
-              <div className="relative h-48 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-blue-900/20 transition-all duration-700 flex items-center justify-center">
+              <div className="relative h-48 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-secondary/10 transition-all duration-700 flex items-center justify-center">
                 {project.logo && (
                   <img
                     src={project.logo}
@@ -74,15 +74,15 @@ const Projects = () => {
               </div>
               
               <div className="p-8 relative z-10">
-                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-accent transition-colors duration-300">
+                <h3 className="text-2xl font-bold mb-4 text-cream group-hover:text-accent transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="text-slate-400 mb-6 leading-relaxed">{project.description}</p>
+                <p className="text-cream/65 mb-6 leading-relaxed">{project.description}</p>
                 
                 {/* Tech badges */}
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tech.map((tech, tIndex) => (
-                    <span key={tIndex} className="px-4 py-2 bg-slate-900/60 backdrop-blur-sm rounded-2xl text-sm font-medium border border-slate-700/50 hover:bg-slate-800/50 transition-all group-hover:border-accent/50">
+                    <span key={tIndex} className="px-4 py-2 bg-cream/5 backdrop-blur-sm rounded-2xl text-sm font-medium border border-cream/10 hover:bg-cream/10 transition-all group-hover:border-accent/50">
                       {tech}
                     </span>
                   ))}
@@ -96,19 +96,19 @@ const Projects = () => {
                 {/* Links */}
                 <div className="flex gap-4 pt-4">
                   {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-slate-900/50 hover:bg-slate-800/80 border border-slate-700/50 text-slate-300 hover:text-accent transition-all group-hover:scale-105 flex-1 justify-center">
+                    <a href={project.github} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 hover:bg-cream/10 border border-cream/10 text-cream/70 hover:text-accent transition-all group-hover:scale-105 flex-1 justify-center">
                       <Github size={20} />
                       Code
                     </a>
                   )}
                   {project.demo && (
-                    <a href={project.demo} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-gradient-to-r from-accent to-blue-500 hover:from-blue-500 hover:to-accent text-white font-medium shadow-lg hover:shadow-accent/30 transition-all group-hover:scale-105 flex-1 justify-center">
+                    <a href={project.demo} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-gradient-to-r from-accent to-secondary hover:from-secondary hover:to-accent text-primary font-semibold shadow-lg hover:shadow-accent/30 transition-all group-hover:scale-105 flex-1 justify-center">
                       <ExternalLink size={20} />
                       Project Site
                     </a>
                   )}
                   {!project.github && !project.demo && (
-                    <span className="flex items-center gap-2 p-4 rounded-2xl bg-slate-900/50 border border-slate-700/50 text-slate-400 flex-1 justify-center">
+                    <span className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 border border-cream/10 text-cream/55 flex-1 justify-center">
                       <Github size={20} />
                       Repo cleanup in progress
                     </span>

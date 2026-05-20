@@ -10,8 +10,11 @@ export default {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
-        primary: '#0f172a',
-        accent: '#3b82f6',
+        primary: '#07111f',
+        surface: '#0f1f2e',
+        accent: '#14b8a6',
+        secondary: '#f59e0b',
+        cream: '#f8faf4',
       },
       animation: {
         'fade-in': 'fadeIn 1s ease-in-out',
@@ -31,4 +34,3 @@ export default {
   },
   plugins: [],
 }
-

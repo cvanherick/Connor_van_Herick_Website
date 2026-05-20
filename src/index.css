@@ -8,25 +8,29 @@
   }
   body {
     font-family: 'Inter', sans-serif;
-    @apply bg-primary text-white;
+    background:
+      linear-gradient(180deg, #07111f 0%, #081827 46%, #0d1f26 100%);
+    @apply text-cream antialiased;
   }
   * {
-    @apply border-slate-800;
+    @apply border-cream/10;
+  }
+  ::selection {
+    @apply bg-accent/30 text-cream;
   }
 }
 
 @layer components {
   .btn {
-    @apply px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-105 shadow-xl;
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-[1.03] shadow-xl;
   }
   .btn-primary {
-    @apply bg-accent text-white hover:bg-blue-600 shadow-accent/20;
+    @apply bg-gradient-to-r from-accent to-secondary text-primary shadow-accent/20 hover:shadow-secondary/20;
   }
   .btn-secondary {
-    @apply border border-white/20 hover:border-white/40 text-white;
+    @apply border border-cream/15 bg-cream/5 text-cream hover:border-accent/50 hover:bg-accent/10;
   }
   .card {
-    @apply bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-2xl p-8 shadow-2xl hover:shadow-accent/20 transition-all duration-500 hover:-translate-y-2;
+    @apply bg-surface/70 backdrop-blur-xl border border-cream/10 rounded-2xl p-8 shadow-2xl shadow-black/20 hover:border-accent/30 hover:shadow-accent/10 transition-all duration-500 hover:-translate-y-2;
   }
 }
-

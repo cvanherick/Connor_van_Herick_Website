@@ -6,22 +6,20 @@ const Hero = () => {
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center pt-20 px-6 relative overflow-hidden">
       {/* Animated grid background */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+            linear-gradient(rgba(20, 184, 166, 0.12) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(245, 158, 11, 0.08) 1px, transparent 1px)
           `,
           backgroundSize: '50px 50px'
         }} />
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-blue-500/10 rounded-full blur-3xl"
+          className="absolute inset-0 bg-[linear-gradient(135deg,rgba(20,184,166,0.22),transparent_38%,rgba(245,158,11,0.14)_78%)]"
           animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.5, 0.3]
+            opacity: [0.45, 0.75, 0.45]
           }}
           transition={{ duration: 10, repeat: Infinity }}
-          style={{ top: '20%', right: '10%' }}
         />
       </div>
 
@@ -30,7 +28,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-white via-slate-100 to-slate-200 bg-clip-text text-transparent mb-6 leading-tight"
+          className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-cream via-white to-accent bg-clip-text text-transparent mb-6 leading-tight"
         >
           Connor van Herick
         </motion.h1>
@@ -39,33 +37,16 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-2xl md:text-3xl font-medium text-slate-200 mb-6 max-w-2xl mx-auto leading-relaxed"
+          className="text-2xl md:text-3xl font-medium text-cream/90 mb-6 max-w-2xl mx-auto leading-relaxed"
         >
-          UC Berkeley CS | Machine Learning Engineer Intern @ LendingClub
-        </motion.p>
-
-        <motion.p 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-xl md:text-2xl text-slate-400 mb-12 max-w-xl mx-auto leading-relaxed"
-        >
-          Building production-minded software and machine learning systems.
-        </motion.p>
-
-        <motion.p 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-lg text-slate-500 mb-12 max-w-2xl mx-auto leading-relaxed italic"
-        >
-          Targeting full-time software engineering and machine learning engineering roles after graduation.
+          UC Berkeley Computer Science & Data Science
+          <span className="block text-xl md:text-2xl text-cream/60 mt-3">Graduating May 2027</span>
         </motion.p>
 
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20"
         >
           <Link to="about" smooth={true} duration={800}>
@@ -98,13 +79,13 @@ const Hero = () => {
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
         >
           <div className="flex gap-6 justify-center">
-            <motion.a href="https://github.com/connorvanherick" target="_blank" rel="noopener" className="w-14 h-14 bg-slate-800/50 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
+            <motion.a href="https://github.com/cvanherick" target="_blank" rel="noopener" className="w-14 h-14 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-cream/10 hover:border-accent/50 hover:bg-accent/15 hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
               <Github size={24} />
             </motion.a>
-            <motion.a href="mailto:cvanherick@berkeley.edu" className="w-14 h-14 bg-slate-800/50 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
+            <motion.a href="mailto:cvanherick@berkeley.edu" className="w-14 h-14 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-cream/10 hover:border-accent/50 hover:bg-accent/15 hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
               <Mail size={24} />
             </motion.a>
           </div>

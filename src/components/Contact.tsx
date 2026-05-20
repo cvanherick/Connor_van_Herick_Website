@@ -27,10 +27,10 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-24"
         >
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent mb-6">
+          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
             Get In Touch
           </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-cream/60 max-w-2xl mx-auto">
             I'm always interested in new opportunities and collaborations.
           </p>
         </motion.div>
@@ -48,7 +48,7 @@ const Contact = () => {
               </div>
               <div>
                 <h4 className="text-xl font-bold mb-2">Email</h4>
-                <a href="mailto:cvanherick@berkeley.edu" className="text-slate-300 hover:text-accent transition-colors font-medium break-all">
+                <a href="mailto:cvanherick@berkeley.edu" className="text-cream/70 hover:text-accent transition-colors font-medium break-all">
                   cvanherick@berkeley.edu
                 </a>
               </div>
@@ -60,7 +60,7 @@ const Contact = () => {
               </div>
               <div>
                 <h4 className="text-xl font-bold mb-2">Phone</h4>
-                <a href="tel:+15109902593" className="text-slate-300 hover:text-accent transition-colors font-medium">
+                <a href="tel:+15109902593" className="text-cream/70 hover:text-accent transition-colors font-medium">
                   (510) 990-2593
                 </a>
               </div>
@@ -72,7 +72,7 @@ const Contact = () => {
               </div>
               <div>
                 <h4 className="text-xl font-bold mb-2">Location</h4>
-                <p className="text-slate-300">UC Berkeley, California</p>
+                <p className="text-cream/70">UC Berkeley, California</p>
               </div>
             </div>
           </motion.div>
@@ -85,35 +85,35 @@ const Contact = () => {
             <div className="card p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-slate-300 font-medium mb-3">Name</label>
+                  <label className="block text-cream/70 font-medium mb-3">Name</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full p-4 bg-slate-900/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-accent focus:outline-none transition-all duration-300"
+                    className="w-full p-4 bg-primary/70 border border-cream/10 rounded-xl text-cream placeholder-cream/35 focus:border-accent focus:outline-none transition-all duration-300"
                     placeholder="Your name"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-300 font-medium mb-3">Email</label>
+                  <label className="block text-cream/70 font-medium mb-3">Email</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="w-full p-4 bg-slate-900/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-accent focus:outline-none transition-all duration-300"
+                    className="w-full p-4 bg-primary/70 border border-cream/10 rounded-xl text-cream placeholder-cream/35 focus:border-accent focus:outline-none transition-all duration-300"
                     placeholder="your@email.com"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-300 font-medium mb-3">Message</label>
+                  <label className="block text-cream/70 font-medium mb-3">Message</label>
                   <textarea
                     rows={5}
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="w-full p-4 bg-slate-900/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:border-accent focus:outline-none transition-all duration-300 resize-vertical"
+                    className="w-full p-4 bg-primary/70 border border-cream/10 rounded-xl text-cream placeholder-cream/35 focus:border-accent focus:outline-none transition-all duration-300 resize-vertical"
                     placeholder="Tell me about your project..."
                   />
                 </div>

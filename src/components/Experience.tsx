@@ -75,7 +75,7 @@ const experiences: ExperienceItem[] = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-32 px-6 bg-slate-950/50">
+    <section id="experience" className="py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -83,10 +83,10 @@ const Experience = () => {
           viewport={{ once: true }}
           className="text-center mb-24"
         >
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent mb-6">
+          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
             Experience
           </h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-cream/60 max-w-2xl mx-auto">
             Applied machine learning, data science, and technical leadership experience.
           </p>
         </motion.div>
@@ -104,7 +104,7 @@ const Experience = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-44 rounded-t-3xl" />
 
-              <div className="relative h-44 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-blue-900/20 transition-all duration-700 flex items-center justify-center">
+              <div className="relative h-44 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-secondary/10 transition-all duration-700 flex items-center justify-center">
                 {exp.logo && (
                   <div className="h-24 w-24 rounded-3xl bg-white/95 flex items-center justify-center p-5 shadow-2xl transition-all duration-500 group-hover:scale-110">
                     <img
@@ -130,8 +130,8 @@ const Experience = () => {
                     <BrainCog size={18} />
                     <span>{exp.duration}</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-accent transition-colors duration-300">{exp.title}</h3>
-                  <p className="text-slate-300 font-medium leading-relaxed">{exp.company}</p>
+                  <h3 className="text-2xl font-bold text-cream mb-3 group-hover:text-accent transition-colors duration-300">{exp.title}</h3>
+                  <p className="text-cream/70 font-medium leading-relaxed">{exp.company}</p>
                   {exp.note && (
                     <p className="mt-4 inline-flex rounded-xl border border-accent/30 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">
                       {exp.note}
@@ -139,7 +139,7 @@ const Experience = () => {
                   )}
                 </div>
 
-                <ul className="space-y-3 text-slate-300 leading-relaxed">
+                <ul className="space-y-3 text-cream/70 leading-relaxed">
                   {exp.bullets.map((bullet, bIndex) => (
                     <li key={bIndex} className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
