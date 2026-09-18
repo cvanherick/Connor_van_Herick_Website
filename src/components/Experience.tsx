@@ -28,8 +28,8 @@ const experiences: ExperienceItem[] = [
     title: 'Collections Strategy Intern',
     company: 'Happen Bank (formerly LendingClub)',
     duration: 'Jun 2026 – Aug 2026',
-    logo: './assets/lendingclub-logo.svg',
-    logoAlt: 'LendingClub logo',
+    logo: './assets/happen-bank.png',
+    logoAlt: 'Happen Bank logo',
     bullets: [
       'Engineered PySpark and SQL decisioning pipelines in Databricks across 73M+ records',
       'Built XGBoost S/T-Learners with 40 borrower features and 24 interaction features under compliance and capacity constraints',
@@ -121,7 +121,7 @@ const Experience = () => {
 
               <div className="relative h-44 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-secondary/10 transition-all duration-700 flex items-center justify-center">
                 {exp.logo && (
-                  <div className={`h-24 w-24 rounded-3xl flex items-center justify-center shadow-2xl transition-all duration-500 group-hover:scale-110 ${exp.company === 'Cal Climbing' ? 'bg-black p-2' : exp.company === 'UC Berkeley School of Law' ? 'bg-white/95 p-2' : 'bg-white/95 p-5'}`}>
+                  <div className={`h-24 rounded-3xl flex items-center justify-center shadow-2xl transition-all duration-500 group-hover:scale-110 ${exp.company === 'Happen Bank (formerly LendingClub)' ? 'w-40 bg-surface p-3' : 'w-24'} ${exp.company === 'Cal Climbing' ? 'bg-black p-2' : exp.company === 'UC Berkeley School of Law' ? 'bg-white/95 p-2' : exp.company === 'Happen Bank (formerly LendingClub)' ? '' : 'bg-white/95 p-5'}`}>
                     <img
                       src={exp.logo}
                       alt={exp.logoAlt ?? `${exp.company} logo`}
