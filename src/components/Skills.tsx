@@ -33,7 +33,7 @@ const skills = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-32 px-6 bg-primary/35">
+    <section id="skills" aria-labelledby="skills-title" className="py-32 px-6 bg-primary/35">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -42,7 +42,7 @@ const Skills = () => {
           className="text-center mb-24"
         >
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
-            Skills
+            <span id="skills-title">Skills</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
             Technical foundation across ML, systems, and production tools
