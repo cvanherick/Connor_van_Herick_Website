@@ -24,15 +24,14 @@ export const courses = [
 interface CourseworkProps { archive?: boolean }
 
 const Coursework = ({ archive = false }: CourseworkProps) => {
-  const selectedCodes = ['CS 189', 'CS C182', 'CS 180', 'EECS C106A', 'EECS C183']
-  const visibleCourses = archive ? courses : courses.filter((course) => selectedCodes.includes(course.code))
+  const visibleCourses = courses
 
   return (
     <section id="coursework" aria-labelledby="coursework-title" className="py-28 px-6 bg-primary/35">
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6"><span id="coursework-title">{archive ? 'Coursework Archive' : 'Selected Coursework'}</span></h2>
-          <p className="text-xl text-cream/60 max-w-2xl mx-auto">{archive ? 'Transcript-derived coursework across computer science, data science, mathematics, and robotics.' : 'Selected ML, computer vision, robotics, and NLP courses.'}</p>
+          <p className="text-xl text-cream/60 max-w-2xl mx-auto">Transcript-derived coursework across computer science, data science, mathematics, and robotics.</p>
         </motion.div>
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {visibleCourses.map((course, index) => (
