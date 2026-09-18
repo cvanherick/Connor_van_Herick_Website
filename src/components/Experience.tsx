@@ -16,6 +16,8 @@ const experiences: ExperienceItem[] = [
     title: 'Technical Advisor',
     company: 'UC Berkeley School of Law',
     duration: 'Sep 2026 – Present',
+    logo: './assets/clean-slate-initiative.png',
+    logoAlt: 'Clean Slate Initiative logo',
     bullets: [
       'Advise on benchmarking and optimizing open-weight LLMs and agentic workflows for secure automation',
       'Design web-scraping and data pipelines with integrity checks for research infrastructure',
@@ -89,7 +91,7 @@ const experiences: ExperienceItem[] = [
 const Experience = () => {
   return (
     <section id="experience" aria-labelledby="experience-title" className="py-32 px-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -104,7 +106,7 @@ const Experience = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.title}
@@ -119,7 +121,7 @@ const Experience = () => {
 
               <div className="relative h-44 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-secondary/10 transition-all duration-700 flex items-center justify-center">
                 {exp.logo && (
-                  <div className={`h-24 w-24 rounded-3xl flex items-center justify-center shadow-2xl transition-all duration-500 group-hover:scale-110 ${exp.company === 'Cal Climbing' ? 'bg-black p-2' : 'bg-white/95 p-5'}`}>
+                  <div className={`h-24 w-24 rounded-3xl flex items-center justify-center shadow-2xl transition-all duration-500 group-hover:scale-110 ${exp.company === 'Cal Climbing' ? 'bg-black p-2' : exp.company === 'UC Berkeley School of Law' ? 'bg-white/95 p-2' : 'bg-white/95 p-5'}`}>
                     <img
                       src={exp.logo}
                       alt={exp.logoAlt ?? `${exp.company} logo`}
