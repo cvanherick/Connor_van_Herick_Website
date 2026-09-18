@@ -11,7 +11,7 @@ const Footer = () => {
               Connor van Herick
             </Link>
             <p className="text-cream/45 text-sm max-w-md mx-auto lg:mx-0">
-              Computer Science @ UC Berkeley
+              Data Science + Computer Science @ UC Berkeley
             </p>
           </div>
 
@@ -29,6 +29,12 @@ const Footer = () => {
               </Link>
               <Link to="projects" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 Projects
+              </Link>
+              <Link to="skills" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
+                Skills
+              </Link>
+              <Link to="building" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
+                Building
               </Link>
               <Link to="contact" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 Contact
@@ -50,7 +56,7 @@ const Footer = () => {
               </a>
             </div>
             <p className="text-cream/35 text-sm text-center lg:text-left">
-              © 2026 Connor van Herick. Berkeley EECS. Built with React + Tailwind.
+              © 2026 Connor van Herick. UC Berkeley Data Science + Computer Science.
             </p>
           </div>
         </div>

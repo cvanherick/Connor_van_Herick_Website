@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
 
-  const sections = ['about', 'experience', 'projects', 'coursework', 'contact']
+  const sections = ['about', 'experience', 'projects', 'skills', 'building', 'coursework', 'contact']
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,6 +72,8 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <button 
+            type="button"
+            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden p-2 rounded-xl hover:bg-cream/5 transition-colors"
           >

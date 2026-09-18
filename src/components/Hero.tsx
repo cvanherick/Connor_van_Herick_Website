@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowDown, Download, Linkedin, Mail, Github } from 'lucide-react'
+import { ArrowDown, Mail, Linkedin, Mail as MailIcon, Github } from 'lucide-react'
 import { Link } from 'react-scroll'
 
 const Hero = () => {
@@ -39,8 +39,8 @@ const Hero = () => {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="text-2xl md:text-3xl font-medium text-cream/90 mb-6 max-w-2xl mx-auto leading-relaxed"
         >
-          UC Berkeley Computer Science & Data Science
-          <span className="block text-xl md:text-2xl text-cream/60 mt-3">Graduating May 2027</span>
+          Building reliable ML systems and thoughtful products
+          <span className="block text-xl md:text-2xl text-cream/60 mt-3">UC Berkeley · Data Science + Computer Science · May 2027</span>
         </motion.p>
 
         <motion.div 
@@ -56,13 +56,12 @@ const Hero = () => {
             </motion.button>
           </Link>
           <motion.a 
-            href="/resume.pdf" 
-            download
+            href="mailto:cvanherick@berkeley.edu?subject=Resume%20request"
             className="btn btn-secondary group flex items-center gap-2 px-8 py-4 text-lg"
             whileHover={{ scale: 1.05 }}
           >
-            <Download size={20} />
-            Resume
+            <MailIcon size={20} />
+            Request Resume
           </motion.a>
           <motion.a 
             href="https://www.linkedin.com/in/connor-vanherick/" 
@@ -82,10 +81,10 @@ const Hero = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
         >
           <div className="flex gap-6 justify-center">
-            <motion.a href="https://github.com/cvanherick" target="_blank" rel="noopener" className="w-14 h-14 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-cream/10 hover:border-accent/50 hover:bg-accent/15 hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
+            <motion.a aria-label="Connor's GitHub" href="https://github.com/cvanherick" target="_blank" rel="noopener noreferrer" className="w-14 h-14 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-cream/10 hover:border-accent/50 hover:bg-accent/15 hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
               <Github size={24} />
             </motion.a>
-            <motion.a href="mailto:cvanherick@berkeley.edu" className="w-14 h-14 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-cream/10 hover:border-accent/50 hover:bg-accent/15 hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
+            <motion.a aria-label="Email Connor" href="mailto:cvanherick@berkeley.edu" className="w-14 h-14 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-cream/10 hover:border-accent/50 hover:bg-accent/15 hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
               <Mail size={24} />
             </motion.a>
           </div>

@@ -6,22 +6,22 @@ const WhatImBuilding = () => {
     {
       icon: Rocket,
       title: 'AI Systems',
-      description: 'Intelligent infrastructure for the next generation of products.'
+            description: 'Reliable agent workflows with clear schemas, validation, and evaluation.'
     },
     {
       icon: Brain,
       title: 'Startup Ideas',
-      description: 'Exploring ambitious intersections of AI + human potential.'
+            description: 'Turning technical curiosity into focused experiments and useful tools.'
     },
     {
       icon: Zap,
       title: 'Workflow Software',
-      description: 'Tools that think with you - smarter, faster decision making.'
+            description: 'Practical software that makes complex decisions easier to understand.'
     },
     {
       icon: Rocket,
       title: 'ML Products',
-      description: 'Deploying machine learning that drives real business impact.'
+            description: 'ML products designed for measurable impact, not just impressive demos.'
     }
   ]
 

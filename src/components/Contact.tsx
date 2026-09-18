@@ -1,23 +1,7 @@
 import { motion } from 'framer-motion'
-import { Mail, MapPin, Phone } from 'lucide-react'
-import { useState } from 'react'
+import { Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react'
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
-  const [status, setStatus] = useState('')
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Here you would typically send the form data to your backend
-    setStatus("Thank you! I'll get back to you soon.")
-    setFormData({ name: '', email: '', message: '' })
-    setTimeout(() => setStatus(''), 5000)
-  }
-
   return (
     <section id="contact" className="py-32 px-6">
       <div className="max-w-4xl mx-auto">
@@ -31,7 +15,7 @@ const Contact = () => {
             Get In Touch
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
-            I'm always interested in new opportunities and collaborations.
+            I’m open to thoughtful conversations about ML, systems, and ambitious products.
           </p>
         </motion.div>
 
@@ -83,52 +67,14 @@ const Contact = () => {
             viewport={{ once: true }}
           >
             <div className="card p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-cream/70 font-medium mb-3">Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full p-4 bg-primary/70 border border-cream/10 rounded-xl text-cream placeholder-cream/35 focus:border-accent focus:outline-none transition-all duration-300"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-cream/70 font-medium mb-3">Email</label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="w-full p-4 bg-primary/70 border border-cream/10 rounded-xl text-cream placeholder-cream/35 focus:border-accent focus:outline-none transition-all duration-300"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-cream/70 font-medium mb-3">Message</label>
-                  <textarea
-                    rows={5}
-                    required
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="w-full p-4 bg-primary/70 border border-cream/10 rounded-xl text-cream placeholder-cream/35 focus:border-accent focus:outline-none transition-all duration-300 resize-vertical"
-                    placeholder="Tell me about your project..."
-                  />
-                </div>
-                <motion.button
-                  type="submit"
-                  className="w-full btn btn-primary text-lg py-5 font-semibold"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Send Message
-                </motion.button>
-                {status && (
-                  <p className="text-center text-accent font-medium pt-4">{status}</p>
-                )}
-              </form>
+              <p className="text-sm uppercase tracking-[0.2em] text-secondary font-semibold">Start a conversation</p>
+              <h3 className="mt-4 text-3xl font-bold text-cream">Have a problem worth solving?</h3>
+              <p className="mt-4 text-lg leading-relaxed text-cream/65">
+                The fastest way to reach me is email. Include a little context about what you’re building or exploring, and I’ll get back to you.
+              </p>
+              <a href="mailto:cvanherick@berkeley.edu" className="mt-8 btn btn-primary inline-flex items-center gap-2 text-lg">
+                Email Connor <ArrowUpRight size={20} />
+              </a>
             </div>
           </motion.div>
         </div>

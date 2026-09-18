@@ -177,9 +177,9 @@ const Projects = () => {
                         </a>
                       )}
                       {!project.github && !project.demo && (
-                        <span className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 border border-cream/10 text-cream/55 flex-1 justify-center">
-                          <Github size={20} />
-                          Repo cleanup in progress
+                          <span className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 border border-cream/10 text-cream/55 flex-1 justify-center text-center">
+                            <Github size={20} />
+                          Private project · summary available
                         </span>
                       )}
                     </div>
