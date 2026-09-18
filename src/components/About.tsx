@@ -29,6 +29,8 @@ const About = () => {
               <img
                 src="./assets/headshot.jpeg"
                 alt="Connor van Herick"
+                loading="lazy"
+                decoding="async"
                 className="aspect-[4/5] w-full rounded-2xl object-cover object-[50%_28%]"
               />
             </div>
