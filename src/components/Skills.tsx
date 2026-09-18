@@ -8,6 +8,9 @@ const skills = [
   { name: 'Go', icon: Code2, category: 'Languages' },
   { name: 'C', icon: Code2, category: 'Languages' },
   { name: 'SQL', icon: Database, category: 'Languages' },
+  { name: 'RISC-V', icon: Code2, category: 'Languages' },
+  { name: 'Scheme', icon: Code2, category: 'Languages' },
+  { name: 'x86', icon: Code2, category: 'Languages' },
   
   // ML/Data
   { name: 'TensorFlow', icon: BrainCog, category: 'ML/Data' },
@@ -16,6 +19,7 @@ const skills = [
   { name: 'Pandas', icon: Database, category: 'ML/Data' },
   { name: 'NumPy', icon: Layers, category: 'ML/Data' },
   { name: 'SHAP', icon: BrainCog, category: 'ML/Data' },
+  { name: 'Scikit-learn', icon: BrainCog, category: 'ML/Data' },
   
   // Systems
   { name: 'Cryptography', icon: Lock, category: 'Systems' },
@@ -26,6 +30,11 @@ const skills = [
   // Tools
   { name: 'Git', icon: Github, category: 'Tools' },
   { name: 'Databricks', icon: Terminal, category: 'Tools' },
+  { name: 'PySpark', icon: Terminal, category: 'Tools' },
+  { name: 'Spark SQL', icon: Database, category: 'Tools' },
+  { name: 'Trino', icon: Database, category: 'Tools' },
+  { name: 'Hive', icon: Database, category: 'Tools' },
+  { name: 'DataGrip', icon: Terminal, category: 'Tools' },
   { name: 'Docker', icon: Layers, category: 'Tools' },
   { name: 'Dash / Plotly', icon: Database, category: 'Tools' },
   { name: 'DuckDB', icon: Database, category: 'Tools' },

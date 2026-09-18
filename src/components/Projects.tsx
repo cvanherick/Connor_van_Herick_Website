@@ -51,9 +51,9 @@ const projects: Project[] = [
   },
   {
     title: 'Secure File Sharing System',
-    description: 'Built encrypted file storage and sharing with invitation-based access, secure user state, and hierarchical revocation.',
-    tech: ['Go', 'Cryptography', 'System Design', 'Access Control'],
-    impact: '50+ adversarial tests passed • Security-focused systems design',
+    description: 'Built a secure Go system for authenticated users, encrypted file storage, append operations, invitation-based sharing, and hierarchical access revocation.',
+    tech: ['Go', 'Cryptography', 'System Design', 'Access Control', 'Testing'],
+    impact: '50+ adversarial tests • Tamper detection + recursive revocation',
   },
   {
     title: 'Performance Attribution Dashboard',
@@ -63,9 +63,9 @@ const projects: Project[] = [
   },
   {
     title: 'RISC-V CPU Design',
-    description: 'Designed a RISC-V CPU datapath with ALU, register file, memory, immediate generation, and control logic.',
-    tech: ['Logisim', 'RISC-V', 'Digital Logic', 'C'],
-    impact: 'Functional CPU components • Unit and integration test coverage',
+    description: 'Designed a functional 32-register RISC-V CPU capable of executing arithmetic, memory, and control instructions with a 3-stage pipeline.',
+    tech: ['C', 'Verilog', 'Logisim', 'RISC-V'],
+    impact: 'Pipeline hazards handled with forwarding + branch control logic',
     demo: './case-studies/riscv-cpu.html',
     accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
   },

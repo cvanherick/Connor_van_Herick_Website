@@ -13,15 +13,25 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
-    title: 'Machine Learning Engineer Intern',
-    company: 'LendingClub — Collections Strategy',
-    duration: 'Summer 2026',
+    title: 'Technical Advisor',
+    company: 'UC Berkeley School of Law',
+    duration: 'Sep 2026 – Present',
+    bullets: [
+      'Advise on benchmarking and optimizing open-weight LLMs and agentic workflows for secure automation',
+      'Design web-scraping and data pipelines with integrity checks for research infrastructure',
+      'Formulate causal experiments to improve participant outreach, deliverability, engagement, and outcomes',
+    ]
+  },
+  {
+    title: 'Collections Strategy Intern',
+    company: 'Happen Bank (formerly LendingClub)',
+    duration: 'Jun 2026 – Aug 2026',
     logo: './assets/lendingclub-logo.svg',
     logoAlt: 'LendingClub logo',
     bullets: [
-      'Incoming Machine Learning Engineer Intern on the Collections Strategy team',
-      'Working at the intersection of predictive modeling, financial technology, and production decision systems',
-      'Focused on practical ML systems in a regulated, business-critical environment',
+      'Engineered PySpark and SQL decisioning pipelines in Databricks across 73M+ records',
+      'Built XGBoost S/T-Learners with 40 borrower features and 24 interaction features under compliance and capacity constraints',
+      'Achieved a 2.04% charge-off reduction on holdout evaluation, with an estimated $20.4M in gross value',
     ]
   },
   {
@@ -32,10 +42,9 @@ const experiences: ExperienceItem[] = [
     logo: './assets/arcteryx-logo.png',
     logoAlt: 'Arc\'teryx logo',
     bullets: [
-      'Led 9-person team building predictive ML models for retail labor allocation',
-      'Supported 80+ North American stores with operational staffing insights',
-      'Engineered 14 external-factor features; TensorFlow, XGBoost, SARIMAX, Prophet',
-      'Cross-validation + hyperparameter tuning in Databricks',
+      'Led a 9-person team building daily predictive models for retail labor allocation across 80+ North American stores',
+      'Engineered 14 external-factor features, including weather and promotions, through APIs',
+      'Evaluated TensorFlow, XGBoost, SARIMAX, and Prophet models with cross-validation and hyperparameter tuning in Databricks',
     ]
   },
   {
@@ -46,9 +55,9 @@ const experiences: ExperienceItem[] = [
     logo: './assets/santa-clara-county-seal.svg',
     logoAlt: 'Santa Clara County seal',
     bullets: [
-      'Treatment outcome prediction on 46K+ patient records (AUC 0.85)',
-      'LightGBM / Random Forests / Neural Networks',
-      'SHAP model interpretability',
+      'Developed and tuned Random Forest, LightGBM, and neural network classifiers on 46K+ patient records',
+      'Used 50 CANS mental health assessment features to predict treatment outcomes, achieving AUC up to 0.85',
+      'Applied SHAP and permutation importance to identify five key clinical and demographic drivers',
     ]
   },
   {
@@ -63,8 +72,8 @@ const experiences: ExperienceItem[] = [
   },
   {
     title: 'Membership Officer & Incoming Treasurer',
-    company: 'UC Berkeley Climbing Club',
-    duration: '2025 – 2027',
+    company: 'Cal Climbing',
+    duration: '2025 – Present',
     bullets: [
       'Served as Membership Officer for the 2025-2026 school year',
       'Incoming Treasurer for the 2026-2027 school year',
@@ -116,6 +125,7 @@ const Experience = () => {
                 )}
                 {!exp.logo && (
                   <div className="h-24 w-24 rounded-3xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent shadow-2xl transition-all duration-500 group-hover:scale-110">
+                    {index === 0 && <BriefcaseBusiness size={44} />}
                     {index === 2 && <Users size={44} />}
                     {index === 3 && <Briefcase size={44} />}
                     {index === 4 && <Users size={44} />}
