@@ -3,22 +3,60 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: dark;
+    --page-gutter: clamp(1rem, 4vw, 1.5rem);
+    --nav-height: 5rem;
+    --line-subtle: rgba(248, 250, 244, 0.1);
+    --line-strong: rgba(20, 184, 166, 0.35);
+    --surface-glass: rgba(15, 31, 46, 0.68);
+  }
+
   html {
     scroll-behavior: smooth;
   }
+
   body {
     font-family: 'Inter', sans-serif;
     background:
       radial-gradient(circle at 80% 0%, rgba(20,184,166,.10), transparent 28rem),
       linear-gradient(180deg, #071018 0%, #09131b 52%, #0b161b 100%);
+    min-width: 320px;
+    overflow-x: hidden;
     @apply text-cream antialiased;
   }
+
   * {
     @apply border-cream/10;
   }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  button {
+    font: inherit;
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid #14b8a6;
+    outline-offset: 4px;
+  }
+
+  section[id] {
+    scroll-margin-top: calc(var(--nav-height) + 1rem);
+  }
+
   ::selection {
     @apply bg-accent/30 text-cream;
   }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -27,27 +65,94 @@
 
 @layer components {
   .skip-link { @apply fixed left-4 top-4 z-[100] -translate-y-24 rounded-xl bg-accent px-4 py-3 font-semibold text-primary shadow-xl transition-transform focus:translate-y-0; }
-  .btn {
-    @apply px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-[1.01] shadow-xl;
-  }
+  .btn { @apply inline-flex min-h-11 items-center justify-center px-6 py-3 rounded-xl font-medium transition-all duration-200 shadow-xl; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(1px); }
   .btn-primary {
     @apply bg-accent text-primary shadow-accent/20 hover:bg-[#9af6dc] hover:shadow-secondary/20;
   }
   .btn-secondary {
     @apply border border-cream/15 bg-cream/5 text-cream hover:border-accent/50 hover:bg-accent/10;
   }
+  .text-link { @apply inline-flex items-center gap-2 font-semibold text-cream/65 underline decoration-cream/20 underline-offset-4 transition-colors duration-200 hover:text-accent hover:decoration-accent; }
   .card {
-    @apply bg-surface/65 border border-cream/10 rounded-2xl p-8 shadow-xl shadow-black/10 hover:border-accent/35 hover:shadow-accent/10 transition-all duration-300;
+    @apply relative bg-surface/65 border border-cream/10 rounded-2xl p-6 md:p-8 shadow-xl shadow-black/10 backdrop-blur-sm hover:-translate-y-1 hover:border-accent/35 hover:shadow-accent/10 transition-all duration-200;
   }
-  .section-heading { @apply text-3xl md:text-5xl font-semibold tracking-[-0.03em] text-cream; }
+  .section-heading { @apply text-3xl md:text-5xl font-semibold tracking-[-0.03em] text-cream; text-wrap: balance; }
   .section-kicker { @apply text-xs font-bold uppercase tracking-[0.22em] text-secondary; }
   .eyebrow { @apply text-xs font-bold uppercase tracking-[0.24em] text-accent; }
   .hairline { @apply border-t border-cream/10; }
-  .hero-panel { @apply rounded-3xl border border-cream/10 bg-surface/55 shadow-2xl shadow-black/20; background-image: linear-gradient(rgba(248,250,244,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(248,250,244,.04) 1px, transparent 1px); background-size: 28px 28px; }
-  .signal-node { @apply flex items-center gap-4 rounded-2xl border border-cream/10 bg-primary/65 p-4; }
+  .hero-panel { @apply rounded-3xl border border-cream/10 bg-surface/55 shadow-2xl shadow-black/20 backdrop-blur-sm; background-image: linear-gradient(rgba(248,250,244,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(248,250,244,.04) 1px, transparent 1px); background-size: 28px 28px; }
+  .signal-node { @apply flex min-w-0 items-center gap-4 rounded-2xl border border-cream/10 bg-primary/65 p-4; }
   .signal-node.active { @apply border-accent/40 bg-accent/10; }
   .signal-index { @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-accent/40 text-xs font-bold text-accent; }
   .signal-node strong { @apply block text-sm font-semibold text-cream; }
-  .signal-node small { @apply mt-1 block text-xs text-cream/50; }
+  .signal-node small { @apply mt-1 block text-xs text-cream/50; overflow-wrap: anywhere; }
   .signal-line { @apply ml-8 h-5 w-px bg-gradient-to-b from-accent/60 to-secondary/40; }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --nav-height: 4.5rem;
+  }
+
+  section[id] {
+    scroll-margin-top: calc(var(--nav-height) + .75rem);
+  }
+
+  main > section:not(#hero) {
+    padding-inline: var(--page-gutter);
+    padding-block: clamp(4.5rem, 14vw, 6.5rem);
+  }
+
+  #hero {
+    padding-inline: var(--page-gutter);
+    padding-top: clamp(8.5rem, 28vw, 10.5rem);
+    padding-bottom: clamp(4.5rem, 14vw, 7rem);
+  }
+
+  #hero h1 {
+    font-size: clamp(3.5rem, 15vw, 5rem);
+    line-height: .94;
+  }
+
+  #hero .btn {
+    width: 100%;
+  }
+
+  #hero .hero-panel {
+    padding: 1rem;
+    background-size: 20px 20px;
+  }
+
+  #hero .hero-panel > div:first-child {
+    margin-bottom: 1.25rem;
+  }
+
+  #hero .signal-node {
+    gap: .75rem;
+    padding: .875rem;
+  }
+
+  #hero .hero-panel > .grid {
+    gap: .75rem;
+  }
+
+  #hero .hero-panel > .grid strong {
+    font-size: 1.25rem;
+  }
+
+  .section-heading {
+    line-height: 1.05;
+  }
+
+  .card {
+    border-radius: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  main > section {
+    padding-inline: clamp(1.5rem, 5vw, 3rem);
+  }
 }

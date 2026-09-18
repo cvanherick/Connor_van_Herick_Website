@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
 
-  const sections = ['about', 'experience', 'projects', 'building', 'contact']
+  const sections = ['about', 'experience', 'projects', 'building', 'skills', 'coursework', 'contact']
   const sectionLabels: Record<string, string> = { building: 'Currently' }
 
   useEffect(() => {
@@ -26,8 +26,15 @@ const Navbar = () => {
     }
 
     window.addEventListener('scroll', handleScroll)
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsOpen(false)
+    }
+    document.addEventListener('keydown', handleKeyDown)
     handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
   }, [])
 
   return (
@@ -45,13 +52,14 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop menu */}
-          <div className="hidden lg:flex items-center space-x-2">
+          <div className="hidden xl:flex items-center space-x-2">
             {sections.map((section) => (
               <Link
                 key={section}
                 to={section}
                 smooth={true}
                 duration={800}
+                aria-current={activeSection === section ? 'location' : undefined}
                 className={`px-4 py-2 font-semibold rounded-xl transition-all duration-300 ${
                   activeSection === section 
                     ? 'bg-accent/10 text-accent border border-accent/30 shadow-lg' 
@@ -88,7 +96,7 @@ const Navbar = () => {
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-xl hover:bg-cream/5 transition-colors"
+            className="xl:hidden p-2 rounded-xl hover:bg-cream/5 transition-colors"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -100,7 +108,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             id="mobile-navigation"
-            className="lg:hidden pb-6 overflow-hidden"
+            className="xl:hidden pb-6 overflow-hidden"
           >
             <div className="flex flex-col space-y-3 pt-4 border-t border-cream/10">
               {sections.map((section) => (
