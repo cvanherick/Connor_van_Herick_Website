@@ -45,7 +45,7 @@ const Coursework = ({ archive = false }: CourseworkProps) => {
             </motion.div>
           ))}
         </div>
-        {!archive && <div className="mt-10 text-center"><a href="./coursework/" className="btn btn-secondary inline-flex">View Full Coursework <span aria-hidden="true">→</span></a></div>}
+        {!archive && <div className="mt-10 text-center"><a href="./coursework/" className="btn btn-secondary inline-flex">View More Coursework <span aria-hidden="true">→</span></a></div>}
       </div>
     </section>
   )
