@@ -29,7 +29,7 @@ const Navbar = () => {
   }, [])
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-primary/85 backdrop-blur-2xl border-b border-cream/10 shadow-2xl shadow-black/20">
+    <nav aria-label="Primary navigation" className="fixed top-0 w-full z-50 bg-primary/85 backdrop-blur-2xl border-b border-cream/10 shadow-2xl shadow-black/20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex justify-between items-center py-5">
           <Link 
