@@ -78,7 +78,7 @@ const courses = [
 
 const Coursework = () => {
   return (
-    <section id="coursework" className="py-32 px-6 bg-primary/35">
+    <section id="coursework" aria-labelledby="coursework-title" className="py-32 px-6 bg-primary/35">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -87,7 +87,7 @@ const Coursework = () => {
           className="text-center mb-20"
         >
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
-            Coursework
+            <span id="coursework-title">Coursework</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
             Selected technical classes and the practical skills I use from them.
