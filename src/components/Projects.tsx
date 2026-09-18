@@ -127,7 +127,7 @@ const relevanceOrder = [
 ]
 
 const sortedProjects = [...projects].sort((a, b) => relevanceOrder.indexOf(a.title) - relevanceOrder.indexOf(b.title))
-const featuredProjects = sortedProjects.slice(0, 6)
+const featuredProjects = sortedProjects.slice(0, 3)
 const categoryOptions = ['All', 'ML/AI', 'Systems', 'Robotics/CV', 'Data', 'Coursework']
 const projectCategory = (title: string) => {
   if (title.includes('Robotic') || title.includes('CS 180')) return 'Robotics/CV'
@@ -266,7 +266,7 @@ const Projects = ({ archive = false }: ProjectsProps) => {
             })()
           ))}
         </div>
-        {!archive && <div className="mt-12 text-center"><a href="./projects/" className="btn btn-secondary inline-flex">View More Projects <span aria-hidden="true">→</span></a></div>}
+        {!archive && <div className="mt-12 text-center"><a href="./projects/" className="btn btn-secondary inline-flex">View All Projects <span aria-hidden="true">→</span></a></div>}
       </div>
     </section>
   )

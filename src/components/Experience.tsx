@@ -9,6 +9,7 @@ export interface ExperienceItem {
   bullets: string[]
   logo?: string
   logoAlt?: string
+  caseStudy?: string
 }
 
 export const experiences: ExperienceItem[] = [
@@ -30,6 +31,7 @@ export const experiences: ExperienceItem[] = [
     duration: 'Jun 2026 – Aug 2026',
     logo: './assets/happen-bank.png',
     logoAlt: 'Happen Bank logo',
+    caseStudy: './case-studies/happen-bank.html',
     bullets: [
       'Engineered PySpark and SQL decisioning pipelines in Databricks across 73M+ records',
       'Built XGBoost S/T-Learners with 40 borrower features and 24 interaction features under compliance and capacity constraints',
@@ -164,6 +166,7 @@ const Experience = ({ archive = false }: ExperienceProps) => {
                 <ul className="space-y-3 text-cream/70 leading-relaxed">
                   {exp.bullets.map((bullet, bIndex) => <li key={bIndex} className="flex items-start gap-3"><div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" /><span>{bullet}</span></li>)}
                 </ul>
+                {exp.caseStudy && <a href={exp.caseStudy} className="mt-7 inline-flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 font-semibold text-accent transition-colors hover:bg-accent/20">Featured Work case study <span aria-hidden="true">→</span></a>}
               </div>
             </motion.div>
           ))}

@@ -1,49 +1,21 @@
 import { motion } from 'framer-motion'
-import { Code2, Database, BrainCog, Layers, Lock, Zap, Terminal, Github } from 'lucide-react'
+import { Code2, Database, BrainCog, Layers, Terminal, Github } from 'lucide-react'
 
 const skills = [
-  // Languages
   { name: 'Python', icon: Code2, category: 'Languages' },
-  { name: 'Java', icon: Code2, category: 'Languages' },
-  { name: 'Go', icon: Code2, category: 'Languages' },
-  { name: 'C', icon: Code2, category: 'Languages' },
   { name: 'SQL', icon: Database, category: 'Languages' },
-  { name: 'RISC-V', icon: Code2, category: 'Languages' },
-  { name: 'Scheme', icon: Code2, category: 'Languages' },
-  { name: 'x86', icon: Code2, category: 'Languages' },
-  
-  // ML/Data
-  { name: 'TensorFlow', icon: BrainCog, category: 'ML/Data' },
+  { name: 'Java', icon: Code2, category: 'Languages' },
+  { name: 'C', icon: Code2, category: 'Languages' },
+  { name: 'PySpark', icon: Terminal, category: 'ML/Data' },
+  { name: 'Databricks', icon: Terminal, category: 'ML/Data' },
   { name: 'XGBoost', icon: BrainCog, category: 'ML/Data' },
-  { name: 'LightGBM', icon: BrainCog, category: 'ML/Data' },
-  { name: 'Pandas', icon: Database, category: 'ML/Data' },
-  { name: 'NumPy', icon: Layers, category: 'ML/Data' },
-  { name: 'SHAP', icon: BrainCog, category: 'ML/Data' },
+  { name: 'TensorFlow / PyTorch', icon: BrainCog, category: 'ML/Data' },
   { name: 'Scikit-learn', icon: BrainCog, category: 'ML/Data' },
-  { name: 'Matplotlib', icon: Database, category: 'ML/Data' },
-  { name: 'Seaborn', icon: Database, category: 'ML/Data' },
-  { name: 'Regex', icon: Code2, category: 'Languages' },
-  
-  // Systems
-  { name: 'Cryptography', icon: Lock, category: 'Systems' },
-  { name: 'CPU Arch', icon: Zap, category: 'Systems' },
-  { name: 'System Design', icon: Layers, category: 'Systems' },
+  { name: 'Docker', icon: Layers, category: 'Systems' },
   { name: 'ROS 2', icon: Layers, category: 'Systems' },
-  
-  // Tools
-  { name: 'Git', icon: Github, category: 'Tools' },
-  { name: 'Databricks', icon: Terminal, category: 'Tools' },
-  { name: 'PySpark', icon: Terminal, category: 'Tools' },
+  { name: 'System Design', icon: Layers, category: 'Systems' },
   { name: 'Spark SQL', icon: Database, category: 'Tools' },
-  { name: 'Trino', icon: Database, category: 'Tools' },
-  { name: 'Hive', icon: Database, category: 'Tools' },
-  { name: 'DataGrip', icon: Terminal, category: 'Tools' },
-  { name: 'Docker', icon: Layers, category: 'Tools' },
-  { name: 'Dash / Plotly', icon: Database, category: 'Tools' },
-  { name: 'DuckDB', icon: Database, category: 'Tools' },
-  { name: 'Jupyter Notebook', icon: Terminal, category: 'Tools' },
-  { name: 'VS Code', icon: Terminal, category: 'Tools' },
-  { name: 'IntelliJ', icon: Terminal, category: 'Tools' },
+  { name: 'Git', icon: Github, category: 'Tools' },
 ]
 
 const Skills = () => {

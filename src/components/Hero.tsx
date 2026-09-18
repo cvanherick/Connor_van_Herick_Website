@@ -40,6 +40,7 @@ const Hero = () => {
         >
           ML engineer building reliable AI, data, and decision systems
           <span className="block text-xl md:text-2xl text-cream/60 mt-3">UC Berkeley · Computer Science + Data Science · Spring 2027</span>
+          <span className="block text-base md:text-lg text-accent/90 mt-4">ML systems across 73M+ financial records · agentic research infrastructure · robotics</span>
         </motion.p>
 
         <motion.div 

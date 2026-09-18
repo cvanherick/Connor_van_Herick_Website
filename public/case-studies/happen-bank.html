@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happen Bank Collections Strategy | Connor van Herick</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #07111f; color: #f8faf4; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: linear-gradient(120deg, rgba(20,184,166,.12), transparent 36%, rgba(245,158,11,.1) 72%, transparent), linear-gradient(180deg, #07111f 0%, #081827 46%, #0d1f26 100%); }
+      main { width: min(1040px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 72px; }
+      a { color: #14b8a6; }
+      .back { display: inline-flex; margin-bottom: 48px; color: #f8faf4; text-decoration: none; font-weight: 700; }
+      .eyebrow { color: #f59e0b; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; }
+      h1 { max-width: 860px; margin: 12px 0 22px; color: #f8faf4; font-size: clamp(2.4rem, 7vw, 5.2rem); line-height: .96; }
+      .lede { max-width: 780px; margin: 0; color: rgba(248,250,244,.75); font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.7; }
+      .photo { width: 100%; margin: 42px 0 12px; border-radius: 18px; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 38%; border: 1px solid rgba(248,250,244,.12); }
+      .caption { color: rgba(248,250,244,.5); font-size: .9rem; }
+      .grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 38px 0 56px; }
+      .stat, .card { border: 1px solid rgba(248,250,244,.12); border-radius: 12px; background: rgba(15,31,46,.7); }
+      .stat { min-height: 116px; padding: 18px; }
+      .stat strong { display: block; color: #f8faf4; font-size: 1.2rem; margin-bottom: 8px; }
+      .stat span, p, li { color: rgba(248,250,244,.72); line-height: 1.72; font-size: 1.02rem; }
+      section { padding: 40px 0; border-top: 1px solid rgba(248,250,244,.12); }
+      h2 { margin: 0 0 18px; color: #f8faf4; font-size: clamp(1.6rem, 4vw, 2.4rem); }
+      ul { padding-left: 1.2rem; }
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+      .card { padding: 24px; }
+      .card h3 { margin: 0 0 12px; color: #14b8a6; }
+      footer { padding-top: 40px; color: rgba(248,250,244,.45); font-size: .95rem; }
+      @media (max-width: 760px) { .grid, .two-col { grid-template-columns: 1fr 1fr; } .grid .stat:last-child { grid-column: 1 / -1; } main { padding-top: 28px; } }
+      @media (max-width: 480px) { .grid, .two-col { grid-template-columns: 1fr; } .grid .stat:last-child { grid-column: auto; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="../">Back to portfolio</a>
+      <div class="eyebrow">Featured Work · Collections Strategy Intern</div>
+      <h1>Happen Bank Collections Strategy</h1>
+      <p class="lede">Built data and machine-learning decision systems to help a collections strategy team evaluate borrower treatment choices at scale.</p>
+
+      <img class="photo" src="../assets/happen-bank-presentation-optimized.jpg" alt="Connor presenting project results at the end of his Happen Bank internship" />
+      <p class="caption">Presenting project results at the end of the internship. This page is a high-level portfolio summary and omits confidential implementation details.</p>
+
+      <div class="grid">
+        <div class="stat"><strong>Scale</strong><span>73M+ records processed</span></div>
+        <div class="stat"><strong>Stack</strong><span>PySpark, SQL, Databricks</span></div>
+        <div class="stat"><strong>Modeling</strong><span>XGBoost uplift modeling</span></div>
+        <div class="stat"><strong>Result</strong><span>2.04% charge-off reduction</span></div>
+        <div class="stat"><strong>Value</strong><span>$20.4M estimated gross value</span></div>
+      </div>
+
+      <section>
+        <h2>Problem</h2>
+        <p>Collections strategy requires making high-volume decisions under operational, compliance, and capacity constraints. The project focused on turning large-scale borrower and account data into a more measurable decision process.</p>
+      </section>
+
+      <section>
+        <h2>Approach</h2>
+        <div class="two-col">
+          <div class="card"><h3>Data architecture</h3><p>Built production-oriented PySpark and SQL pipelines in Databricks, with feature construction and evaluation designed for large datasets.</p></div>
+          <div class="card"><h3>Decision modeling</h3><p>Applied XGBoost S- and T-Learner approaches to estimate treatment effects, then evaluated results on holdout data with business constraints in mind.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Result</h2>
+        <p>The holdout evaluation showed a 2.04% charge-off reduction and an estimated $20.4M in gross value. The public summary intentionally excludes internal datasets, feature names, decision rules, and proprietary business context.</p>
+      </section>
+
+      <footer>© 2026 Connor van Herick.</footer>
+    </main>
+  </body>
+</html>
