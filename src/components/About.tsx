@@ -58,16 +58,22 @@ const About = () => {
           viewport={{ once: true }}
           className="mt-16 grid gap-5 md:grid-cols-3"
         >
+          <div className="md:col-span-3">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-secondary">Outside of work</p>
+            <h3 className="mt-2 text-3xl font-bold text-cream">Climbing, skiing, and sharing the work</h3>
+          </div>
           <figure className="group overflow-hidden rounded-3xl border border-cream/10 bg-surface/70 md:col-span-2">
-            <img src="./assets/happen-bank-presentation.jpg" alt="Connor presenting at the end of his Happen Bank internship" loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+            <img src="./assets/happen-bank-presentation.jpg" alt="Connor presenting at the end of his Happen Bank internship" loading="eager" decoding="async" className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
             <figcaption className="px-5 py-4 text-sm font-medium text-cream/65">Presenting project results at the end of my Happen Bank internship.</figcaption>
           </figure>
           <div className="grid grid-cols-2 gap-5 md:grid-cols-1">
             <figure className="group overflow-hidden rounded-3xl border border-cream/10 bg-surface/70">
-              <img src="./assets/skiing.jpg" alt="Connor skiing in the mountains" loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+              <img src="./assets/skiing.jpg" alt="Connor skiing in the mountains" loading="eager" decoding="async" className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+              <figcaption className="px-4 py-3 text-sm font-medium text-cream/65">Skiing in the Sierra.</figcaption>
             </figure>
             <figure className="group overflow-hidden rounded-3xl border border-cream/10 bg-surface/70">
-              <img src="./assets/climbing.jpg" alt="Connor climbing outdoors" loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+              <img src="./assets/climbing.jpg" alt="Connor climbing outdoors" loading="eager" decoding="async" className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+              <figcaption className="px-4 py-3 text-sm font-medium text-cream/65">Climbing outdoors.</figcaption>
             </figure>
           </div>
         </motion.div>
