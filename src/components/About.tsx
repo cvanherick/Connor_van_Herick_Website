@@ -3,7 +3,7 @@ import { GraduationCap, Code2, BrainCog, TrendingUp } from 'lucide-react'
 
 const About = () => {
   return (
-    <section id="about" className="py-28 px-6 bg-primary/35">
+    <section id="about" aria-labelledby="about-title" className="py-28 px-6 bg-primary/35">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -13,7 +13,7 @@ const About = () => {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
-            About
+            <span id="about-title">About</span>
           </h2>
         </motion.div>
 
