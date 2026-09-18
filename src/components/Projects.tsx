@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Bot, Cpu, ExternalLink, Gamepad2, Github, LockKeyhole, Map, Network, Search, Shield, TrendingUp, Users } from 'lucide-react'
 import { Project } from '../types'
 
-const projects: Project[] = [
+export const projects: Project[] = [
   {
     title: 'Vision-Guided Robotic Game Player',
     description: 'Built a ROS 2 autonomy stack that lets a UR7e robot arm perceive, plan, and place physical game pieces.',
@@ -120,6 +120,14 @@ const relevanceOrder = [
 
 const sortedProjects = [...projects].sort((a, b) => relevanceOrder.indexOf(a.title) - relevanceOrder.indexOf(b.title))
 const featuredProjects = sortedProjects.slice(0, 6)
+const categoryOptions = ['All', 'ML/AI', 'Systems', 'Robotics/CV', 'Data', 'Coursework']
+const projectCategory = (title: string) => {
+  if (title.includes('Robotic') || title.includes('CS 180')) return 'Robotics/CV'
+  if (title.includes('Secure') || title.includes('RISC-V') || title.includes('Snek') || title.includes('Ngordnet') || title.includes('World') || title.includes('2048')) return 'Systems'
+  if (title.includes('Classify') || title.includes('Cadre')) return 'ML/AI'
+  if (title.includes('Attribution')) return 'Data'
+  return 'Coursework'
+}
 
 const projectIcon = (title: string) => {
   if (title.includes('Robotic')) return Bot
@@ -134,9 +142,13 @@ const projectIcon = (title: string) => {
   return Network
 }
 
-const Projects = () => {
-  const [showAll, setShowAll] = useState(false)
-  const visibleProjects = showAll ? sortedProjects : featuredProjects
+interface ProjectsProps {
+  archive?: boolean
+}
+
+const Projects = ({ archive = false }: ProjectsProps) => {
+  const [category, setCategory] = useState('All')
+  const visibleProjects = (archive ? sortedProjects : featuredProjects).filter((project) => category === 'All' || projectCategory(project.title) === category)
 
   return (
     <section id="projects" aria-labelledby="projects-title" className="py-32 px-6">
@@ -151,9 +163,13 @@ const Projects = () => {
             <span id="projects-title">Projects</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
-            Selected work across machine learning, computer vision, robotics, systems, and data products.
+            {archive ? 'A complete record of coursework, systems, ML, robotics, and data projects.' : 'Selected work across machine learning, computer vision, robotics, systems, and data products.'}
           </p>
         </motion.div>
+
+        {archive && <div className="mb-10 flex flex-wrap justify-center gap-3" aria-label="Filter projects by category">
+          {categoryOptions.map((option) => <button key={option} type="button" onClick={() => setCategory(option)} className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${category === option ? 'border-accent bg-accent/15 text-accent' : 'border-cream/10 bg-cream/5 text-cream/65 hover:border-accent/40 hover:text-cream'}`}>{option}</button>)}
+        </div>}
 
         <div className="grid md:grid-cols-2 gap-8">
           {visibleProjects.map((project, index) => (
@@ -226,7 +242,7 @@ const Projects = () => {
                       {project.demo && (
                         <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-4 rounded-2xl bg-gradient-to-r from-accent to-secondary hover:from-secondary hover:to-accent text-primary font-semibold shadow-lg hover:shadow-accent/30 transition-all group-hover:scale-105 flex-1 justify-center">
                           <ExternalLink size={20} />
-                          Project Site
+                          {project.demo.startsWith('./case-studies') ? 'Case Study' : 'View Project'}
                         </a>
                       )}
                       {!project.github && !project.demo && (
@@ -242,16 +258,7 @@ const Projects = () => {
             })()
           ))}
         </div>
-        <div className="mt-12 text-center">
-          <button
-            type="button"
-            onClick={() => setShowAll(!showAll)}
-            aria-expanded={showAll}
-            className="btn btn-secondary"
-          >
-            {showAll ? 'Show Featured Projects' : `More Projects (${sortedProjects.length - featuredProjects.length})`}
-          </button>
-        </div>
+        {!archive && <div className="mt-12 text-center"><a href="./projects/" className="btn btn-secondary inline-flex">View More Projects <span aria-hidden="true">→</span></a></div>}
       </div>
     </section>
   )

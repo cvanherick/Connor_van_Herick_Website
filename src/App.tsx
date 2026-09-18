@@ -8,8 +8,14 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Skills from './components/Skills'
 import WhatImBuilding from './components/WhatImBuilding'
+import ArchivePage from './components/ArchivePage'
 
 function App() {
+  const pathname = window.location.pathname
+  if (pathname.includes('/experience')) return <ArchivePage kind="experience" />
+  if (pathname.includes('/projects')) return <ArchivePage kind="projects" />
+  if (pathname.includes('/coursework')) return <ArchivePage kind="coursework" />
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-primary">
       <a href="#main-content" className="skip-link">Skip to content</a>
@@ -17,10 +23,10 @@ function App() {
       <div className="relative z-10">
         <Navbar />
         <main id="main-content"><Hero />
-        <WhatImBuilding />
-        <About />
         <Experience />
         <Projects />
+        <WhatImBuilding />
+        <About />
         <Skills />
         <Coursework />
         <Contact /></main>

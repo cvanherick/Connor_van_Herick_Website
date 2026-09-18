@@ -34,7 +34,7 @@ const Footer = () => {
                 Skills
               </Link>
               <Link to="building" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
-                Building
+                Currently
               </Link>
               <Link to="contact" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 Contact

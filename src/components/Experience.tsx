@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { BrainCog, Briefcase, BriefcaseBusiness, Users } from 'lucide-react'
 
-interface ExperienceItem {
+export interface ExperienceItem {
   title: string
   company: string
   duration: string
@@ -11,7 +11,7 @@ interface ExperienceItem {
   logoAlt?: string
 }
 
-const experiences: ExperienceItem[] = [
+export const experiences: ExperienceItem[] = [
   {
     title: 'Technical Advisor',
     company: 'UC Berkeley School of Law',
@@ -42,7 +42,7 @@ const experiences: ExperienceItem[] = [
     duration: 'Jan 2025 – May 2025',
     note: 'NDA project',
     logo: './assets/arcteryx-logo.png',
-    logoAlt: 'Arc\'teryx logo',
+    logoAlt: "Arc'teryx logo",
     bullets: [
       'Led a 9-person team building daily predictive models for retail labor allocation across 80+ North American stores',
       'Engineered 14 external-factor features, including weather and promotions, through APIs',
@@ -69,68 +69,54 @@ const experiences: ExperienceItem[] = [
     logo: './assets/cal-adventures.png',
     logoAlt: 'Cal Adventures logo',
     bullets: [
-      'Leadership in high-pressure outdoor education environments',
       'Led teams of 20+ campers in wilderness settings',
+      'Managed safety, instruction, and logistics in high-pressure outdoor education environments',
       'Developed crisis management and team coordination skills',
     ]
   },
   {
-    title: 'Membership Officer & Incoming Treasurer',
+    title: 'Treasurer & Membership Officer',
     company: 'Cal Climbing',
     duration: '2025 – Present',
     logo: './assets/cal-climbing.png',
     logoAlt: 'California Climbing logo',
     bullets: [
       'Served as Membership Officer for the 2025-2026 school year',
-      'Treasurer for the 2026-2027 school year',
-      'Supported club operations, member coordination, and student community building',
+      'Serve as Treasurer for the 2026-2027 school year',
+      'Support club operations, member coordination, and student community building',
     ]
   },
 ]
 
-const Experience = () => {
+interface ExperienceProps {
+  archive?: boolean
+}
+
+const Experience = ({ archive = false }: ExperienceProps) => {
+  const visibleExperiences = archive ? experiences : experiences.slice(0, 4)
+
   return (
-    <section id="experience" aria-labelledby="experience-title" className="py-32 px-6">
+    <section id="experience" aria-labelledby="experience-title" className="py-28 px-6">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-24"
-        >
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
-            <span id="experience-title">Experience</span>
+            <span id="experience-title">{archive ? 'Experience' : 'Selected Experience'}</span>
           </h2>
-          <p className="text-xl text-cream/60 max-w-2xl mx-auto">
-            Applied machine learning, data science, and technical leadership experience.
-          </p>
+          <p className="text-xl text-cream/60 max-w-2xl mx-auto">Applied machine learning, data science, and technical leadership experience.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="card group overflow-hidden rounded-3xl hover:shadow-2xl hover:shadow-accent/20 transition-all duration-700 hover:-translate-y-4 overflow-clip"
-              whileHover={{ y: -16 }}
-            >
+          {visibleExperiences.map((exp, index) => (
+            <motion.div key={exp.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: Math.min(index, 3) * 0.05 }} className="card group overflow-hidden rounded-3xl overflow-clip">
               <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-44 rounded-t-3xl" />
-
-              <div className="relative h-44 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-secondary/10 transition-all duration-700 flex items-center justify-center">
+              <div className="relative h-44 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden flex items-center justify-center">
                 {exp.logo && (
-                  <div className={`h-24 rounded-3xl flex items-center justify-center shadow-2xl transition-all duration-500 group-hover:scale-110 ${exp.company === 'Happen Bank (formerly LendingClub)' ? 'w-40 bg-surface p-3' : 'w-24'} ${exp.company === 'Cal Climbing' ? 'bg-black p-2' : exp.company === 'UC Berkeley School of Law' ? 'bg-white/95 p-2' : exp.company === 'Happen Bank (formerly LendingClub)' ? '' : 'bg-white/95 p-5'}`}>
-                    <img
-                      src={exp.logo}
-                      alt={exp.logoAlt ?? `${exp.company} logo`}
-                      className={`h-full w-full object-contain ${exp.company.includes("Arc'teryx") ? 'invert-0' : ''}`}
-                    />
+                  <div className={`h-24 rounded-3xl flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-105 ${exp.company === 'Happen Bank (formerly LendingClub)' ? 'w-40 bg-surface p-3' : 'w-24'} ${exp.company === 'Cal Climbing' ? 'bg-black p-2' : exp.company === 'UC Berkeley School of Law' ? 'bg-white/95 p-2' : exp.company === 'Happen Bank (formerly LendingClub)' ? '' : 'bg-white/95 p-5'}`}>
+                    <img src={exp.logo} alt={exp.logoAlt ?? `${exp.company} logo`} className="h-full w-full object-contain" />
                   </div>
                 )}
                 {!exp.logo && (
-                  <div className="h-24 w-24 rounded-3xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent shadow-2xl transition-all duration-500 group-hover:scale-110">
+                  <div className="h-24 w-24 rounded-3xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent shadow-2xl">
                     {index === 0 && <BriefcaseBusiness size={44} />}
                     {index === 2 && <Users size={44} />}
                     {index === 3 && <Briefcase size={44} />}
@@ -142,31 +128,20 @@ const Experience = () => {
 
               <div className="p-8 relative z-10">
                 <div className="mb-6">
-                  <div className="flex items-center gap-2 text-accent font-semibold mb-3">
-                    <BrainCog size={18} />
-                    <span>{exp.duration}</span>
-                  </div>
+                  <div className="flex items-center gap-2 text-accent font-semibold mb-3"><BrainCog size={18} /><span>{exp.duration}</span></div>
                   <h3 className="text-2xl font-bold text-cream mb-3 group-hover:text-accent transition-colors duration-300">{exp.title}</h3>
                   <p className="text-cream/70 font-medium leading-relaxed">{exp.company}</p>
-                  {exp.note && (
-                    <p className="mt-4 inline-flex rounded-xl border border-accent/30 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">
-                      {exp.note}
-                    </p>
-                  )}
+                  {exp.note && <p className="mt-4 inline-flex rounded-xl border border-accent/30 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">{exp.note}</p>}
                 </div>
-
                 <ul className="space-y-3 text-cream/70 leading-relaxed">
-                  {exp.bullets.map((bullet, bIndex) => (
-                    <li key={bIndex} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
+                  {exp.bullets.map((bullet, bIndex) => <li key={bIndex} className="flex items-start gap-3"><div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" /><span>{bullet}</span></li>)}
                 </ul>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {!archive && <div className="mt-12 text-center"><a href="./experience/" className="btn btn-secondary inline-flex">View More Experience <span aria-hidden="true">→</span></a></div>}
       </div>
     </section>
   )
