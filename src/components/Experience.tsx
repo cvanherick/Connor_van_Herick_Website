@@ -69,9 +69,9 @@ export const experiences: ExperienceItem[] = [
     logo: './assets/cal-adventures.png',
     logoAlt: 'Cal Adventures logo',
     bullets: [
-      'Led teams of 20+ campers in wilderness settings',
-      'Managed safety, instruction, and logistics in high-pressure outdoor education environments',
-      'Developed crisis management and team coordination skills',
+      'Instructed campers in paddle boarding, kayaking, and rock climbing',
+      'Supervised groups of up to 28 campers with one to three fellow counselors',
+      'Shuttled campers to local points of interest and taught Bay Area ecology and history',
     ]
   },
   {
@@ -84,6 +84,34 @@ export const experiences: ExperienceItem[] = [
       'Served as Membership Officer for the 2025-2026 school year',
       'Serve as Treasurer for the 2026-2027 school year',
       'Support club operations, member coordination, and student community building',
+    ]
+  },
+  {
+    title: 'Ride Operator',
+    company: 'Tilden Park Carousel',
+    duration: 'Jun 2022 – Aug 2023',
+    bullets: [
+      'Operated and maintained the 110-year-old historic carousel in Tilden Regional Park',
+      'Supervised groups of up to 50 riders while maintaining a safe, welcoming environment',
+      'Trained nine ride attendants on operating the machine',
+    ]
+  },
+  {
+    title: 'Member',
+    company: 'Cal Hiking & Outdoor Society',
+    duration: 'UC Berkeley',
+    logo: './assets/cal-hiking.png',
+    logoAlt: 'Cal Hiking and Outdoor Society logo',
+    bullets: [
+      'Participate in Berkeley’s hiking and outdoor community',
+    ]
+  },
+  {
+    title: 'Participant',
+    company: 'Intramural Volleyball',
+    duration: 'UC Berkeley',
+    bullets: [
+      'Played intramural volleyball as part of Berkeley campus recreation',
     ]
   },
 ]

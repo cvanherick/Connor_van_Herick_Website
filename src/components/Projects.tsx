@@ -101,6 +101,13 @@ export const projects: Project[] = [
     course: 'CS 61B · Fall 2024',
     accessNote: 'Coursework project; code private for academic integrity.',
   },
+  {
+    title: 'Cook County Housing Price Analysis',
+    description: 'Built a Python housing-price analysis pipeline and examined fairness questions connected to historical racial discrimination in property valuation.',
+    tech: ['Python', 'Pandas', 'Scikit-learn', 'Jupyter', 'Fairness Analysis'],
+    impact: 'Data cleaning, feature selection, and model evaluation • RMSE-driven analysis',
+    accessNote: 'Earlier academic project; notebook available on request.',
+  },
 ]
 
 const relevanceOrder = [
@@ -116,6 +123,7 @@ const relevanceOrder = [
   'Build Your Own World',
   'Snek Game Engine',
   '2048 Game',
+  'Cook County Housing Price Analysis',
 ]
 
 const sortedProjects = [...projects].sort((a, b) => relevanceOrder.indexOf(a.title) - relevanceOrder.indexOf(b.title))

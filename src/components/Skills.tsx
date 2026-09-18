@@ -20,6 +20,9 @@ const skills = [
   { name: 'NumPy', icon: Layers, category: 'ML/Data' },
   { name: 'SHAP', icon: BrainCog, category: 'ML/Data' },
   { name: 'Scikit-learn', icon: BrainCog, category: 'ML/Data' },
+  { name: 'Matplotlib', icon: Database, category: 'ML/Data' },
+  { name: 'Seaborn', icon: Database, category: 'ML/Data' },
+  { name: 'Regex', icon: Code2, category: 'Languages' },
   
   // Systems
   { name: 'Cryptography', icon: Lock, category: 'Systems' },
@@ -38,6 +41,9 @@ const skills = [
   { name: 'Docker', icon: Layers, category: 'Tools' },
   { name: 'Dash / Plotly', icon: Database, category: 'Tools' },
   { name: 'DuckDB', icon: Database, category: 'Tools' },
+  { name: 'Jupyter Notebook', icon: Terminal, category: 'Tools' },
+  { name: 'VS Code', icon: Terminal, category: 'Tools' },
+  { name: 'IntelliJ', icon: Terminal, category: 'Tools' },
 ]
 
 const Skills = () => {
