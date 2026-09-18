@@ -44,7 +44,7 @@ const About = () => {
             className="text-lg leading-relaxed text-cream"
           >
             <p className="text-2xl leading-relaxed text-cream">
-              Hi! I'm Connor, a UC Berkeley student studying Data Science and Computer Science, passionate about building large-scale backend systems and machine learning pipelines that are reliable, efficient, and maintainable.
+              Hi! I'm Connor, a UC Berkeley student pursuing a BA in Computer Science and a BA in Data Science with an emphasis in Robotics. I'm passionate about building large-scale backend systems and machine learning pipelines that are reliable, efficient, and maintainable.
             </p>
             <p className="mt-6 text-xl leading-relaxed text-cream/75">
               I enjoy tackling complex technical challenges by designing clean abstractions, implementing end-to-end solutions, and ensuring models and systems perform robustly in the real world.
@@ -65,9 +65,10 @@ const About = () => {
           <div className="card p-8 text-center group hover:lift">
             <GraduationCap size={56} className="mx-auto mb-6 text-accent group-hover:scale-110 transition-transform duration-300" />
             <h3 className="text-2xl font-bold mb-2">UC Berkeley</h3>
-            <p className="text-cream/60 mb-2">Data Science + Computer Science</p>
-            <p className="font-semibold text-accent text-xl">GPA: 3.86</p>
-            <p className="text-cream/60 text-sm">May 2027</p>
+            <p className="text-cream/60 mb-2">Computer Science BA + Data Science BA</p>
+            <p className="text-cream/60 text-sm mb-2">Robotics emphasis</p>
+            <p className="font-semibold text-accent text-xl">GPA: 3.807</p>
+            <p className="text-cream/60 text-sm">Expected Spring 2027</p>
           </div>
 
           <div className="md:col-span-3 card p-8 group hover:lift">

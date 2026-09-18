@@ -40,7 +40,7 @@ const Hero = () => {
           className="text-2xl md:text-3xl font-medium text-cream/90 mb-6 max-w-2xl mx-auto leading-relaxed"
         >
           Building reliable ML systems and thoughtful products
-          <span className="block text-xl md:text-2xl text-cream/60 mt-3">UC Berkeley · Data Science + Computer Science · May 2027</span>
+          <span className="block text-xl md:text-2xl text-cream/60 mt-3">UC Berkeley · Computer Science BA + Data Science BA · Robotics emphasis · Spring 2027</span>
         </motion.p>
 
         <motion.div 

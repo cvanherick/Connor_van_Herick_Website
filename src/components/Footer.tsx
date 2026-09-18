@@ -11,7 +11,7 @@ const Footer = () => {
               Connor van Herick
             </Link>
             <p className="text-cream/45 text-sm max-w-md mx-auto lg:mx-0">
-              Data Science + Computer Science @ UC Berkeley
+              Computer Science BA + Data Science BA · Robotics emphasis @ UC Berkeley
             </p>
           </div>
 
@@ -56,7 +56,7 @@ const Footer = () => {
               </a>
             </div>
             <p className="text-cream/35 text-sm text-center lg:text-left">
-              © 2026 Connor van Herick. UC Berkeley Data Science + Computer Science.
+              © 2026 Connor van Herick. UC Berkeley Computer Science BA + Data Science BA.
             </p>
           </div>
         </div>

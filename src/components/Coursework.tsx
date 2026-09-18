@@ -2,78 +2,68 @@ import { motion } from 'framer-motion'
 import { Binary, Bot, BrainCog, Database, Eye, LockKeyhole, Network, Sigma } from 'lucide-react'
 
 const courses = [
+  { code: 'DATA C8', name: 'Foundations of Data Science', skills: ['Python', 'data analysis', 'statistics'], icon: Database, status: 'Completed' },
+  { code: 'MATH 1B', name: 'Calculus', skills: ['calculus', 'integration', 'series'], icon: Sigma, status: 'Completed' },
   {
     code: 'CS 61A',
     name: 'Structure and Interpretation of Computer Programs',
     skills: ['Python', 'abstraction', 'recursion', 'interpreters'],
-    icon: Binary,
+    icon: Binary, status: 'Completed',
   },
   {
     code: 'CS 61B',
     name: 'Data Structures',
     skills: ['Java', 'data structures', 'testing', 'software design'],
-    icon: Network,
+    icon: Network, status: 'Completed',
   },
   {
     code: 'CS 61C',
     name: 'Machine Structures',
     skills: ['C', 'RISC-V', 'memory', 'computer architecture'],
-    icon: Binary,
+    icon: Binary, status: 'Completed',
   },
+  { code: 'MATH 53', name: 'Multivariable Calculus', skills: ['multivariable calculus', 'gradients', 'optimization'], icon: Sigma, status: 'Completed' },
+  { code: 'DATA C100', name: 'Principles & Techniques of Data Science', skills: ['pandas', 'SQL', 'modeling', 'data pipelines'], icon: Database, status: 'Completed' },
+  { code: 'MATH 54', name: 'Linear Algebra and Differential Equations', skills: ['linear algebra', 'eigenvectors', 'differential equations'], icon: Sigma, status: 'Completed' },
+  { code: 'COMPSCI 70', name: 'Discrete Mathematics and Probability Theory', skills: ['discrete math', 'probability', 'proofs'], icon: Sigma, status: 'Completed' },
+  { code: 'DATA C140', name: 'Probability for Data Science', skills: ['probability', 'inference', 'distributions', 'statistical reasoning'], icon: Sigma, status: 'Completed' },
   {
     code: 'CS 161',
     name: 'Computer Security',
     skills: ['cryptography', 'threat modeling', 'access control', 'secure systems'],
-    icon: LockKeyhole,
+    icon: LockKeyhole, status: 'Completed',
   },
   {
     code: 'CS 170',
     name: 'Efficient Algorithms',
     skills: ['algorithm design', 'graphs', 'dynamic programming', 'optimization'],
-    icon: Network,
+    icon: Network, status: 'Completed',
   },
   {
     code: 'CS 189',
     name: 'Machine Learning',
     skills: ['supervised learning', 'model evaluation', 'optimization', 'probability'],
-    icon: BrainCog,
+    icon: BrainCog, status: 'Completed',
   },
   {
     code: 'CS C182',
     name: 'Deep Neural Networks',
     skills: ['deep learning', 'backpropagation', 'neural architectures', 'training dynamics'],
-    icon: BrainCog,
+    icon: BrainCog, status: 'In progress',
   },
   {
     code: 'CS 180',
     name: 'Computer Vision',
     skills: ['image processing', 'feature matching', 'geometry', 'computational photography'],
-    icon: Eye,
-  },
-  {
-    code: 'Data C100',
-    name: 'Principles & Techniques of Data Science',
-    skills: ['pandas', 'SQL', 'modeling', 'data pipelines'],
-    icon: Database,
-  },
-  {
-    code: 'Data C140',
-    name: 'Probability for Data Science',
-    skills: ['probability', 'inference', 'distributions', 'statistical reasoning'],
-    icon: Sigma,
+    icon: Eye, status: 'In progress',
   },
   {
     code: 'EECS C106A',
-    name: 'Robotic Manipulation and Interaction',
+    name: 'Introduction to Robotics',
     skills: ['robot kinematics', 'motion planning', 'control', 'robot perception'],
-    icon: Bot,
+    icon: Bot, status: 'Completed',
   },
-  {
-    code: 'Math 54 / 53',
-    name: 'Linear Algebra and Multivariable Calculus',
-    skills: ['linear algebra', 'eigenvectors', 'gradients', 'multivariable optimization'],
-    icon: Sigma,
-  },
+  { code: 'EECS C183', name: 'Natural Language Processing', skills: ['language models', 'text representations', 'NLP'], icon: BrainCog, status: 'In progress' },
 ]
 
 const Coursework = () => {
@@ -111,6 +101,7 @@ const Coursework = () => {
                 <div>
                   <p className="text-sm font-bold uppercase tracking-wide text-secondary">{course.code}</p>
                   <h3 className="mt-1 text-xl font-bold text-cream leading-snug">{course.name}</h3>
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-cream/45">{course.status}</p>
                 </div>
               </div>
 
