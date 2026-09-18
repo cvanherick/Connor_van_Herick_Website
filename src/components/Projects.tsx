@@ -19,6 +19,14 @@ const projects: Project[] = [
     demo: './case-studies/cadre.html',
   },
   {
+    title: 'CS 180 Computer Vision Projects',
+    description: 'Portfolio of my UC Berkeley CS 180 computer vision work, including a dedicated Project 1 write-up with implementation details and results.',
+    tech: ['Computer Vision', 'Python', 'Image Processing'],
+    impact: 'Fall 2026 coursework • Project write-up and results',
+    course: 'CS 180 · Fall 2026',
+    demo: 'https://cvanherick.github.io/Connor_van_Herick_CS180/projects/project1/',
+  },
+  {
     title: 'Ngordnet Language Explorer',
     description: 'Built a Java web app for exploring historical word usage and WordNet hyponym relationships using graphs, time series, and query handlers.',
     tech: ['Java', 'Graphs', 'Time Series', 'Web Handlers', 'JUnit'],
@@ -96,6 +104,7 @@ const projects: Project[] = [
 
 const relevanceOrder = [
   'Vision-Guided Robotic Game Player',
+  'CS 180 Computer Vision Projects',
   'Cadre Agent Team Framework',
   'Secure File Sharing System',
   'RISC-V CPU Design',
