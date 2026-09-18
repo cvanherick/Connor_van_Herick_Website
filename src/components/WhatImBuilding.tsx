@@ -17,7 +17,7 @@ const WhatImBuilding = () => {
     {
       icon: Network,
       title: 'Cadre Agent Team Framework',
-      description: 'Evolving a YAML-driven framework for composing, validating, and evaluating AI agent teams.',
+      description: 'Evolving a framework for role-based AI collaboration, structured review, and human-led decision making.',
     }
   ]
 

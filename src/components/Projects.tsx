@@ -14,9 +14,9 @@ export const projects: Project[] = [
   },
   {
     title: 'Cadre Agent Team Framework',
-    description: 'Designed a YAML-driven framework for composing AI agent teams with schemas, skills, templates, validation, and evaluation workflows.',
-    tech: ['Python', 'YAML', 'JSON Schema', 'Testing', 'AI Systems'],
-    impact: 'Spec-driven agent architecture • Validation and eval workflows',
+    description: 'Designed a framework for composing role-based AI teams with structured collaboration, review checkpoints, and human oversight.',
+    tech: ['AI Systems', 'Multi-Agent Workflows', 'Evaluation', 'Human-in-the-Loop'],
+    impact: 'Role-based orchestration • Multi-perspective review and quality gates',
     demo: './case-studies/cadre.html',
   },
   {
