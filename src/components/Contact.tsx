@@ -3,7 +3,7 @@ import { Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react'
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-32 px-6">
+    <section id="contact" aria-labelledby="contact-title" className="py-32 px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -12,7 +12,7 @@ const Contact = () => {
           className="text-center mb-24"
         >
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
-            Get In Touch
+            <span id="contact-title">Get In Touch</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
             I’m open to thoughtful conversations about ML, systems, and ambitious products.
