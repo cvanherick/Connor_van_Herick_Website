@@ -64,6 +64,8 @@ const experiences: ExperienceItem[] = [
     title: 'Instructor & Team Lead',
     company: 'Cal Adventures',
     duration: '2022 – 2024',
+    logo: './assets/cal-adventures.png',
+    logoAlt: 'Cal Adventures logo',
     bullets: [
       'Leadership in high-pressure outdoor education environments',
       'Led teams of 20+ campers in wilderness settings',
