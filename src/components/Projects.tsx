@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Bot, Cpu, ExternalLink, Gamepad2, Github, LockKeyhole, Map, Network, Search, Shield, TrendingUp, Users } from 'lucide-react'
 import { Project } from '../types'
@@ -118,6 +119,7 @@ const relevanceOrder = [
 ]
 
 const sortedProjects = [...projects].sort((a, b) => relevanceOrder.indexOf(a.title) - relevanceOrder.indexOf(b.title))
+const featuredProjects = sortedProjects.slice(0, 6)
 
 const projectIcon = (title: string) => {
   if (title.includes('Robotic')) return Bot
@@ -133,6 +135,9 @@ const projectIcon = (title: string) => {
 }
 
 const Projects = () => {
+  const [showAll, setShowAll] = useState(false)
+  const visibleProjects = showAll ? sortedProjects : featuredProjects
+
   return (
     <section id="projects" aria-labelledby="projects-title" className="py-32 px-6">
       <div className="max-w-7xl mx-auto">
@@ -146,12 +151,12 @@ const Projects = () => {
             <span id="projects-title">Projects</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
-            Selected work across machine learning, robotics, systems, and data products.
+            Selected work across machine learning, computer vision, robotics, systems, and data products.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sortedProjects.map((project, index) => (
+        <div className="grid md:grid-cols-2 gap-8">
+          {visibleProjects.map((project, index) => (
             (() => {
               const Icon = projectIcon(project.title)
 
@@ -161,9 +166,8 @@ const Projects = () => {
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="card group overflow-hidden rounded-3xl hover:shadow-2xl hover:shadow-accent/20 transition-all duration-700 hover:-translate-y-4 overflow-clip"
-                  whileHover={{ y: -20 }}
+                  transition={{ duration: 0.45, delay: Math.min(index, 5) * 0.05 }}
+                  className="card group overflow-hidden rounded-3xl overflow-clip"
                 >
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-48 rounded-t-3xl" />
@@ -237,6 +241,16 @@ const Projects = () => {
               )
             })()
           ))}
+        </div>
+        <div className="mt-12 text-center">
+          <button
+            type="button"
+            onClick={() => setShowAll(!showAll)}
+            aria-expanded={showAll}
+            className="btn btn-secondary"
+          >
+            {showAll ? 'Show Featured Projects' : `More Projects (${sortedProjects.length - featuredProjects.length})`}
+          </button>
         </div>
       </div>
     </section>

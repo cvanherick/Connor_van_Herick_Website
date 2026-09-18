@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cvanherick.github.io/Connor_van_Herick_Website/sitemap.xml

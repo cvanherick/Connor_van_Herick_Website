@@ -82,7 +82,7 @@ const experiences: ExperienceItem[] = [
     logoAlt: 'California Climbing logo',
     bullets: [
       'Served as Membership Officer for the 2025-2026 school year',
-      'Incoming Treasurer for the 2026-2027 school year',
+      'Treasurer for the 2026-2027 school year',
       'Supported club operations, member coordination, and student community building',
     ]
   },

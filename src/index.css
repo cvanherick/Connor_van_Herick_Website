@@ -27,7 +27,7 @@
 @layer components {
   .skip-link { @apply fixed left-4 top-4 z-[100] -translate-y-24 rounded-xl bg-accent px-4 py-3 font-semibold text-primary shadow-xl transition-transform focus:translate-y-0; }
   .btn {
-    @apply px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-[1.03] shadow-xl;
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-300 hover:scale-[1.01] shadow-xl;
   }
   .btn-primary {
     @apply bg-gradient-to-r from-accent to-secondary text-primary shadow-accent/20 hover:shadow-secondary/20;
@@ -36,6 +36,6 @@
     @apply border border-cream/15 bg-cream/5 text-cream hover:border-accent/50 hover:bg-accent/10;
   }
   .card {
-    @apply bg-surface/70 backdrop-blur-xl border border-cream/10 rounded-2xl p-8 shadow-2xl shadow-black/20 hover:border-accent/30 hover:shadow-accent/10 transition-all duration-500 hover:-translate-y-2;
+    @apply bg-surface/70 backdrop-blur-xl border border-cream/10 rounded-2xl p-8 shadow-2xl shadow-black/20 hover:border-accent/30 hover:shadow-accent/10 transition-all duration-500 hover:-translate-y-1;
   }
 }

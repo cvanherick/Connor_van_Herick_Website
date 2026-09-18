@@ -17,11 +17,11 @@ function App() {
       <div className="relative z-10">
         <Navbar />
         <main id="main-content"><Hero />
+        <WhatImBuilding />
         <About />
         <Experience />
         <Projects />
         <Skills />
-        <WhatImBuilding />
         <Coursework />
         <Contact /></main>
         <Footer />

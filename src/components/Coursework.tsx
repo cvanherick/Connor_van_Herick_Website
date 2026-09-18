@@ -1,44 +1,7 @@
 import { motion } from 'framer-motion'
-import { Binary, Bot, BrainCog, Database, Eye, LockKeyhole, Network, Sigma } from 'lucide-react'
+import { Bot, BrainCog, Eye } from 'lucide-react'
 
 const courses = [
-  { code: 'DATA C8', name: 'Foundations of Data Science', skills: ['Python', 'data analysis', 'statistics'], icon: Database, status: 'Completed' },
-  { code: 'MATH 1B', name: 'Calculus', skills: ['calculus', 'integration', 'series'], icon: Sigma, status: 'Completed' },
-  {
-    code: 'CS 61A',
-    name: 'Structure and Interpretation of Computer Programs',
-    skills: ['Python', 'abstraction', 'recursion', 'interpreters'],
-    icon: Binary, status: 'Completed',
-  },
-  {
-    code: 'CS 61B',
-    name: 'Data Structures',
-    skills: ['Java', 'data structures', 'testing', 'software design'],
-    icon: Network, status: 'Completed',
-  },
-  {
-    code: 'CS 61C',
-    name: 'Machine Structures',
-    skills: ['C', 'RISC-V', 'memory', 'computer architecture'],
-    icon: Binary, status: 'Completed',
-  },
-  { code: 'MATH 53', name: 'Multivariable Calculus', skills: ['multivariable calculus', 'gradients', 'optimization'], icon: Sigma, status: 'Completed' },
-  { code: 'DATA C100', name: 'Principles & Techniques of Data Science', skills: ['pandas', 'SQL', 'modeling', 'data pipelines'], icon: Database, status: 'Completed' },
-  { code: 'MATH 54', name: 'Linear Algebra and Differential Equations', skills: ['linear algebra', 'eigenvectors', 'differential equations'], icon: Sigma, status: 'Completed' },
-  { code: 'COMPSCI 70', name: 'Discrete Mathematics and Probability Theory', skills: ['discrete math', 'probability', 'proofs'], icon: Sigma, status: 'Completed' },
-  { code: 'DATA C140', name: 'Probability for Data Science', skills: ['probability', 'inference', 'distributions', 'statistical reasoning'], icon: Sigma, status: 'Completed' },
-  {
-    code: 'CS 161',
-    name: 'Computer Security',
-    skills: ['cryptography', 'threat modeling', 'access control', 'secure systems'],
-    icon: LockKeyhole, status: 'Completed',
-  },
-  {
-    code: 'CS 170',
-    name: 'Efficient Algorithms',
-    skills: ['algorithm design', 'graphs', 'dynamic programming', 'optimization'],
-    icon: Network, status: 'Completed',
-  },
   {
     code: 'CS 189',
     name: 'Machine Learning',

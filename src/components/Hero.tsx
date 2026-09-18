@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowDown, Mail, Linkedin, Mail as MailIcon, Github } from 'lucide-react'
-import { Link } from 'react-scroll'
+import { FileText, Mail, Linkedin, Github } from 'lucide-react'
 
 const Hero = () => {
   return (
@@ -39,8 +38,8 @@ const Hero = () => {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="text-2xl md:text-3xl font-medium text-cream/90 mb-6 max-w-2xl mx-auto leading-relaxed"
         >
-          Building reliable ML systems and thoughtful products
-          <span className="block text-xl md:text-2xl text-cream/60 mt-3">UC Berkeley · Computer Science BA + Data Science BA · Robotics emphasis · Spring 2027</span>
+          ML engineer building reliable AI, data, and decision systems
+          <span className="block text-xl md:text-2xl text-cream/60 mt-3">UC Berkeley · Computer Science + Data Science · Spring 2027</span>
         </motion.p>
 
         <motion.div 
@@ -49,26 +48,29 @@ const Hero = () => {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20"
         >
-          <Link to="about" smooth={true} duration={800}>
-            <motion.button className="btn btn-primary group flex items-center gap-2 px-8 py-4 text-lg">
-              About Me
-              <ArrowDown size={20} className="group-hover:translate-y-1 transition-transform" />
-            </motion.button>
-          </Link>
           <motion.a 
-            href="mailto:cvanherick@berkeley.edu?subject=Resume%20request"
-            className="btn btn-secondary group flex items-center gap-2 px-8 py-4 text-lg"
-            whileHover={{ scale: 1.05 }}
+            href="./Connor_van_Herick_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary group flex items-center gap-2 px-8 py-4 text-lg"
           >
-            <MailIcon size={20} />
-            Request Resume
+            <FileText size={20} />
+            View Resume
+          </motion.a>
+          <motion.a
+            href="https://github.com/cvanherick"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-secondary group flex items-center gap-2 px-8 py-4 text-lg"
+          >
+            <Github size={20} />
+            GitHub
           </motion.a>
           <motion.a 
             href="https://www.linkedin.com/in/connor-vanherick/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="btn btn-secondary group flex items-center gap-2 px-8 py-4 text-lg"
-            whileHover={{ scale: 1.05 }}
           >
             <Linkedin size={20} />
             LinkedIn
@@ -81,10 +83,7 @@ const Hero = () => {
           transition={{ delay: 0.6, duration: 0.5 }}
         >
           <div className="flex gap-6 justify-center">
-            <motion.a aria-label="Connor's GitHub" href="https://github.com/cvanherick" target="_blank" rel="noopener noreferrer" className="w-14 h-14 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-cream/10 hover:border-accent/50 hover:bg-accent/15 hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
-              <Github size={24} />
-            </motion.a>
-            <motion.a aria-label="Email Connor" href="mailto:cvanherick@berkeley.edu" className="w-14 h-14 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-cream/10 hover:border-accent/50 hover:bg-accent/15 hover:scale-110 transition-all duration-300" whileHover={{ rotate: 360 }}>
+            <motion.a aria-label="Email Connor" href="mailto:cvanherick@berkeley.edu" className="w-12 h-12 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-cream/10 hover:border-accent/50 hover:bg-accent/15 transition-colors duration-300">
               <Mail size={24} />
             </motion.a>
           </div>

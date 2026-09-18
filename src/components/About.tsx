@@ -67,7 +67,7 @@ const About = () => {
             <h3 className="text-2xl font-bold mb-2">UC Berkeley</h3>
             <p className="text-cream/60 mb-2">Computer Science BA + Data Science BA</p>
             <p className="text-cream/60 text-sm mb-2">Robotics emphasis</p>
-            <p className="font-semibold text-accent text-xl">GPA: 3.807</p>
+            <p className="font-semibold text-accent text-xl">GPA: 3.81</p>
             <p className="text-cream/60 text-sm">Expected Spring 2027</p>
           </div>
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X, Linkedin } from 'lucide-react'
+import { FileText, Menu, X, Linkedin } from 'lucide-react'
 import { Link, animateScroll as scroll } from 'react-scroll'
 
 const Navbar = () => {
@@ -8,6 +8,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('')
 
   const sections = ['about', 'experience', 'projects', 'skills', 'building', 'coursework', 'contact']
+  const sectionLabels: Record<string, string> = { building: 'Currently' }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,14 +58,23 @@ const Navbar = () => {
                     : 'text-cream/70 hover:text-cream hover:bg-cream/5 hover:shadow-lg'
                 }`}
               >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
+                {sectionLabels[section] ?? section.charAt(0).toUpperCase() + section.slice(1)}
               </Link>
             ))}
+            <a
+              href="./Connor_van_Herick_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 font-semibold rounded-xl text-cream/70 hover:text-cream hover:bg-cream/5 transition-colors"
+            >
+              <FileText size={18} className="inline mr-2" />
+              Resume
+            </a>
             <a 
               href="https://www.linkedin.com/in/connor-vanherick/" 
               target="_blank" 
               rel="noopener"
-              className="ml-4 px-6 py-2 bg-gradient-to-r from-accent to-secondary hover:from-secondary hover:to-accent text-primary font-semibold rounded-xl shadow-lg hover:shadow-accent/30 hover:scale-[1.02] transition-all duration-300"
+              className="ml-4 px-6 py-2 bg-gradient-to-r from-accent to-secondary hover:from-secondary hover:to-accent text-primary font-semibold rounded-xl shadow-lg hover:shadow-accent/30 transition-colors duration-300"
             >
               <Linkedin size={20} className="inline mr-2" />
               LinkedIn
@@ -104,9 +114,18 @@ const Navbar = () => {
                     activeSection === section ? 'bg-accent/20 text-accent border border-accent/30' : 'text-cream/70 hover:text-cream'
                   }`}
                 >
-                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                    {sectionLabels[section] ?? section.charAt(0).toUpperCase() + section.slice(1)}
                 </Link>
               ))}
+              <a
+                href="./Connor_van_Herick_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-3 px-4 font-semibold rounded-xl text-cream/70 hover:text-cream hover:bg-cream/5 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Resume
+              </a>
               <a 
                 href="https://www.linkedin.com/in/connor-vanherick/" 
                 target="_blank" 
