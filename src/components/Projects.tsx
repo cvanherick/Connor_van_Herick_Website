@@ -8,6 +8,7 @@ const projects: Project[] = [
     description: 'Built a ROS 2 autonomy stack that lets a UR7e robot arm perceive, plan, and place physical game pieces.',
     tech: ['Python', 'ROS 2', 'MoveIt 2', 'RealSense', 'NumPy'],
     impact: 'End-to-end hardware pipeline • Perception, planning, control',
+    course: 'EECS C106A · Spring 2026',
     demo: 'https://sites.google.com/berkeley.edu/blokushumanvsrobot/intro?authuser=0',
   },
   {
@@ -24,6 +25,7 @@ const projects: Project[] = [
     impact: 'CS61B project • NGram + WordNet query engine',
     demo: './case-studies/ngordnet.html',
     accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
+    course: 'CS 61B · Fall 2024',
   },
   {
     title: 'Build Your Own World',
@@ -32,6 +34,7 @@ const projects: Project[] = [
     impact: 'CS61B project • Java game code available to run locally',
     demo: './case-studies/byow.html',
     accessNote: 'Original Java code can be shared directly; recruiter run guide included.',
+    course: 'CS 61B · Fall 2024',
   },
   {
     title: 'Snek Game Engine',
@@ -40,6 +43,7 @@ const projects: Project[] = [
     impact: '21 integration boards • Unit tests + Valgrind-ready memory checks',
     demo: './case-studies/snek.html',
     accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
+    course: 'CS 61C · Fall 2025',
   },
   {
     title: 'CS61Classify',
@@ -48,12 +52,14 @@ const projects: Project[] = [
     impact: 'Assembly ML pipeline • Unit and coverage tests',
     demo: './case-studies/cs61classify.html',
     accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
+    course: 'CS 61C · Fall 2025',
   },
   {
     title: 'Secure File Sharing System',
     description: 'Built a secure Go system for authenticated users, encrypted file storage, append operations, invitation-based sharing, and hierarchical access revocation.',
     tech: ['Go', 'Cryptography', 'System Design', 'Access Control', 'Testing'],
     impact: '50+ adversarial tests • Tamper detection + recursive revocation',
+    course: 'CS 161 · Spring 2026',
   },
   {
     title: 'Performance Attribution Dashboard',
@@ -66,10 +72,43 @@ const projects: Project[] = [
     description: 'Designed a functional 32-register RISC-V CPU capable of executing arithmetic, memory, and control instructions with a 3-stage pipeline.',
     tech: ['C', 'Verilog', 'Logisim', 'RISC-V'],
     impact: 'Pipeline hazards handled with forwarding + branch control logic',
+    course: 'CS 61C · Fall 2025',
     demo: './case-studies/riscv-cpu.html',
     accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
   },
+  {
+    title: 'Scheme Interpreter',
+    description: 'Implemented an interpreter for a Scheme-like language with evaluation, environments, special forms, procedures, and macro support.',
+    tech: ['Python', 'Interpreters', 'Functional Programming', 'Recursion'],
+    impact: 'Language runtime • Environments, evaluation, and macros',
+    course: 'CS 61A · Spring 2024',
+    accessNote: 'Coursework project; code private for academic integrity.',
+  },
+  {
+    title: '2048 Game',
+    description: 'Implemented the core game logic for a playable Java version of 2048, including board movement, tile merging, scoring, and game state updates.',
+    tech: ['Java', 'Object-Oriented Design', 'Testing', 'Game Logic'],
+    impact: 'Foundational Java project • Deterministic state transitions',
+    course: 'CS 61B · Fall 2024',
+    accessNote: 'Coursework project; code private for academic integrity.',
+  },
 ]
+
+const relevanceOrder = [
+  'Vision-Guided Robotic Game Player',
+  'Cadre Agent Team Framework',
+  'Secure File Sharing System',
+  'RISC-V CPU Design',
+  'CS61Classify',
+  'Performance Attribution Dashboard',
+  'Scheme Interpreter',
+  'Ngordnet Language Explorer',
+  'Build Your Own World',
+  'Snek Game Engine',
+  '2048 Game',
+]
+
+const sortedProjects = [...projects].sort((a, b) => relevanceOrder.indexOf(a.title) - relevanceOrder.indexOf(b.title))
 
 const projectIcon = (title: string) => {
   if (title.includes('Robotic')) return Bot
@@ -103,7 +142,7 @@ const Projects = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {sortedProjects.map((project, index) => (
             (() => {
               const Icon = projectIcon(project.title)
 
@@ -139,6 +178,7 @@ const Projects = () => {
                     <h3 className="text-2xl font-bold mb-4 text-cream group-hover:text-accent transition-colors duration-300">
                       {project.title}
                     </h3>
+                    {project.course && <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-secondary">{project.course}</p>}
                     <p className="text-cream/65 mb-6 leading-relaxed">{project.description}</p>
 
                     {/* Tech badges */}

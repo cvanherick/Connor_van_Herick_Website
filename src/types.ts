@@ -3,6 +3,7 @@ export interface Project {
   description: string;
   tech: string[];
   impact: string;
+  course?: string;
   github?: string;
   demo?: string;
   logo?: string;
