@@ -4,7 +4,7 @@ import { Link } from 'react-scroll'
 
 const Hero = () => {
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-20 px-6 relative overflow-hidden">
+    <section id="hero" aria-labelledby="hero-title" className="min-h-screen flex items-center justify-center pt-20 px-6 relative overflow-hidden">
       {/* Animated grid background */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0" style={{
@@ -30,7 +30,7 @@ const Hero = () => {
           transition={{ duration: 1 }}
           className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-cream via-white to-accent bg-clip-text text-transparent mb-6 leading-tight"
         >
-          Connor van Herick
+          <span id="hero-title">Connor van Herick</span>
         </motion.h1>
         
         <motion.p 
