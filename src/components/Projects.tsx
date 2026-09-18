@@ -14,9 +14,9 @@ export const projects: Project[] = [
   },
   {
     title: 'Cadre Agent Team Framework',
-    description: 'Designed a framework for composing role-based AI teams with structured collaboration, review checkpoints, and human oversight.',
+    description: 'Designed a role-based AI team framework with explicit orchestration, review checkpoints, attribution, and human decision control.',
     tech: ['AI Systems', 'Multi-Agent Workflows', 'Evaluation', 'Human-in-the-Loop'],
-    impact: 'Role-based orchestration • Multi-perspective review and quality gates',
+    impact: 'Inspectable collaboration • Review gates, attribution, and operator control',
     demo: './case-studies/cadre.html',
   },
   {
@@ -111,10 +111,10 @@ export const projects: Project[] = [
 ]
 
 const relevanceOrder = [
-  'Vision-Guided Robotic Game Player',
-  'CS 180 Computer Vision Projects',
   'Cadre Agent Team Framework',
+  'Vision-Guided Robotic Game Player',
   'Secure File Sharing System',
+  'CS 180 Computer Vision Projects',
   'RISC-V CPU Design',
   'CS61Classify',
   'Performance Attribution Dashboard',
@@ -176,8 +176,9 @@ const Projects = ({ archive = false }: ProjectsProps) => {
         </motion.div>
 
         {archive && <div className="mb-10 flex flex-wrap justify-center gap-3" aria-label="Filter projects by category">
-          {categoryOptions.map((option) => <button key={option} type="button" onClick={() => setCategory(option)} className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${category === option ? 'border-accent bg-accent/15 text-accent' : 'border-cream/10 bg-cream/5 text-cream/65 hover:border-accent/40 hover:text-cream'}`}>{option}</button>)}
+          {categoryOptions.map((option) => <button key={option} type="button" aria-pressed={category === option} onClick={() => setCategory(option)} className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${category === option ? 'border-accent bg-accent/15 text-accent' : 'border-cream/10 bg-cream/5 text-cream/65 hover:border-accent/40 hover:text-cream'}`}>{option}</button>)}
         </div>}
+        {archive && <p className="mb-8 text-center text-sm text-cream/60" aria-live="polite">Showing {visibleProjects.length} {visibleProjects.length === 1 ? 'project' : 'projects'}{category !== 'All' ? ` in ${category}` : ''}.</p>}
 
         <div className="grid md:grid-cols-2 gap-8">
           {visibleProjects.map((project, index) => (

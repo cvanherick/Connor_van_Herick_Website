@@ -24,7 +24,7 @@ export const courses = [
 interface CourseworkProps { archive?: boolean }
 
 const Coursework = ({ archive = false }: CourseworkProps) => {
-  const selectedCodes = ['CS 189', 'CS C182', 'EECS C183', 'CS 180', 'CS 170', 'CS 161', 'EECS C106A', 'DATA C140']
+  const selectedCodes = ['CS 189', 'CS C182', 'CS 180', 'CS 170', 'CS 161', 'EECS C106A']
   const visibleCourses = archive ? courses : courses.filter((course) => selectedCodes.includes(course.code))
 
   return (

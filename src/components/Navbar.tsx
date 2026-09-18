@@ -7,8 +7,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
 
-  const sections = ['about', 'experience', 'projects', 'building', 'skills', 'coursework', 'contact']
-  const sectionLabels: Record<string, string> = { building: 'Currently' }
+  const sections = ['experience', 'projects', 'building', 'about', 'contact']
+  const sectionLabels: Record<string, string> = { experience: 'Work', building: 'Currently' }
 
   useEffect(() => {
     const handleScroll = () => {

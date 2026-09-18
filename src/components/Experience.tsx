@@ -20,7 +20,7 @@ export const experiences: ExperienceItem[] = [
     logo: './assets/clean-slate-initiative.png',
     logoAlt: 'Clean Slate Initiative logo',
     bullets: [
-      'Advise on benchmarking and optimizing open-weight LLMs and agentic workflows for secure automation',
+      'Benchmark and optimize open-weight LLMs and role-based workflows for secure automation',
       'Design web-scraping and data pipelines with integrity checks for research infrastructure',
       'Formulate causal experiments to improve participant outreach, deliverability, engagement, and outcomes',
     ]
@@ -35,14 +35,14 @@ export const experiences: ExperienceItem[] = [
     bullets: [
       'Engineered PySpark and SQL decisioning pipelines in Databricks across 73M+ records',
       'Built XGBoost S/T-Learners with 40 borrower features and 24 interaction features under compliance and capacity constraints',
-      'Achieved a 2.04% charge-off reduction on holdout evaluation, with an estimated $20.4M in gross value',
+      'Reduced the holdout-evaluated charge-off rate by 2.04%; modeled results implied approximately $20.4M in gross value',
     ]
   },
   {
     title: 'Machine Learning Project Lead',
     company: "Arc'teryx — Data Science Society @ UC Berkeley",
     duration: 'Jan 2025 – May 2025',
-    note: 'NDA project',
+    note: 'Confidential client project',
     logo: './assets/arcteryx-logo.png',
     logoAlt: "Arc'teryx logo",
     bullets: [
@@ -55,12 +55,12 @@ export const experiences: ExperienceItem[] = [
     title: 'Data Science Consultant',
     company: 'Santa Clara County',
     duration: 'Aug 2024 – Dec 2024',
-    note: 'NDA project',
+    note: 'Confidential client project',
     logo: './assets/santa-clara-county-seal.svg',
     logoAlt: 'Santa Clara County seal',
     bullets: [
       'Developed and tuned Random Forest, LightGBM, and neural network classifiers on 46K+ patient records',
-      'Used 50 CANS mental health assessment features to predict treatment outcomes, achieving AUC up to 0.85',
+      'Used 50 CANS mental health assessment features to predict treatment outcomes, achieving up to 0.85 AUC under the project validation setup',
       'Applied SHAP and permutation importance to identify five key clinical and demographic drivers',
     ]
   },

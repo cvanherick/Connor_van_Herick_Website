@@ -2,20 +2,14 @@ import { motion } from 'framer-motion'
 import { Code2, Database, BrainCog, Layers, Terminal, Github } from 'lucide-react'
 
 const skills = [
-  { name: 'Python', icon: Code2, category: 'Languages' },
-  { name: 'SQL', icon: Database, category: 'Languages' },
-  { name: 'Java', icon: Code2, category: 'Languages' },
-  { name: 'C', icon: Code2, category: 'Languages' },
-  { name: 'PySpark', icon: Terminal, category: 'ML/Data' },
-  { name: 'Databricks', icon: Terminal, category: 'ML/Data' },
-  { name: 'XGBoost', icon: BrainCog, category: 'ML/Data' },
-  { name: 'TensorFlow / PyTorch', icon: BrainCog, category: 'ML/Data' },
-  { name: 'Scikit-learn', icon: BrainCog, category: 'ML/Data' },
-  { name: 'Docker', icon: Layers, category: 'Systems' },
-  { name: 'ROS 2', icon: Layers, category: 'Systems' },
-  { name: 'System Design', icon: Layers, category: 'Systems' },
-  { name: 'Spark SQL', icon: Database, category: 'Tools' },
-  { name: 'Git', icon: Github, category: 'Tools' },
+  { name: 'Python', evidence: 'PySpark pipelines, modeling, and data products', icon: Code2, category: 'Languages' },
+  { name: 'SQL', evidence: '73M+ record decisioning workflows', icon: Database, category: 'Languages' },
+  { name: 'Java / C / Go', evidence: 'Graphs, systems, security, and low-level projects', icon: Code2, category: 'Languages' },
+  { name: 'ML + Data', evidence: 'XGBoost, scikit-learn, TensorFlow/PyTorch, Databricks', icon: BrainCog, category: 'ML/Data' },
+  { name: 'Distributed Data', evidence: 'PySpark, Spark SQL, and feature pipelines', icon: Terminal, category: 'ML/Data' },
+  { name: 'Robotics', evidence: 'ROS 2, MoveIt 2, RealSense, and NumPy', icon: Layers, category: 'Systems' },
+  { name: 'Systems', evidence: 'Cryptography, access control, RISC-V, and testing', icon: Layers, category: 'Systems' },
+  { name: 'Tools', evidence: 'Docker, Git, JUnit, and Valgrind-ready workflows', icon: Github, category: 'Tools' },
 ]
 
 const Skills = () => {
@@ -81,6 +75,7 @@ const Skills = () => {
 
 interface Skill {
   name: string
+  evidence: string
   icon: any
   category: string
 }
@@ -97,6 +92,7 @@ const SkillBadge = ({ skill, index }: { skill: Skill, index: number }) => (
     <span className="mt-2 block text-sm font-semibold text-cream/80 transition-colors group-hover:text-accent">
       {skill.name}
     </span>
+    <span className="mt-1 block text-xs leading-relaxed text-cream/60">{skill.evidence}</span>
   </motion.div>
 )
 

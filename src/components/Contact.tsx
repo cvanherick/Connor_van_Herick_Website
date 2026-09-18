@@ -12,10 +12,10 @@ const Contact = () => {
           className="text-center mb-24"
         >
           <h2 className="section-heading mb-6">
-            <span id="contact-title">Get In Touch</span>
+            <span id="contact-title">Let’s Talk</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
-            I’m open to thoughtful conversations about ML, systems, and ambitious products.
+            I’m exploring 2027 opportunities in ML engineering, AI engineering, software engineering, and applied data science.
           </p>
         </motion.div>
 
@@ -56,7 +56,7 @@ const Contact = () => {
           >
             <div className="card p-8">
               <p className="text-sm uppercase tracking-[0.2em] text-secondary font-semibold">Start a conversation</p>
-              <h3 className="mt-4 text-3xl font-bold text-cream">Have a problem worth solving?</h3>
+              <h3 className="mt-4 text-3xl font-bold text-cream">Interested in working together?</h3>
               <p className="mt-4 text-lg leading-relaxed text-cream/65">
                 The fastest way to reach me is email. Include a little context about what you’re building or exploring, and I’ll get back to you.
               </p>
