@@ -74,6 +74,8 @@ const Navbar = () => {
           <button 
             type="button"
             aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden p-2 rounded-xl hover:bg-cream/5 transition-colors"
           >
@@ -86,6 +88,7 @@ const Navbar = () => {
           <motion.div 
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
+            id="mobile-navigation"
             className="lg:hidden pb-6 overflow-hidden"
           >
             <div className="flex flex-col space-y-3 pt-4 border-t border-cream/10">
