@@ -74,6 +74,8 @@ const experiences: ExperienceItem[] = [
     title: 'Membership Officer & Incoming Treasurer',
     company: 'Cal Climbing',
     duration: '2025 – Present',
+    logo: './assets/cal-climbing.png',
+    logoAlt: 'California Climbing logo',
     bullets: [
       'Served as Membership Officer for the 2025-2026 school year',
       'Incoming Treasurer for the 2026-2027 school year',
@@ -115,7 +117,7 @@ const Experience = () => {
 
               <div className="relative h-44 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-secondary/10 transition-all duration-700 flex items-center justify-center">
                 {exp.logo && (
-                  <div className="h-24 w-24 rounded-3xl bg-white/95 flex items-center justify-center p-5 shadow-2xl transition-all duration-500 group-hover:scale-110">
+                  <div className={`h-24 w-24 rounded-3xl flex items-center justify-center shadow-2xl transition-all duration-500 group-hover:scale-110 ${exp.company === 'Cal Climbing' ? 'bg-black p-2' : 'bg-white/95 p-5'}`}>
                     <img
                       src={exp.logo}
                       alt={exp.logoAlt ?? `${exp.company} logo`}
