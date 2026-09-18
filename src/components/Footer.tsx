@@ -45,10 +45,10 @@ const Footer = () => {
           <div className="text-center lg:col-span-2">
             <h4 className="text-lg font-bold text-slate-200 mb-8">Connect</h4>
             <div className="flex justify-center lg:justify-start gap-6 mb-8">
-              <a href="https://www.linkedin.com/in/connor-vanherick/" target="_blank" rel="noopener" className="w-16 h-16 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent/15 hover:scale-110 transition-all duration-300 group border border-cream/10 hover:border-accent/50">
+              <a href="https://www.linkedin.com/in/connor-vanherick/" target="_blank" rel="noopener noreferrer" className="w-16 h-16 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent/15 hover:scale-110 transition-all duration-300 group border border-cream/10 hover:border-accent/50">
                 <Linkedin size={24} className="group-hover:rotate-12" />
               </a>
-              <a href="https://github.com/cvanherick" target="_blank" rel="noopener" className="w-16 h-16 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent/15 hover:scale-110 transition-all duration-300 group border border-cream/10 hover:border-accent/50">
+              <a href="https://github.com/cvanherick" target="_blank" rel="noopener noreferrer" className="w-16 h-16 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent/15 hover:scale-110 transition-all duration-300 group border border-cream/10 hover:border-accent/50">
                 <Github size={24} className="group-hover:rotate-12" />
               </a>
               <a href="mailto:cvanherick@berkeley.edu" className="w-16 h-16 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent/15 hover:scale-110 transition-all duration-300 group border border-cream/10 hover:border-accent/50">
