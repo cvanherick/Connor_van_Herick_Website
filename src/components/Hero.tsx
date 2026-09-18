@@ -66,7 +66,7 @@ const Hero = () => {
           <motion.a 
             href="https://www.linkedin.com/in/connor-vanherick/" 
             target="_blank" 
-            rel="noopener"
+            rel="noopener noreferrer"
             className="btn btn-secondary group flex items-center gap-2 px-8 py-4 text-lg"
             whileHover={{ scale: 1.05 }}
           >
