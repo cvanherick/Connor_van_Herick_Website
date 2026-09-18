@@ -167,7 +167,7 @@ const Projects = ({ archive = false }: ProjectsProps) => {
           viewport={{ once: true }}
           className="text-center mb-24"
         >
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
+          <h2 className="section-heading mb-6">
             <span id="projects-title">Projects</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
@@ -191,7 +191,7 @@ const Projects = ({ archive = false }: ProjectsProps) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: Math.min(index, 5) * 0.05 }}
-                  className="card group overflow-hidden rounded-3xl overflow-clip"
+                  className={`card group overflow-hidden rounded-3xl overflow-clip ${index === 0 ? 'lg:col-span-2' : ''}`}
                 >
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-48 rounded-t-3xl" />

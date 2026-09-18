@@ -28,7 +28,7 @@ const Skills = () => {
           viewport={{ once: true }}
           className="text-center mb-24"
         >
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
+          <h2 className="section-heading mb-6">
             <span id="skills-title">Skills</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
@@ -91,12 +91,10 @@ const SkillBadge = ({ skill, index }: { skill: Skill, index: number }) => (
     whileInView={{ opacity: 1, scale: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: index * 0.03 }}
-    whileHover={{ scale: 1.15, y: -8, boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.4)' }}
-    className="group relative p-6 bg-gradient-to-br from-surface/70 to-primary/30 backdrop-blur-xl border border-cream/10 rounded-2xl hover:border-accent/50 hover:from-accent/10 hover:to-secondary/10 transition-all duration-500 cursor-pointer overflow-hidden"
+    className="group relative rounded-xl border border-cream/10 bg-surface/45 p-4 transition-colors duration-300 hover:border-accent/40 hover:bg-accent/5"
   >
-    <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-secondary/10 scale-0 group-hover:scale-100 transition-transform duration-700 rounded-2xl" />
-    <skill.icon size={36} className="text-accent group-hover:scale-110 transition-transform duration-300 flex-shrink-0 relative z-10" />
-    <span className="block font-semibold text-lg mt-3 text-cream relative z-10 group-hover:text-accent transition-colors">
+    <skill.icon size={24} className="text-accent transition-transform duration-300 group-hover:scale-105" />
+    <span className="mt-2 block text-sm font-semibold text-cream/80 transition-colors group-hover:text-accent">
       {skill.name}
     </span>
   </motion.div>

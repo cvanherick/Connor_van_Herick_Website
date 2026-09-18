@@ -12,7 +12,7 @@ const About = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
+          <h2 className="section-heading mb-6">
             <span id="about-title">About Me</span>
           </h2>
         </motion.div>

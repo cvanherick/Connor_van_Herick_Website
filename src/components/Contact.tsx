@@ -11,7 +11,7 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-24"
         >
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
+          <h2 className="section-heading mb-6">
             <span id="contact-title">Get In Touch</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">

@@ -7,7 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
 
-  const sections = ['about', 'experience', 'projects', 'skills', 'building', 'coursework', 'contact']
+  const sections = ['about', 'experience', 'projects', 'building', 'contact']
   const sectionLabels: Record<string, string> = { building: 'Currently' }
 
   useEffect(() => {

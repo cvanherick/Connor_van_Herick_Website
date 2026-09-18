@@ -129,7 +129,7 @@ const Experience = ({ archive = false }: ExperienceProps) => {
     <section id="experience" aria-labelledby="experience-title" className="py-28 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
+          <h2 className="section-heading mb-6">
             <span id="experience-title">{archive ? 'Experience' : 'Selected Experience'}</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">Applied machine learning, data science, and technical leadership experience.</p>
@@ -137,7 +137,7 @@ const Experience = ({ archive = false }: ExperienceProps) => {
 
         <div className="grid md:grid-cols-2 gap-8">
           {visibleExperiences.map((exp, index) => (
-            <motion.div key={exp.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: Math.min(index, 3) * 0.05 }} className="card group overflow-hidden rounded-3xl overflow-clip">
+            <motion.div key={exp.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: Math.min(index, 3) * 0.05 }} className={`card group overflow-hidden rounded-3xl overflow-clip ${exp.caseStudy ? 'md:col-span-2' : ''}`}>
               <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-44 rounded-t-3xl" />
               <div className="relative h-44 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden flex items-center justify-center">
                 {exp.logo && (
@@ -163,6 +163,9 @@ const Experience = ({ archive = false }: ExperienceProps) => {
                   <p className="text-cream/70 font-medium leading-relaxed">{exp.company}</p>
                   {exp.note && <p className="mt-4 inline-flex rounded-xl border border-accent/30 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">{exp.note}</p>}
                 </div>
+                {exp.caseStudy && <div className="mb-7 grid gap-2 sm:grid-cols-5">
+                  {['73M+ records', 'Feature engineering', 'Uplift models', 'Constraints', 'Decision impact'].map((step, stepIndex) => <div key={step} className="relative rounded-xl border border-cream/10 bg-primary/45 px-3 py-3 text-center text-[11px] font-semibold text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
+                </div>}
                 <ul className="space-y-3 text-cream/70 leading-relaxed">
                   {exp.bullets.map((bullet, bIndex) => <li key={bIndex} className="flex items-start gap-3"><div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" /><span>{bullet}</span></li>)}
                 </ul>
