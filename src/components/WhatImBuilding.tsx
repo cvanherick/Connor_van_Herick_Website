@@ -26,7 +26,7 @@ const WhatImBuilding = () => {
   ]
 
   return (
-    <section id="building" className="py-32 px-6">
+    <section id="building" aria-labelledby="building-title" className="py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -35,7 +35,7 @@ const WhatImBuilding = () => {
           className="text-center mb-24"
         >
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-cream via-white to-accent bg-clip-text text-transparent mb-6">
-            What I'm Building
+            <span id="building-title">What I'm Building</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
             Thinking founder-mode • Always shipping
