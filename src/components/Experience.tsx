@@ -75,7 +75,7 @@ const experiences: ExperienceItem[] = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-32 px-6">
+    <section id="experience" aria-labelledby="experience-title" className="py-32 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -84,7 +84,7 @@ const Experience = () => {
           className="text-center mb-24"
         >
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
-            Experience
+            <span id="experience-title">Experience</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
             Applied machine learning, data science, and technical leadership experience.
