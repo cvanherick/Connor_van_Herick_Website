@@ -86,7 +86,7 @@ const projectIcon = (title: string) => {
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-32 px-6">
+    <section id="projects" aria-labelledby="projects-title" className="py-32 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -95,7 +95,7 @@ const Projects = () => {
           className="text-center mb-24"
         >
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-6">
-            Projects
+            <span id="projects-title">Projects</span>
           </h2>
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">
             Selected work across machine learning, robotics, systems, and data products.
