@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import ConnectPrompt from './components/ConnectPrompt'
 import About from './components/About'
 import Coursework from './components/Coursework'
 import Projects from './components/Projects'
@@ -30,7 +31,7 @@ function App() {
       <div className="pointer-events-none fixed inset-0 opacity-70 bg-[linear-gradient(120deg,rgba(20,184,166,0.08),transparent_35%,rgba(245,158,11,0.07)_68%,transparent)]" />
       <div className="relative z-10">
         <Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'dark' ? 'light' : 'dark')} />
-        <main id="main-content"><Hero />
+        <main id="main-content"><Hero /><ConnectPrompt />
         <Experience />
         <Projects />
         <WhatImBuilding />
