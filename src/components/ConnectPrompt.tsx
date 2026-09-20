@@ -9,8 +9,7 @@ const ConnectPrompt = () => {
             <CalendarDays size={22} />
           </div>
           <div>
-            <h2 id="connect-prompt-title" className="text-xl font-semibold text-cream">Have an idea to discuss?</h2>
-            <p className="mt-1 text-cream/65">Schedule a time to connect.</p>
+            <h2 id="connect-prompt-title" className="text-xl font-semibold text-cream">Schedule a time to connect</h2>
           </div>
         </div>
         <a href="https://calendar.app.google/pwfKRt1mxRrWAtH97" target="_blank" rel="noopener noreferrer" className="btn btn-primary inline-flex w-full items-center gap-2 md:w-auto">
