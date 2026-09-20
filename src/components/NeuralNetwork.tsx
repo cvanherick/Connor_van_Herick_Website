@@ -34,7 +34,7 @@ const NeuralNetwork = () => {
   const layerPulses = [signalPulse, representationPulse, decisionPulse, actionPulse]
 
   return (
-    <section ref={sectionRef} id="neural-network" aria-hidden="true" className="relative min-h-[180vh] overflow-hidden px-4 sm:px-6">
+    <section ref={sectionRef} id="neural-network" aria-hidden="true" className="relative min-h-[180vh] px-4 sm:px-6">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_28%_50%,rgba(20,184,166,0.13),transparent_38%),radial-gradient(circle_at_75%_48%,rgba(245,158,11,0.1),transparent_36%)]" />
       <div className="sticky top-0 flex min-h-screen items-center">
         <div className="relative mx-auto w-full max-w-7xl">
