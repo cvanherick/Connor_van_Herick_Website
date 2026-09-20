@@ -117,17 +117,27 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
 
         <div className="overflow-hidden rounded-3xl border border-cream/10 bg-surface/45 shadow-2xl shadow-black/10">
           <div className="overflow-x-auto">
-            <svg viewBox="0 0 1000 600" role="img" aria-labelledby="knowledge-graph-title" className="min-h-[30rem] w-full">
+            <div className="relative aspect-[5/3] min-h-[30rem] w-full" aria-label="Interactive knowledge graph">
+              <svg viewBox="0 0 1000 600" role="img" aria-labelledby="knowledge-graph-title" className="absolute inset-0 h-full w-full">
               <defs><filter id="graph-glow"><feGaussianBlur stdDeviation="4" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter></defs>
               <g opacity=".55">
                 {visibleEdges.map(edge => { const start = positions[edge.from]; const end = positions[edge.to]; return <motion.line key={edge.key} x1={start.x} y1={start.y} x2={end.x} y2={end.y} stroke={selected === edge.from || selected === edge.to ? '#14b8a6' : 'rgba(248,250,244,.18)'} strokeWidth={selected === edge.from || selected === edge.to ? 2.5 : 1.2} animate={{ opacity: 1 }} transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 90, damping: 18 }} /> })}
               </g>
-              {visibleIds.map(id => { const node = graph[id]; const point = positions[id]; const style = typeStyles[node.type]; const isSelected = selected === id; const isExpanded = expanded.has(id); return <motion.g key={id} role="button" tabIndex={0} aria-expanded={isExpanded} aria-label={`${node.label}. ${typeStyles[node.type].label}. ${node.summary}. ${isExpanded ? 'Expanded' : 'Collapsed'}`} onClick={() => toggleNode(id)} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleNode(id) } }} animate={{ x: point.x, y: point.y }} transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 120, damping: 18 }} style={{ cursor: 'pointer' }}>
-                <circle r={node.type === 'root' ? 48 : isSelected ? 34 : 28} fill={style.fill} stroke={style.stroke} strokeWidth={isSelected ? 4 : 2} filter={isSelected ? 'url(#graph-glow)' : undefined} opacity={isExpanded || isSelected || node.type === 'root' ? 1 : .85} />
-                <text textAnchor="middle" y="4" fill={style.text} fontSize={node.type === 'root' ? 15 : 11} fontWeight="700">{node.label}</text>
-                <text textAnchor="middle" y={node.type === 'root' ? 68 : 49} fill="currentColor" className="fill-cream/55" fontSize="10">{isExpanded ? 'collapse' : 'expand'}</text>
-              </motion.g> })}
-            </svg>
+              </svg>
+              {visibleIds.map(id => {
+                const node = graph[id]
+                const point = positions[id]
+                const style = typeStyles[node.type]
+                const isSelected = selected === id
+                const isExpanded = expanded.has(id)
+                return <motion.button key={id} type="button" aria-expanded={isExpanded} aria-label={`${node.label}. ${typeStyles[node.type].label}. ${node.summary}. ${isExpanded ? 'Collapse' : 'Expand'} node`} onClick={() => toggleNode(id)} animate={{ left: `${point.x / 10}%`, top: `${point.y / 6}%` }} transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 120, damping: 18 }} className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary" style={{ color: style.text }}>
+                  <span className="flex items-center justify-center rounded-full border-2 font-bold shadow-lg transition-transform hover:scale-110" style={{ width: node.type === 'root' ? 96 : isSelected ? 68 : 56, height: node.type === 'root' ? 96 : isSelected ? 68 : 56, backgroundColor: style.fill, borderColor: style.stroke, boxShadow: isSelected ? `0 0 0 4px ${style.fill}33, 0 0 24px ${style.fill}66` : undefined }}>
+                    <span className={node.type === 'root' ? 'text-sm' : 'max-w-[4.5rem] px-1 text-[0.65rem] leading-tight'}>{node.label}</span>
+                  </span>
+                  <span className="mt-1 text-[0.65rem] font-semibold text-cream/55">{isExpanded ? 'collapse' : 'expand'}</span>
+                </motion.button>
+              })}
+            </div>
           </div>
           <div className="border-t border-cream/10 bg-primary/35 p-5 md:p-6">
             <div className="flex flex-wrap gap-2" aria-label="Knowledge graph node types">{Object.entries(typeStyles).map(([type, style]) => <span key={type} className="inline-flex items-center gap-2 rounded-full border border-cream/10 bg-cream/5 px-3 py-1.5 text-xs font-semibold text-cream/65"><span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: style.fill }} />{style.label}</span>)}</div>
