@@ -1,4 +1,4 @@
-export type KnowledgeNodeType = 'root' | 'project' | 'course' | 'work' | 'technology' | 'concept'
+export type KnowledgeNodeType = 'root' | 'theme' | 'project' | 'course' | 'work' | 'technology' | 'concept'
 
 export interface KnowledgeNode {
   id: string
@@ -11,7 +11,12 @@ export interface KnowledgeNode {
 // The graph is intentionally an adjacency-list hashmap: shared concepts such as Python,
 // SQL, and machine learning are referenced by several branches instead of duplicated.
 export const knowledgeGraph: Record<string, KnowledgeNode> = {
-  connor: { id: 'connor', label: 'Connor', type: 'root', summary: 'ML engineering, data systems, robotics, and curious problem solving.', connections: ['cadre', 'robot-player', 'happen-bank', 'arc-teryx', 'cs189', 'cs106a', 'python', 'machine-learning', 'systems-design'] },
+  connor: { id: 'connor', label: 'Connor', type: 'root', summary: 'ML engineering, data systems, robotics, and curious problem solving.', connections: ['ml-ai', 'robotics-theme', 'systems-theme', 'data-theme', 'agentic-ai'] },
+  'ml-ai': { id: 'ml-ai', label: 'ML / AI', type: 'theme', summary: 'Models, evaluation, and decisions that turn data into measurable outcomes.', connections: ['machine-learning', 'model-evaluation', 'optimization', 'xgboost', 'cs189', 'happen-bank', 'arc-teryx'] },
+  'robotics-theme': { id: 'robotics-theme', label: 'Robotics', type: 'theme', summary: 'Perception, planning, and control that connect intelligence to the physical world.', connections: ['robotics', 'computer-vision', 'ros2', 'robot-player', 'cs106a'] },
+  'systems-theme': { id: 'systems-theme', label: 'Systems', type: 'theme', summary: 'Reliable software, interfaces, and human checkpoints across a whole system.', connections: ['systems-design', 'react', 'human-control', 'orchestration'] },
+  'data-theme': { id: 'data-theme', label: 'Data', type: 'theme', summary: 'Pipelines, warehouses, and features that make analysis and modeling production-ready.', connections: ['python', 'sql', 'pyspark', 'databricks', 'decisioning', 'forecasting', 'happen-bank', 'arc-teryx'] },
+  'agentic-ai': { id: 'agentic-ai', label: 'Agentic AI', type: 'theme', summary: 'Specialized agents coordinating around shared objectives with review and human control.', connections: ['cadre', 'multi-agent', 'orchestration', 'human-control', 'typescript'] },
   cadre: { id: 'cadre', label: 'Cadre', type: 'project', summary: 'Role-based agent teams with orchestration, review gates, and human control.', connections: ['connor', 'multi-agent', 'orchestration', 'human-control', 'typescript', 'python'] },
   'robot-player': { id: 'robot-player', label: 'Vision-Guided Robot', type: 'project', summary: 'ROS 2 autonomy stack for perception, planning, and physical game play.', connections: ['connor', 'robotics', 'computer-vision', 'ros2', 'python', 'cs106a'] },
   'happen-bank': { id: 'happen-bank', label: 'Happen Bank', type: 'work', summary: 'Collections strategy and uplift modeling across large-scale financial records.', connections: ['connor', 'xgboost', 'sql', 'pyspark', 'decisioning', 'machine-learning'] },
