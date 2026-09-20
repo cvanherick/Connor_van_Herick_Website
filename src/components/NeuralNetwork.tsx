@@ -32,9 +32,10 @@ const NeuralNetwork = () => {
   const layerPulses = [signalPulse, representationPulse, decisionPulse, actionPulse]
 
   return (
-    <section ref={sectionRef} id="neural-network" aria-labelledby="neural-network-title" className="relative overflow-hidden px-6 py-24 md:py-32">
+    <section ref={sectionRef} id="neural-network" aria-labelledby="neural-network-title" className="relative min-h-[155vh] overflow-hidden px-6 py-24 md:py-32">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(20,184,166,0.11),transparent_55%)]" />
-      <div className="relative mx-auto max-w-7xl">
+      <div className="sticky top-20 flex min-h-[calc(100vh-5rem)] items-center">
+        <div className="relative mx-auto w-full max-w-7xl">
         <div className="max-w-2xl">
           <p className="section-kicker">Systems thinking</p>
           <h2 id="neural-network-title" className="section-heading mt-3">Signals in. Decisions out.</h2>
@@ -72,6 +73,7 @@ const NeuralNetwork = () => {
             <span>Data</span><span aria-hidden="true">→</span><span>Models</span><span aria-hidden="true">→</span><span>Constraints</span><span aria-hidden="true">→</span><span>Impact</span>
           </div>
         </motion.div>
+        </div>
       </div>
     </section>
   )
