@@ -159,7 +159,7 @@ const Experience = ({ archive = false }: ExperienceProps) => {
               <div className="p-8 relative z-10">
                 <div className="mb-6">
                   <div className="flex items-center gap-2 text-accent font-semibold mb-3"><BrainCog size={18} /><span>{exp.duration}</span></div>
-                  <h3 className="text-2xl font-bold text-cream mb-3 group-hover:text-accent transition-colors duration-300">{exp.title}</h3>
+                  <h3 className="text-2xl font-bold text-cream mb-3 group-hover:text-accent transition-colors duration-300">{exp.caseStudy ? <a href={exp.caseStudy} className="focus-visible:rounded-sm">{exp.title}</a> : exp.title}</h3>
                   <p className="text-cream/70 font-medium leading-relaxed">{exp.company}</p>
                   {exp.note && <p className="mt-4 inline-flex rounded-xl border border-accent/30 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">{exp.note}</p>}
                 </div>

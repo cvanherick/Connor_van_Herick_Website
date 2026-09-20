@@ -9,12 +9,15 @@ import Footer from './components/Footer'
 import Skills from './components/Skills'
 import WhatImBuilding from './components/WhatImBuilding'
 import ArchivePage from './components/ArchivePage'
+import OutsideWorkPage from './components/OutsideWorkPage'
+import NeuralNetwork from './components/NeuralNetwork'
 
 function App() {
   const pathname = window.location.pathname
   if (pathname.includes('/experience')) return <ArchivePage kind="experience" />
   if (pathname.includes('/projects')) return <ArchivePage kind="projects" />
   if (pathname.includes('/coursework')) return <ArchivePage kind="coursework" />
+  if (pathname.includes('/outside-work')) return <OutsideWorkPage />
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-primary">
@@ -25,6 +28,7 @@ function App() {
         <main id="main-content"><Hero />
         <Experience />
         <Projects />
+        <NeuralNetwork />
         <WhatImBuilding />
         <About />
         <Skills />

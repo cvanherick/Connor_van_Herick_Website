@@ -39,6 +39,9 @@ const Footer = () => {
               <Link to="contact" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 Contact
               </Link>
+              <a href="./outside-work/" className="block text-cream/60 transition-colors hover:text-accent">
+                Outside of work
+              </a>
             </div>
           </div>
 

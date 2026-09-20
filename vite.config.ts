@@ -14,7 +14,7 @@ export default defineConfig({
       const indexPath = path.join(outDir, 'index.html')
       const index = readFileSync(indexPath, 'utf8')
       const archiveIndex = index.replace('<head>', '<head><base href="../">')
-      for (const page of ['experience', 'projects', 'coursework']) {
+      for (const page of ['experience', 'projects', 'coursework', 'outside-work']) {
         const pageDir = path.join(outDir, page)
         mkdirSync(pageDir, { recursive: true })
         writeFileSync(path.join(pageDir, 'index.html'), archiveIndex)
