@@ -11,7 +11,7 @@
     --color-secondary: 245 158 11;
     --color-cream: 248 250 244;
     --page-gutter: clamp(1rem, 4vw, 1.5rem);
-    --nav-height: 5rem;
+    --nav-height: 7.5rem;
     --line-subtle: rgba(248, 250, 244, 0.1);
     --line-strong: rgba(20, 184, 166, 0.35);
     --surface-glass: rgba(15, 31, 46, 0.68);
@@ -119,7 +119,7 @@ html[data-theme='light'] .btn-primary { color: #ffffff; }
 
 @media (max-width: 767px) {
   :root {
-    --nav-height: 4.5rem;
+    --nav-height: 7rem;
   }
 
   section[id] {
