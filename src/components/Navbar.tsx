@@ -14,8 +14,8 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
 
-  const sections = mode === 'explore' ? ['experience', 'projects', 'building', 'about', 'knowledge-graph', 'contact'] : ['experience', 'projects', 'contact']
-  const sectionLabels: Record<string, string> = { experience: 'Work', building: 'Currently', 'knowledge-graph': 'Knowledge graph' }
+  const sections = mode === 'explore' ? ['experience', 'projects', 'building', 'about', 'contact'] : ['experience', 'projects', 'contact']
+  const sectionLabels: Record<string, string> = { experience: 'Work', building: 'Currently' }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -105,7 +105,6 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
 
           {/* Compact controls stay visible on smaller screens so the two views are discoverable. */}
           <div className="flex items-center gap-2 xl:hidden">
-            {mode === 'explore' && <Link to="knowledge-graph" aria-label="Knowledge graph" smooth={true} duration={800} className="inline-flex rounded-xl px-2 py-1 text-[11px] font-bold text-cream/70 hover:bg-cream/5 hover:text-cream">Map</Link>}
             <div role="group" aria-label="Portfolio view" className="inline-flex rounded-xl border border-cream/10 bg-cream/5 p-1">
               {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" aria-pressed={mode === option} onClick={() => mode !== option && onToggleMode()} className={`rounded-lg px-2 py-1 text-[11px] font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
             </div>
