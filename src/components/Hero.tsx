@@ -27,20 +27,8 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .12 }} className="hero-panel relative p-5 md:p-7">
-          <div className="mb-8 flex items-center justify-between border-b border-cream/10 pb-4 text-xs font-bold uppercase tracking-[.2em] text-cream/45"><span>Systems in motion</span><span className="text-accent">01 / 03</span></div>
-          <div className="space-y-4">
-            <div className="signal-node"><span className="signal-index">01</span><div><strong>Large-scale data</strong><small>73M+ records · PySpark · SQL</small></div></div>
-            <div className="signal-line" />
-            <div className="signal-node active"><span className="signal-index">02</span><div><strong>Model + orchestrate</strong><small>Uplift models · agentic workflows</small></div></div>
-            <div className="signal-line" />
-            <div className="signal-node"><span className="signal-index">03</span><div><strong>Ship decisions</strong><small>Robotics · secure systems · impact</small></div></div>
-          </div>
-          <div className="mt-10 grid grid-cols-3 gap-3 border-t border-cream/10 pt-5">
-            <div><strong className="block text-2xl tracking-tight text-cream">73M+</strong><span className="text-xs text-cream/45">records</span></div>
-            <div><strong className="block text-2xl tracking-tight text-cream">2.04%</strong><span className="text-xs text-cream/45">reduction</span></div>
-            <div><strong className="block text-2xl tracking-tight text-cream">ROS 2</strong><span className="text-xs text-cream/45">robotics</span></div>
-          </div>
+        <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .12 }} className="hero-panel relative overflow-hidden p-3 md:p-5">
+          <img src="./assets/connor-headshot.png" alt="Connor van Herick smiling outdoors" className="aspect-[4/5] w-full rounded-2xl object-cover object-center" />
         </motion.div>
       </div>
     </section>
