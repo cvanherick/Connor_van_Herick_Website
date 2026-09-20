@@ -98,6 +98,8 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
     const movableIds = new Set(visibleIds.filter(id => !previousVisible.current.has(id)))
     previousVisible.current = new Set(visibleIds)
     const seeded = { ...positionsRef.current }
+    const branchParent = path[path.length - 1]
+    const branchConnections = expanded.has(branchParent) ? graph[branchParent]?.connections.filter(connection => visibleSet.has(connection)) ?? [] : []
     visibleIds.forEach((id, index) => {
       if (themeAnchors[id] && !manualPositions[id]) {
         seeded[id] = themeAnchors[id]
@@ -106,8 +108,9 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
       if (seeded[id]) return
       const origin = spawnOrigins.current[id]
       const parent = origin ? seeded[origin] ?? { x: 500, y: 300 } : { x: 500, y: 300 }
-      const angle = ((index + 1) * 2.399) % (Math.PI * 2)
-      const radius = origin ? 85 : 185
+      const branchIndex = branchConnections.indexOf(id)
+      const angle = branchIndex >= 0 ? -Math.PI / 2 + (branchIndex * (Math.PI * 2)) / Math.max(branchConnections.length, 1) : ((index + 1) * 2.399) % (Math.PI * 2)
+      const radius = origin ? 145 : 185
       seeded[id] = { x: clamp(parent.x + Math.cos(angle) * radius, 55, 945), y: clamp(parent.y + Math.sin(angle) * radius, 55, 545) }
     })
     Object.keys(seeded).forEach(id => { if (!visibleSet.has(id)) delete seeded[id] })
