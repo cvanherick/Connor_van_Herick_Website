@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Bot, Cpu, ExternalLink, Gamepad2, Github, LockKeyhole, Map, Network, Search, Shield, TrendingUp, Users } from 'lucide-react'
+import { Bot, Cpu, ExternalLink, Gamepad2, Github, LockKeyhole, Map, Network, Search, Shield, TrendingUp, Users, Play } from 'lucide-react'
 import { Project } from '../types'
+import CadreSimulation from './CadreSimulation'
 
 export const projects: Project[] = [
   {
@@ -156,6 +157,7 @@ interface ProjectsProps {
 
 const Projects = ({ archive = false }: ProjectsProps) => {
   const [category, setCategory] = useState('All')
+  const [cadreSimulationOpen, setCadreSimulationOpen] = useState(false)
   const visibleProjects = (archive ? sortedProjects : featuredProjects).filter((project) => category === 'All' || projectCategory(project.title) === category)
 
   return (
@@ -242,6 +244,9 @@ const Projects = ({ archive = false }: ProjectsProps) => {
 
                     {/* Links */}
                     <div className="flex gap-4 pt-4">
+                      {project.title === 'Cadre Agent Team Framework' && <button type="button" onClick={() => setCadreSimulationOpen(current => !current)} className="flex items-center gap-2 rounded-2xl border border-accent/30 bg-accent/10 p-4 font-semibold text-accent transition-all hover:bg-accent/20">
+                        <Play size={20} /> {cadreSimulationOpen ? 'Hide simulation' : 'Run simulation'}
+                      </button>}
                       {project.github && (
                         <a href={project.github} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 hover:bg-cream/10 border border-cream/10 text-cream/70 hover:text-accent transition-all group-hover:scale-105 flex-1 justify-center">
                           <Github size={20} />
@@ -261,6 +266,7 @@ const Projects = ({ archive = false }: ProjectsProps) => {
                         </span>
                       )}
                     </div>
+                    {project.title === 'Cadre Agent Team Framework' && <CadreSimulation open={cadreSimulationOpen} onClose={() => setCadreSimulationOpen(false)} />}
                   </div>
                 </motion.div>
               )
