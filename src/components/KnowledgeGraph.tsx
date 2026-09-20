@@ -21,24 +21,17 @@ const typeStyles: Record<KnowledgeNodeType, { fill: string; stroke: string; text
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value))
 
-const getVisibleIds = (graph: Record<string, KnowledgeNode>, expanded: Set<string>) => {
-  const visible = new Set<string>(['connor'])
-  const queue = ['connor']
-  while (queue.length) {
-    const id = queue.shift() as string
-    if (!expanded.has(id)) continue
-    graph[id]?.connections.forEach(connection => {
-      if (!visible.has(connection)) {
-        visible.add(connection)
-        queue.push(connection)
-      }
-    })
-  }
-  return [...visible].filter(id => graph[id])
+const themeAnchors: Record<string, Point> = {
+  'ml-ai': { x: 500, y: 120 },
+  'robotics-theme': { x: 760, y: 235 },
+  'systems-theme': { x: 680, y: 465 },
+  'data-theme': { x: 320, y: 465 },
+  'agentic-ai': { x: 240, y: 235 },
 }
 
 const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
+  const [path, setPath] = useState<string[]>(['connor'])
   const [selected, setSelected] = useState('connor')
   const [positions, setPositions] = useState<Record<string, Point>>({ connor: { x: 500, y: 300 } })
   const [manualPositions, setManualPositions] = useState<Record<string, Point>>({})
@@ -51,21 +44,26 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
   const spawnOrigins = useRef<Record<string, string>>({})
   const panDrag = useRef<{ x: number; y: number; panX: number; panY: number } | null>(null)
 
-  const visibleIds = useMemo(() => getVisibleIds(graph, expanded), [expanded, graph])
+  const visibleIds = useMemo(() => {
+    const visible = new Set(path)
+    const currentId = path[path.length - 1]
+    if (expanded.has(currentId)) graph[currentId]?.connections.forEach(connection => visible.add(connection))
+    return [...visible].filter(id => graph[id])
+  }, [expanded, graph, path])
   const visibleKey = visibleIds.join('|')
   const visibleSet = useMemo(() => new Set(visibleIds), [visibleIds])
 
   const visibleEdges = useMemo(() => visibleIds.flatMap(id => graph[id].connections.filter(connection => visibleSet.has(connection) && id < connection).map(connection => ({ from: id, to: connection, key: `${id}::${connection}` }))), [graph, visibleIds, visibleSet])
 
   const sharedIds = useMemo(() => {
-    const activeThemes = [...expanded].filter(id => graph[id]?.type === 'theme')
-    return new Set(visibleIds.filter(id => activeThemes.filter(themeId => graph[themeId].connections.includes(id)).length > 1))
-  }, [expanded, graph, visibleIds])
+    const themeIds = Object.keys(graph).filter(id => graph[id].type === 'theme')
+    return new Set(visibleIds.filter(id => themeIds.filter(themeId => graph[themeId].connections.includes(id)).length > 1))
+  }, [graph, visibleIds])
 
   const stepForceLayout = useCallback((current: Record<string, Point>) => {
     const next = { ...current }
     for (const id of visibleIds) {
-      if (id === 'connor' || manualPositions[id]) continue
+      if (id === 'connor' || manualPositions[id] || graph[id]?.type === 'theme') continue
       const point = current[id]
       if (!point) continue
       let forceX = (500 - point.x) * 0.002
@@ -93,11 +91,15 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
       next[id] = { x: clamp(point.x + forceX, 55, 945), y: clamp(point.y + forceY, 55, 545) }
     }
     return next
-  }, [manualPositions, visibleEdges, visibleIds])
+  }, [graph, manualPositions, visibleEdges, visibleIds])
 
   useEffect(() => {
     const seeded = { ...positionsRef.current }
     visibleIds.forEach((id, index) => {
+      if (themeAnchors[id] && !manualPositions[id]) {
+        seeded[id] = themeAnchors[id]
+        return
+      }
       if (seeded[id]) return
       const origin = spawnOrigins.current[id]
       const parent = origin ? seeded[origin] ?? { x: 500, y: 300 } : { x: 500, y: 300 }
@@ -120,30 +122,27 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
     }
     settle()
     return () => { cancelled = true }
-  }, [prefersReducedMotion, stepForceLayout, visibleKey, visibleIds, visibleSet])
+  }, [manualPositions, prefersReducedMotion, stepForceLayout, visibleKey, visibleIds, visibleSet])
 
   const toggleNode = (id: string) => {
-    const currentVisible = new Set(visibleIds)
     const wasExpanded = expanded.has(id)
-    const next = new Set(expanded)
-    if (wasExpanded) next.delete(id)
-    else {
-      next.add(id)
-      graph[id]?.connections.forEach(connection => {
-        if (!currentVisible.has(connection)) spawnOrigins.current[connection] = id
-      })
-    }
-    const nextVisible = getVisibleIds(graph, next)
-    const activeThemes = [...next].filter(nodeId => graph[nodeId]?.type === 'theme')
-    const newlyShared = nextVisible.filter(nodeId => activeThemes.filter(themeId => graph[themeId].connections.includes(nodeId)).length > 1)
+    const pathIndex = path.indexOf(id)
+    const nextPath = pathIndex >= 0 ? path.slice(0, pathIndex + 1) : [...path, id]
+    const next = wasExpanded ? new Set<string>() : new Set([id])
+    const nextVisible = new Set(nextPath)
+    if (!wasExpanded) graph[id]?.connections.forEach(connection => { nextVisible.add(connection); spawnOrigins.current[connection] = id })
+    const themeIds = Object.keys(graph).filter(nodeId => graph[nodeId].type === 'theme')
+    const newlyShared = [...nextVisible].filter(nodeId => themeIds.filter(themeId => graph[themeId].connections.includes(nodeId)).length > 1)
     setPulsing(new Set(newlyShared))
     if (newlyShared.length) window.setTimeout(() => setPulsing(new Set()), 1200)
     setSelected(id)
+    setPath(nextPath)
     setExpanded(next)
   }
 
   const resetGraph = () => {
     setExpanded(new Set())
+    setPath(['connor'])
     setSelected('connor')
     setZoom(1)
     setPan({ x: 0, y: 0 })
@@ -173,7 +172,11 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
   }
 
   const handleCanvasPointerUp = () => { panDrag.current = null }
-  const handleWheel = (event: ReactWheelEvent<HTMLDivElement>) => { event.preventDefault(); setZoom(current => clamp(current - event.deltaY * 0.001, 0.65, 1.8)) }
+  const handleWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
+    if (!event.ctrlKey && !event.metaKey) return
+    event.preventDefault()
+    setZoom(current => clamp(current - event.deltaY * 0.001, 0.65, 1.8))
+  }
   const selectedNode = graph[selected]
 
   return (
