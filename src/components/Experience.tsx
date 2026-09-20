@@ -137,7 +137,7 @@ const Experience = ({ archive = false }: ExperienceProps) => {
 
         <div className="grid md:grid-cols-2 gap-8">
           {visibleExperiences.map((exp, index) => (
-            <motion.div key={exp.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: Math.min(index, 3) * 0.05 }} className={`card group overflow-hidden rounded-3xl overflow-clip ${exp.caseStudy ? 'md:col-span-2' : ''}`}>
+            <motion.div key={exp.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: Math.min(index, 3) * 0.05 }} className="card group overflow-hidden rounded-3xl overflow-clip">
               <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-44 rounded-t-3xl" />
               <div className="relative h-44 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden flex items-center justify-center">
                 {exp.logo && (
