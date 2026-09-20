@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cal Climbing | Connor van Herick</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #07111f; color: #f8faf4; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: linear-gradient(135deg, rgba(20,184,166,.12), transparent 42%), linear-gradient(180deg, #07111f 0%, #0b1925 100%); }
+      main { width: min(1040px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 72px; }
+      a { color: #14b8a6; }
+      .back { display: inline-flex; margin-bottom: 48px; color: #f8faf4; text-decoration: none; font-weight: 700; }
+      .eyebrow { color: #f59e0b; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; }
+      h1 { max-width: 820px; margin: 12px 0 22px; color: #f8faf4; font-size: clamp(2.5rem, 7vw, 5.2rem); line-height: .96; }
+      .lede { max-width: 760px; margin: 0; color: rgba(248,250,244,.75); font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.7; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+      .button { display: inline-flex; padding: 12px 16px; border: 1px solid rgba(20,184,166,.35); border-radius: 12px; color: #14b8a6; background: rgba(20,184,166,.1); font-weight: 700; text-decoration: none; }
+      .button.secondary { border-color: rgba(248,250,244,.16); color: rgba(248,250,244,.76); background: transparent; }
+      .gallery { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; margin: 48px 0 18px; }
+      .gallery img { width: 100%; height: 100%; min-height: 340px; object-fit: cover; border: 1px solid rgba(248,250,244,.12); border-radius: 18px; }
+      .gallery img:first-child { object-position: center; }
+      .caption { color: rgba(248,250,244,.5); font-size: .9rem; }
+      section { padding: 40px 0; border-top: 1px solid rgba(248,250,244,.12); }
+      h2 { margin: 0 0 18px; color: #f8faf4; font-size: clamp(1.6rem, 4vw, 2.4rem); }
+      p, li { color: rgba(248,250,244,.72); line-height: 1.72; font-size: 1.02rem; }
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+      .card { padding: 24px; border: 1px solid rgba(248,250,244,.12); border-radius: 14px; background: rgba(15,31,46,.7); }
+      .card h3 { margin: 0 0 10px; color: #14b8a6; }
+      footer { padding-top: 40px; color: rgba(248,250,244,.45); font-size: .95rem; }
+      @media (max-width: 700px) { .gallery, .two-col { grid-template-columns: 1fr; } .gallery img { min-height: 0; max-height: 520px; } main { padding-top: 28px; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="../">Back to portfolio</a>
+      <div class="eyebrow">Community · Leadership · Climbing</div>
+      <h1>Cal Climbing</h1>
+      <p class="lede">A student climbing community built around consistent practice, outdoor trips, shared gear, and making space for climbers at every experience level.</p>
+
+      <div class="actions">
+        <a class="button" href="https://climbing.studentorg.berkeley.edu/" target="_blank" rel="noopener noreferrer">Visit Cal Climbing ↗</a>
+        <a class="button secondary" href="https://climbing.studentorg.berkeley.edu/join/" target="_blank" rel="noopener noreferrer">Join the club ↗</a>
+      </div>
+
+      <div class="gallery">
+        <img src="../assets/cal-climbing-joshua-tree.jpg" alt="Cal Climbing members gathered outdoors in Joshua Tree" />
+        <img src="../assets/cal-climbing-gym.jpg" alt="Cal Climbing members gathered at an indoor bouldering gym" />
+      </div>
+      <p class="caption">Cal Climbing brings Berkeley students together at local gyms and outdoor climbing areas.</p>
+
+      <section>
+        <h2>My role</h2>
+        <p>I served as Membership Officer for the 2025–2026 school year and serve as Treasurer for 2026–2027. Both roles sit at the intersection of people and operations: helping members find community, keeping club logistics moving, and supporting the trips and practices that make the organization feel active beyond a weekly meeting.</p>
+      </section>
+
+      <section>
+        <h2>What I help build</h2>
+        <div class="two-col">
+          <div class="card"><h3>Member community</h3><p>Support a welcoming student organization for climbers with different backgrounds and experience levels, from first sessions in the gym to outdoor trips with longtime members.</p></div>
+          <div class="card"><h3>Club operations</h3><p>Help coordinate membership and the practical infrastructure behind practices, outdoor trips, gear lending, campsites, and gas reimbursements.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Why it matters</h2>
+        <p>Climbing is one of the places where I most clearly see technical and interpersonal systems overlap. Good preparation, communication, and trust make it possible for a large group to move safely and enjoy the same day outside. Cal Climbing gives me a chance to contribute to that environment while staying connected to the people and places that keep me curious.</p>
+      </section>
+
+      <footer>© 2026 Connor van Herick.</footer>
+    </main>
+  </body>
+</html>

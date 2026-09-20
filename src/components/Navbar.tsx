@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FileText, Menu, X, Linkedin } from 'lucide-react'
+import { FileText, Menu, X, Linkedin, Sun, Moon } from 'lucide-react'
 import { Link, animateScroll as scroll } from 'react-scroll'
 
-const Navbar = () => {
+interface NavbarProps {
+  theme: 'dark' | 'light'
+  onToggleTheme: () => void
+}
+
+const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
 
@@ -78,6 +83,10 @@ const Navbar = () => {
               <FileText size={18} className="inline mr-2" />
               Resume
             </a>
+            <button type="button" onClick={onToggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} className="inline-flex items-center gap-2 rounded-xl px-4 py-2 font-semibold text-cream/70 transition-colors hover:bg-cream/5 hover:text-cream">
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            </button>
             <a 
               href="https://www.linkedin.com/in/connor-vanherick/" 
               target="_blank" 
@@ -134,6 +143,10 @@ const Navbar = () => {
               >
                 Resume
               </a>
+              <button type="button" onClick={onToggleTheme} className="flex items-center gap-2 rounded-xl px-4 py-3 text-left font-semibold text-cream/70 transition-colors hover:bg-cream/5 hover:text-cream">
+                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+              </button>
               <a 
                 href="https://www.linkedin.com/in/connor-vanherick/" 
                 target="_blank" 

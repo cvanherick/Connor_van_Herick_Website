@@ -1,15 +1,40 @@
 import { motion } from 'framer-motion'
-import { Code2, Database, BrainCog, Layers, Terminal, Github } from 'lucide-react'
+import { Code2, Database, BrainCog, Layers, Lock, Zap, Terminal, Github } from 'lucide-react'
 
 const skills = [
   { name: 'Python', evidence: 'PySpark pipelines, modeling, and data products', icon: Code2, category: 'Languages' },
+  { name: 'Java', evidence: 'Data structures, software design, and applications', icon: Code2, category: 'Languages' },
+  { name: 'Go', evidence: 'Backend and systems programming', icon: Code2, category: 'Languages' },
+  { name: 'C', evidence: 'Low-level programming and machine structures', icon: Code2, category: 'Languages' },
   { name: 'SQL', evidence: '73M+ record decisioning workflows', icon: Database, category: 'Languages' },
-  { name: 'Java / C / Go', evidence: 'Graphs, systems, security, and low-level projects', icon: Code2, category: 'Languages' },
-  { name: 'ML + Data', evidence: 'XGBoost, scikit-learn, TensorFlow/PyTorch, Databricks', icon: BrainCog, category: 'ML/Data' },
-  { name: 'Distributed Data', evidence: 'PySpark, Spark SQL, and feature pipelines', icon: Terminal, category: 'ML/Data' },
-  { name: 'Robotics', evidence: 'ROS 2, MoveIt 2, RealSense, and NumPy', icon: Layers, category: 'Systems' },
-  { name: 'Systems', evidence: 'Cryptography, access control, RISC-V, and testing', icon: Layers, category: 'Systems' },
-  { name: 'Tools', evidence: 'Docker, Git, JUnit, and Valgrind-ready workflows', icon: Github, category: 'Tools' },
+  { name: 'RISC-V', evidence: 'CPU architecture and assembly-level systems', icon: Code2, category: 'Languages' },
+  { name: 'Scheme', evidence: 'Interpreters, abstraction, and recursion', icon: Code2, category: 'Languages' },
+  { name: 'x86', evidence: 'Computer architecture and low-level debugging', icon: Code2, category: 'Languages' },
+  { name: 'Regex', evidence: 'Text processing and data cleaning', icon: Code2, category: 'Languages' },
+  { name: 'TensorFlow / PyTorch', evidence: 'Deep learning and neural network training', icon: BrainCog, category: 'ML/Data' },
+  { name: 'XGBoost', evidence: 'Uplift modeling and structured prediction', icon: BrainCog, category: 'ML/Data' },
+  { name: 'LightGBM', evidence: 'Efficient gradient-boosted modeling', icon: BrainCog, category: 'ML/Data' },
+  { name: 'Pandas', evidence: 'Data wrangling, analysis, and feature engineering', icon: Database, category: 'ML/Data' },
+  { name: 'NumPy', evidence: 'Numerical computing and robotics workflows', icon: Layers, category: 'ML/Data' },
+  { name: 'SHAP', evidence: 'Model explanations and feature attribution', icon: BrainCog, category: 'ML/Data' },
+  { name: 'Scikit-learn', evidence: 'Classical ML, evaluation, and pipelines', icon: BrainCog, category: 'ML/Data' },
+  { name: 'Matplotlib / Seaborn', evidence: 'Exploratory analysis and communication', icon: Database, category: 'ML/Data' },
+  { name: 'Cryptography', evidence: 'Secure systems and threat-aware design', icon: Lock, category: 'Systems' },
+  { name: 'CPU Architecture', evidence: 'RISC-V, memory, and machine structures', icon: Zap, category: 'Systems' },
+  { name: 'System Design', evidence: 'Reliable services and maintainable architectures', icon: Layers, category: 'Systems' },
+  { name: 'ROS 2', evidence: 'Robotics middleware, perception, and control', icon: Layers, category: 'Systems' },
+  { name: 'Git', evidence: 'Version control and collaborative delivery', icon: Github, category: 'Tools' },
+  { name: 'Databricks', evidence: 'Large-scale analytics and model workflows', icon: Terminal, category: 'Tools' },
+  { name: 'PySpark', evidence: 'Distributed data processing and feature pipelines', icon: Terminal, category: 'Tools' },
+  { name: 'Spark SQL', evidence: 'Distributed querying and transformation', icon: Database, category: 'Tools' },
+  { name: 'Trino / Hive', evidence: 'Data lake querying and warehouse workflows', icon: Database, category: 'Tools' },
+  { name: 'DataGrip', evidence: 'Database exploration and SQL development', icon: Terminal, category: 'Tools' },
+  { name: 'Docker', evidence: 'Reproducible development and deployment', icon: Layers, category: 'Tools' },
+  { name: 'Dash / Plotly', evidence: 'Interactive data products and dashboards', icon: Database, category: 'Tools' },
+  { name: 'DuckDB', evidence: 'Local analytical workflows and prototyping', icon: Database, category: 'Tools' },
+  { name: 'Jupyter', evidence: 'Research, experimentation, and communication', icon: Terminal, category: 'Tools' },
+  { name: 'VS Code / IntelliJ', evidence: 'Daily development and debugging workflows', icon: Terminal, category: 'Tools' },
+  { name: 'JUnit / Valgrind', evidence: 'Testing, profiling, and correctness checks', icon: Terminal, category: 'Tools' },
 ]
 
 const Skills = () => {
@@ -45,7 +70,7 @@ const Skills = () => {
             <h3 className="text-2xl font-bold text-accent mb-8 text-center">ML / Data</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {skills.filter(s => s.category === 'ML/Data').map((skill, index) => (
-                <SkillBadge key={skill.name} skill={skill} index={index + 6} />
+                <SkillBadge key={skill.name} skill={skill} index={index + 9} />
               ))}
             </div>
           </div>
@@ -54,7 +79,7 @@ const Skills = () => {
             <h3 className="text-2xl font-bold text-accent mb-8 text-center">Systems</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {skills.filter(s => s.category === 'Systems').map((skill, index) => (
-                <SkillBadge key={skill.name} skill={skill} index={index + 14} />
+                <SkillBadge key={skill.name} skill={skill} index={index + 17} />
               ))}
             </div>
           </div>
@@ -63,7 +88,7 @@ const Skills = () => {
             <h3 className="text-2xl font-bold text-accent mb-8 text-center">Tools</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {skills.filter(s => s.category === 'Tools').map((skill, index) => (
-                <SkillBadge key={skill.name} skill={skill} index={index + 18} />
+                <SkillBadge key={skill.name} skill={skill} index={index + 21} />
               ))}
             </div>
           </div>

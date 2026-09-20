@@ -28,7 +28,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .12 }} className="hero-panel relative overflow-hidden p-3 md:p-5">
-          <img src="./assets/connor-headshot.png?v=2" alt="Connor van Herick smiling outdoors" className="aspect-[4/5] w-full rounded-2xl object-cover object-center" />
+          <img src="./assets/connor-headshot.jpg?v=3" alt="Connor van Herick smiling outdoors" className="aspect-[4/5] w-full rounded-2xl object-cover object-center" />
         </motion.div>
       </div>
     </section>

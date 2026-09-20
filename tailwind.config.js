@@ -10,11 +10,11 @@ export default {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
-        primary: '#07111f',
-        surface: '#0f1f2e',
-        accent: '#14b8a6',
-        secondary: '#f59e0b',
-        cream: '#f8faf4',
+        primary: 'rgb(var(--color-primary) / <alpha-value>)',
+        surface: 'rgb(var(--color-surface) / <alpha-value>)',
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+        cream: 'rgb(var(--color-cream) / <alpha-value>)',
       },
       animation: {
         'fade-in': 'fadeIn 1s ease-in-out',

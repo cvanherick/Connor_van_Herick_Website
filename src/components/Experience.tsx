@@ -10,6 +10,7 @@ export interface ExperienceItem {
   logo?: string
   logoAlt?: string
   caseStudy?: string
+  website?: string
 }
 
 export const experiences: ExperienceItem[] = [
@@ -82,10 +83,12 @@ export const experiences: ExperienceItem[] = [
     duration: '2025 – Present',
     logo: './assets/cal-climbing.png',
     logoAlt: 'California Climbing logo',
+    caseStudy: './case-studies/cal-climbing.html',
+    website: 'https://climbing.studentorg.berkeley.edu/',
     bullets: [
       'Served as Membership Officer for the 2025-2026 school year',
       'Serve as Treasurer for the 2026-2027 school year',
-      'Support club operations, member coordination, and student community building',
+      'Support membership, club operations, outdoor trips, and student community building',
     ]
   },
   {
@@ -153,7 +156,10 @@ const Experience = ({ archive = false }: ExperienceProps) => {
                 <ul className="space-y-3 text-cream/70 leading-relaxed">
                   {exp.bullets.map((bullet, bIndex) => <li key={bIndex} className="flex items-start gap-3"><div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" /><span>{bullet}</span></li>)}
                 </ul>
-                {exp.caseStudy && <a href={exp.caseStudy} className="mt-7 inline-flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 font-semibold text-accent transition-colors hover:bg-accent/20">Featured Work case study <span aria-hidden="true">→</span></a>}
+                {(exp.caseStudy || exp.website) && <div className="mt-7 flex flex-wrap gap-3">
+                  {exp.caseStudy && <a href={exp.caseStudy} className="inline-flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 font-semibold text-accent transition-colors hover:bg-accent/20">Read the write-up <span aria-hidden="true">→</span></a>}
+                  {exp.website && <a href={exp.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-cream/15 px-4 py-3 font-semibold text-cream/70 transition-colors hover:border-accent/40 hover:text-accent">Cal Climbing website <span aria-hidden="true">↗</span></a>}
+                </div>}
               </div>
             </motion.div>
           ))}
