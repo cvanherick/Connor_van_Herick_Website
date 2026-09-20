@@ -15,7 +15,7 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
   const [activeSection, setActiveSection] = useState('')
 
   const sections = mode === 'explore' ? ['experience', 'projects', 'building', 'about', 'knowledge-graph', 'contact'] : ['experience', 'projects', 'contact']
-  const sectionLabels: Record<string, string> = { experience: 'Work', building: 'Currently', 'knowledge-graph': 'Map' }
+  const sectionLabels: Record<string, string> = { experience: 'Work', building: 'Currently', 'knowledge-graph': 'Knowledge graph' }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,8 +48,8 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
     <nav aria-label="Primary navigation" className="fixed top-0 w-full z-50 bg-primary/85 backdrop-blur-2xl border-b border-cream/10 shadow-2xl shadow-black/20">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex justify-between items-center py-5">
-          <Link
-            to="hero"
+          <Link 
+            to="hero" 
             className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cream via-white to-accent bg-clip-text text-transparent hover:scale-[1.02] transition-all duration-300"
             onClick={() => scroll.scrollToTop()}
             smooth={true}
@@ -68,8 +68,8 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
                 duration={800}
                 aria-current={activeSection === section ? 'location' : undefined}
                 className={`px-4 py-2 font-semibold rounded-xl transition-all duration-300 ${
-                  activeSection === section
-                    ? 'bg-accent/10 text-accent border border-accent/30 shadow-lg'
+                  activeSection === section 
+                    ? 'bg-accent/10 text-accent border border-accent/30 shadow-lg' 
                     : 'text-cream/70 hover:text-cream hover:bg-cream/5 hover:shadow-lg'
                 }`}
               >
@@ -92,9 +92,9 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
             <div role="group" aria-label="Portfolio view" className="ml-2 inline-flex rounded-xl border border-cream/10 bg-cream/5 p-1">
               {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" aria-pressed={mode === option} onClick={() => mode !== option && onToggleMode()} className={`rounded-lg px-3 py-1.5 text-xs font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
             </div>
-            <a
-              href="https://www.linkedin.com/in/connor-vanherick/"
-              target="_blank"
+            <a 
+              href="https://www.linkedin.com/in/connor-vanherick/" 
+              target="_blank" 
               rel="noopener"
               className="ml-4 px-6 py-2 bg-gradient-to-r from-accent to-secondary hover:from-secondary hover:to-accent text-primary font-semibold rounded-xl shadow-lg hover:shadow-accent/30 transition-colors duration-300"
             >
@@ -105,6 +105,7 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
 
           {/* Compact controls stay visible on smaller screens so the two views are discoverable. */}
           <div className="flex items-center gap-2 xl:hidden">
+            {mode === 'explore' && <Link to="knowledge-graph" smooth={true} duration={800} className="hidden rounded-xl px-2 py-1 text-[11px] font-bold text-cream/70 hover:bg-cream/5 hover:text-cream sm:inline-flex">Knowledge graph</Link>}
             <div role="group" aria-label="Portfolio view" className="inline-flex rounded-xl border border-cream/10 bg-cream/5 p-1">
               {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" aria-pressed={mode === option} onClick={() => mode !== option && onToggleMode()} className={`rounded-lg px-2 py-1 text-[11px] font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
             </div>
@@ -123,7 +124,7 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
 
         {/* Mobile menu */}
         {isOpen && (
-          <motion.div
+          <motion.div 
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             id="mobile-navigation"
@@ -160,9 +161,9 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
               <div role="group" aria-label="Portfolio view" className="flex rounded-xl border border-cream/10 bg-cream/5 p-1">
                 {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" aria-pressed={mode === option} onClick={() => mode !== option && onToggleMode()} className={`flex-1 rounded-lg px-3 py-2 text-sm font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
               </div>
-              <a
-                href="https://www.linkedin.com/in/connor-vanherick/"
-                target="_blank"
+              <a 
+                href="https://www.linkedin.com/in/connor-vanherick/" 
+                target="_blank" 
                 rel="noopener"
                 className="py-3 px-4 bg-gradient-to-r from-accent to-secondary hover:from-secondary hover:to-accent text-primary font-semibold rounded-xl shadow-lg"
                 onClick={() => setIsOpen(false)}
