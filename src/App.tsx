@@ -10,7 +10,6 @@ import Skills from './components/Skills'
 import WhatImBuilding from './components/WhatImBuilding'
 import ArchivePage from './components/ArchivePage'
 import OutsideWorkPage from './components/OutsideWorkPage'
-import NeuralNetwork from './components/NeuralNetwork'
 
 function App() {
   const pathname = window.location.pathname
@@ -28,7 +27,6 @@ function App() {
         <main id="main-content"><Hero />
         <Experience />
         <Projects />
-        <NeuralNetwork />
         <WhatImBuilding />
         <About />
         <Skills />
