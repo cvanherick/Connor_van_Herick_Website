@@ -33,6 +33,7 @@ export const experiences: ExperienceItem[] = [
     duration: 'Jun 2026 – Aug 2026',
     logo: './assets/happen-bank.png',
     logoAlt: 'Happen Bank white mark on an orange background',
+    caseStudy: './case-studies/happen-bank.html',
     bullets: [
       'Built a Databricks Next Best Action pipeline across 73M+ borrower rows using PySpark and SQL',
       'Trained a weighted tree-based treatment-effect model with compliance, eligibility, and operational capacity guardrails',
