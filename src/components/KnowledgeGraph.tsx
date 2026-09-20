@@ -49,6 +49,7 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
   const initialized = useRef<Set<string>>(new Set(Object.keys(anchors)))
   const panDrag = useRef<{ x: number; y: number; panX: number; panY: number } | null>(null)
   const dragStarted = useRef(false)
+  const ignoreClickUntil = useRef(0)
 
   const visibleIds = useMemo(() => {
     const visible = new Set(path)
@@ -57,7 +58,15 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
     return [...visible].filter(id => graph[id])
   }, [expanded, graph, path])
   const visibleSet = useMemo(() => new Set(visibleIds), [visibleIds])
-  const edges = useMemo(() => visibleIds.flatMap(from => graph[from].connections.filter(to => visibleSet.has(to) && from < to).map(to => ({ from, to, key: `${from}-${to}`, label: edgeLabel(graph, from, to) }))), [graph, visibleIds, visibleSet])
+  const edges = useMemo(() => {
+    const seen = new Set<string>()
+    return visibleIds.flatMap(from => graph[from].connections.filter(to => visibleSet.has(to)).flatMap(to => {
+      const key = [from, to].sort().join('-')
+      if (seen.has(key)) return []
+      seen.add(key)
+      return [{ from, to, key, label: edgeLabel(graph, from, to) }]
+    }))
+  }, [graph, visibleIds, visibleSet])
   const sharedIds = useMemo(() => new Set(visibleIds.filter(id => Object.values(graph).filter(node => node.type === 'theme' && node.connections.includes(id)).length > 1)), [graph, visibleIds])
   const selectedNode = graph[selected]
 
@@ -71,7 +80,7 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
       const parent = next[parentId] ?? anchors.connor
       const childIndex = children.indexOf(id)
       const angle = childIndex >= 0 ? -Math.PI / 2 + childIndex * (Math.PI * 2 / Math.max(children.length, 1)) : index * 2.399
-      const radius = 150
+      const radius = 205
       next[id] = { x: clamp(parent.x + Math.cos(angle) * radius, 70, 930), y: clamp(parent.y + Math.sin(angle) * radius, 70, 530) }
       initialized.current.add(id)
     })
@@ -144,7 +153,8 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
     setManualPositions(current => ({ ...current, [id]: next }))
     positionsRef.current = { ...positionsRef.current, [id]: next }
     setPositions(current => ({ ...current, [id]: next }))
-    window.setTimeout(() => { dragStarted.current = false }, 0)
+    ignoreClickUntil.current = Date.now() + 180
+    dragStarted.current = false
   }
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -169,14 +179,14 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
 
       <div className="overflow-hidden rounded-3xl border border-cream/10 bg-surface/45 shadow-2xl shadow-black/10">
         <div className="grid md:grid-cols-[minmax(0,1fr)_19rem]">
-          <div ref={canvasRef} className="relative h-[28rem] w-full touch-none overflow-hidden md:h-[34rem]" aria-label="Interactive knowledge graph" aria-describedby="knowledge-graph-instructions" onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={() => { panDrag.current = null }} onPointerCancel={() => { panDrag.current = null }} onWheel={handleWheel}>
+          <div ref={canvasRef} role="group" className="relative h-[28rem] w-full touch-none overflow-hidden md:h-[34rem]" aria-label="Interactive knowledge graph" aria-describedby="knowledge-graph-instructions" onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={() => { panDrag.current = null }} onPointerCancel={() => { panDrag.current = null }} onWheel={handleWheel}>
             <p id="knowledge-graph-instructions" className="sr-only">Use Tab to focus nodes. Enter or Space expands or collapses the focused node. Drag nodes to reposition them and drag empty space to pan.</p>
             <div className="pointer-events-none absolute inset-0 origin-center" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}>
               <svg viewBox="0 0 1000 600" aria-hidden="true" focusable="false" className="absolute inset-0 h-full w-full">
                 {edges.map(edge => { const start = positions[edge.from]; const end = positions[edge.to]; if (!start || !end) return null; const active = selected === edge.from || selected === edge.to || sharedIds.has(edge.from) || sharedIds.has(edge.to); return <g key={edge.key}><motion.line x1={start.x} y1={start.y} x2={end.x} y2={end.y} stroke={active ? '#14b8a6' : 'rgba(248,250,244,.18)'} strokeWidth={active ? 2.5 : 1.1} className={pulsing.has(edge.from) || pulsing.has(edge.to) ? 'animate-pulse' : undefined} />{(edge.from === 'connor' || active) && <text x={(start.x + end.x) / 2} y={(start.y + end.y) / 2 - 7} textAnchor="middle" fill="currentColor" opacity=".5" fontSize="11" fontWeight="600">{edge.label}</text>}</g> })}
               </svg>
-              {visibleIds.map(id => { const node = graph[id]; const point = positions[id] ?? anchors.connor; const style = styles[node.type]; const isSelected = selected === id; const isExpanded = expanded.has(id); const isShared = sharedIds.has(id); return <motion.button key={id} type="button" drag dragMomentum={false} dragElastic={0.06} onDragStart={() => { dragStarted.current = true }} onDragEnd={(_, info) => handleDragEnd(id, info.offset)} onClick={() => { if (!dragStarted.current) toggleNode(id) }} aria-expanded={isExpanded} aria-controls="knowledge-graph-details" aria-label={`${node.label}. ${style.label}. ${isExpanded ? 'Expanded' : 'Collapsed'}`} title={`${node.label} · ${style.label}`} animate={{ left: `${point.x / 10}%`, top: `${point.y / 6}%` }} transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 150, damping: 20 }} className={`pointer-events-auto absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary ${pulsing.has(id) ? 'animate-pulse' : ''}`} style={{ color: style.text }}>
-                <span className="flex items-center justify-center rounded-full border-2 px-2 text-center font-bold shadow-lg transition-transform hover:scale-110" style={{ width: node.type === 'root' ? 88 : node.type === 'theme' ? 72 : isSelected ? 64 : 56, height: node.type === 'root' ? 88 : node.type === 'theme' ? 72 : isSelected ? 64 : 56, backgroundColor: style.fill, borderColor: style.stroke, boxShadow: isShared || isSelected ? `0 0 0 4px ${style.fill}33, 0 0 22px ${style.fill}66` : undefined }}><span className={node.type === 'root' || node.type === 'theme' ? 'text-xs sm:text-sm' : 'max-w-[5rem] text-[0.63rem] leading-tight'}>{node.label}</span></span>
+              {visibleIds.map(id => { const node = graph[id]; const point = positions[id] ?? anchors.connor; const style = styles[node.type]; const isSelected = selected === id; const isExpanded = expanded.has(id); const isShared = sharedIds.has(id); return <motion.button key={id} type="button" drag dragMomentum={false} dragElastic={0.06} onDragStart={() => { dragStarted.current = true }} onDragEnd={(_, info) => handleDragEnd(id, info.offset)} onClick={() => { if (!dragStarted.current && Date.now() >= ignoreClickUntil.current) toggleNode(id) }} aria-expanded={isExpanded} aria-controls="knowledge-graph-details" aria-label={`${node.label}. ${style.label}. ${isExpanded ? 'Expanded' : 'Collapsed'}`} title={`${node.label} · ${style.label}`} animate={{ left: `${point.x / 10}%`, top: `${point.y / 6}%` }} transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 150, damping: 20 }} className={`pointer-events-auto absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary ${pulsing.has(id) ? 'animate-pulse' : ''}`} style={{ color: style.text }}>
+                <span className="flex items-center justify-center rounded-full border-2 px-2 text-center font-bold shadow-lg transition-transform hover:scale-110" style={{ width: node.type === 'root' ? 88 : node.type === 'theme' ? 72 : isSelected ? 58 : 48, height: node.type === 'root' ? 88 : node.type === 'theme' ? 72 : isSelected ? 58 : 48, backgroundColor: style.fill, borderColor: style.stroke, boxShadow: isShared || isSelected ? `0 0 0 4px ${style.fill}33, 0 0 22px ${style.fill}66` : undefined }}><span className={node.type === 'root' || node.type === 'theme' ? 'text-xs sm:text-sm' : 'max-w-[4.5rem] text-[0.6rem] leading-tight'}>{node.label}</span></span>
               </motion.button> })}
             </div>
             <div className="absolute left-4 top-4 z-20 rounded-lg border border-cream/10 bg-primary/75 px-3 py-2 text-xs text-cream/55 backdrop-blur-sm">{path.length === 1 ? 'Five themes to explore' : 'Focused branch'}</div>
