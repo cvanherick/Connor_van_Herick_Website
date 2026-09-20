@@ -12,8 +12,6 @@ import Skills from './components/Skills'
 import WhatImBuilding from './components/WhatImBuilding'
 import ArchivePage from './components/ArchivePage'
 import OutsideWorkPage from './components/OutsideWorkPage'
-import KnowledgeGraph from './components/KnowledgeGraph'
-import { knowledgeGraph } from './data/knowledgeGraph'
 
 function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => (localStorage.getItem('portfolio-theme') as 'dark' | 'light') || 'dark')
@@ -47,7 +45,7 @@ function App() {
         <main id="main-content"><Hero /><ConnectPrompt />
         <Experience />
         <Projects />
-        {mode === 'explore' && <><WhatImBuilding /><About /><KnowledgeGraph graph={knowledgeGraph} /></>}
+        {mode === 'explore' && <><WhatImBuilding /><About /></>}
         <Skills />
         <Coursework />
         <Contact /></main>
