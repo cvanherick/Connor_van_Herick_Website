@@ -42,6 +42,7 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
   const graphCanvasRef = useRef<HTMLDivElement>(null)
   const positionsRef = useRef<Record<string, Point>>({ connor: { x: 500, y: 300 } })
   const spawnOrigins = useRef<Record<string, string>>({})
+  const previousVisible = useRef<Set<string>>(new Set())
   const panDrag = useRef<{ x: number; y: number; panX: number; panY: number } | null>(null)
 
   const visibleIds = useMemo(() => {
@@ -60,10 +61,10 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
     return new Set(visibleIds.filter(id => themeIds.filter(themeId => graph[themeId].connections.includes(id)).length > 1))
   }, [graph, visibleIds])
 
-  const stepForceLayout = useCallback((current: Record<string, Point>) => {
+  const stepForceLayout = useCallback((current: Record<string, Point>, movableIds: Set<string>) => {
     const next = { ...current }
     for (const id of visibleIds) {
-      if (id === 'connor' || manualPositions[id] || graph[id]?.type === 'theme') continue
+      if (!movableIds.has(id) || id === 'connor' || manualPositions[id] || graph[id]?.type === 'theme') continue
       const point = current[id]
       if (!point) continue
       let forceX = (500 - point.x) * 0.002
@@ -94,6 +95,8 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
   }, [graph, manualPositions, visibleEdges, visibleIds])
 
   useEffect(() => {
+    const movableIds = new Set(visibleIds.filter(id => !previousVisible.current.has(id)))
+    previousVisible.current = new Set(visibleIds)
     const seeded = { ...positionsRef.current }
     visibleIds.forEach((id, index) => {
       if (themeAnchors[id] && !manualPositions[id]) {
@@ -114,7 +117,7 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
     let cancelled = false
     const settle = () => {
       if (cancelled) return
-      current = prefersReducedMotion ? current : stepForceLayout(current)
+      current = prefersReducedMotion ? current : stepForceLayout(current, movableIds)
       positionsRef.current = current
       setPositions({ ...current })
       frame += 1
@@ -148,6 +151,7 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
     setPan({ x: 0, y: 0 })
     setManualPositions({})
     spawnOrigins.current = {}
+    previousVisible.current = new Set()
   }
 
   const handleDragEnd = (id: string, offset: { x: number; y: number }) => {
@@ -187,12 +191,13 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
             <p className="section-kicker mb-3">Explore the connections</p>
             <h2 id="knowledge-graph-title" className="section-heading flex items-center gap-3"><BrainCircuit className="text-accent" size={34} /> Knowledge graph</h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-cream/60">Start with Connor, then grow the map through ML / AI, Robotics, Systems, Data, and Agentic AI. Shared concepts stay connected across branches.</p>
+            {path.length > 1 && <p className="mt-3 max-w-3xl text-sm text-cream/45" aria-live="polite"><span className="font-semibold text-cream/65">Current path:</span> {path.map(id => graph[id]?.label).filter(Boolean).join(' → ')}</p>}
           </div>
           <div className="flex items-center gap-2 text-sm text-cream/50"><CircleHelp size={16} /> Click a node to grow its branch · drag to arrange</div>
         </div>
 
         <div className="overflow-hidden rounded-3xl border border-cream/10 bg-surface/45 shadow-2xl shadow-black/10">
-          <div ref={graphCanvasRef} className="relative aspect-[5/3] min-h-[30rem] w-full touch-none overflow-hidden" aria-label="Interactive knowledge graph" onPointerDown={handleCanvasPointerDown} onPointerMove={handleCanvasPointerMove} onPointerUp={handleCanvasPointerUp} onPointerCancel={handleCanvasPointerUp} onWheel={handleWheel}>
+          <div ref={graphCanvasRef} className="relative aspect-[5/3] min-h-[23rem] w-full touch-none overflow-hidden md:min-h-[30rem]" aria-label="Interactive knowledge graph" onPointerDown={handleCanvasPointerDown} onPointerMove={handleCanvasPointerMove} onPointerUp={handleCanvasPointerUp} onPointerCancel={handleCanvasPointerUp} onWheel={handleWheel}>
             <div className="absolute inset-0 origin-center" style={{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}>
               <svg viewBox="0 0 1000 600" role="img" aria-labelledby="knowledge-graph-title" className="pointer-events-none absolute inset-0 h-full w-full">
                 <g opacity=".55">
