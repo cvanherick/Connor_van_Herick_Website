@@ -37,7 +37,7 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
   const [expanded, setExpanded] = useState<Set<string>>(new Set(['connor']))
   const [path, setPath] = useState(['connor'])
   const [selected, setSelected] = useState('connor')
-  const [detailsOpen, setDetailsOpen] = useState(true)
+  const [detailsOpen, setDetailsOpen] = useState(false)
   const [positions, setPositions] = useState<Record<string, Point>>(anchors)
   const [manualPositions, setManualPositions] = useState<Record<string, Point>>({})
   const [zoom, setZoom] = useState(1)
@@ -69,6 +69,7 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
   }, [graph, visibleIds, visibleSet])
   const sharedIds = useMemo(() => new Set(visibleIds.filter(id => Object.values(graph).filter(node => node.type === 'theme' && node.connections.includes(id)).length > 1)), [graph, visibleIds])
   const selectedNode = graph[selected]
+  const selectedHasConnections = Boolean(selectedNode?.connections.some(id => graph[id]))
 
   useEffect(() => {
     const next = { ...positionsRef.current }
@@ -84,24 +85,8 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
       next[id] = { x: clamp(parent.x + Math.cos(angle) * radius, 70, 930), y: clamp(parent.y + Math.sin(angle) * radius, 70, 530) }
       initialized.current.add(id)
     })
-    let frame = 0
-    let cancelled = false
-    const settle = () => {
-      if (cancelled) return
-      const settled = { ...next }
-      if (!reducedMotion) visibleIds.forEach(id => {
-        if (!next[id] || anchors[id] || manualPositions[id]) return
-        const parentId = path[path.length - 1]
-        const parent = next[parentId] ?? anchors.connor
-        settled[id] = { x: clamp(next[id].x + (parent.x - next[id].x) * 0.006, 60, 940), y: clamp(next[id].y + (parent.y - next[id].y) * 0.006, 60, 540) }
-      })
-      positionsRef.current = settled
-      setPositions(settled)
-      frame += 1
-      if (!reducedMotion && frame < 18) window.requestAnimationFrame(settle)
-    }
-    settle()
-    return () => { cancelled = true }
+    positionsRef.current = next
+    setPositions(next)
   }, [expanded, graph, manualPositions, path, reducedMotion, visibleIds, visibleSet])
 
   const focusBranch = (id: string) => {
@@ -120,11 +105,12 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
   const toggleNode = (id: string) => {
     const isExpanded = expanded.has(id)
     const pathIndex = path.indexOf(id)
-    const nextPath = pathIndex >= 0 ? path.slice(0, pathIndex + 1) : [...path, id]
+    const nextPath = isExpanded ? (id === 'connor' ? ['connor'] : path.slice(0, Math.max(pathIndex, 1))) : pathIndex >= 0 ? path.slice(0, pathIndex + 1) : [...path, id]
+    const nextExpanded = isExpanded ? (id === 'connor' ? new Set<string>() : new Set([nextPath[nextPath.length - 1]])) : new Set([id])
     setSelected(id)
     setDetailsOpen(true)
     setPath(nextPath)
-    setExpanded(isExpanded ? new Set() : new Set([id]))
+    setExpanded(nextExpanded)
     if (!isExpanded) focusBranch(id)
     const shared = graph[id]?.connections.filter(connection => sharedIds.has(connection)) ?? []
     setPulsing(new Set(shared))
@@ -162,7 +148,7 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
     panDrag.current = { x: event.clientX, y: event.clientY, panX: pan.x, panY: pan.y }
     event.currentTarget.setPointerCapture(event.pointerId)
   }
-  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => { if (panDrag.current) setPan({ x: panDrag.current.panX + event.clientX - panDrag.current.x, y: panDrag.current.panY + event.clientY - panDrag.current.y }) }
+  const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => { if (!panDrag.current) return; const rect = canvasRef.current?.getBoundingClientRect(); if (!rect) return; setPan({ x: clamp(panDrag.current.panX + event.clientX - panDrag.current.x, -rect.width * 0.2, rect.width * 0.2), y: clamp(panDrag.current.panY + event.clientY - panDrag.current.y, -rect.height * 0.2, rect.height * 0.2) }) }
   const handleWheel = (event: ReactWheelEvent<HTMLDivElement>) => { if (!event.ctrlKey && !event.metaKey) return; event.preventDefault(); setZoom(value => clamp(value - event.deltaY * 0.001, 0.65, 1.8)) }
 
   return <section id="knowledge-graph" aria-labelledby="knowledge-graph-title" className="px-6 py-28">
@@ -185,7 +171,7 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
               <svg viewBox="0 0 1000 600" aria-hidden="true" focusable="false" className="absolute inset-0 h-full w-full">
                 {edges.map(edge => { const start = positions[edge.from]; const end = positions[edge.to]; if (!start || !end) return null; const active = selected === edge.from || selected === edge.to || sharedIds.has(edge.from) || sharedIds.has(edge.to); return <g key={edge.key}><motion.line x1={start.x} y1={start.y} x2={end.x} y2={end.y} stroke={active ? '#14b8a6' : 'rgba(248,250,244,.18)'} strokeWidth={active ? 2.5 : 1.1} className={pulsing.has(edge.from) || pulsing.has(edge.to) ? 'animate-pulse' : undefined} />{(edge.from === 'connor' || active) && <text x={(start.x + end.x) / 2} y={(start.y + end.y) / 2 - 7} textAnchor="middle" fill="currentColor" opacity=".5" fontSize="11" fontWeight="600">{edge.label}</text>}</g> })}
               </svg>
-              {visibleIds.map(id => { const node = graph[id]; const point = positions[id] ?? anchors.connor; const style = styles[node.type]; const isSelected = selected === id; const isExpanded = expanded.has(id); const isShared = sharedIds.has(id); return <motion.button key={id} type="button" drag dragMomentum={false} dragElastic={0.06} onDragStart={() => { dragStarted.current = true }} onDragEnd={(_, info) => handleDragEnd(id, info.offset)} onClick={() => { if (!dragStarted.current && Date.now() >= ignoreClickUntil.current) toggleNode(id) }} aria-expanded={isExpanded} aria-controls="knowledge-graph-details" aria-label={`${node.label}. ${style.label}. ${isExpanded ? 'Expanded' : 'Collapsed'}`} title={`${node.label} · ${style.label}`} animate={{ left: `${point.x / 10}%`, top: `${point.y / 6}%` }} transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 150, damping: 20 }} className={`pointer-events-auto absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary ${pulsing.has(id) ? 'animate-pulse' : ''}`} style={{ color: style.text }}>
+              {visibleIds.map(id => { const node = graph[id]; const point = positions[id] ?? anchors.connor; const style = styles[node.type]; const isSelected = selected === id; const isExpanded = expanded.has(id); const isShared = sharedIds.has(id); const hasConnections = node.connections.some(connection => graph[connection]); return <motion.button key={id} type="button" drag dragMomentum={false} dragElastic={0.06} onDragStart={() => { dragStarted.current = true }} onDragEnd={(_, info) => handleDragEnd(id, info.offset)} onClick={() => { if (!dragStarted.current && Date.now() >= ignoreClickUntil.current) toggleNode(id) }} aria-expanded={hasConnections ? isExpanded : undefined} aria-controls="knowledge-graph-details" aria-label={`${node.label}. ${style.label}.${hasConnections ? ` ${isExpanded ? 'Expanded' : 'Collapsed'}` : ''}`} title={`${node.label} · ${style.label}`} animate={{ left: `${point.x / 10}%`, top: `${point.y / 6}%` }} transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 150, damping: 20 }} className={`pointer-events-auto absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary ${pulsing.has(id) ? 'animate-pulse' : ''}`} style={{ color: style.text }}>
                 <span className="flex items-center justify-center rounded-full border-2 px-2 text-center font-bold shadow-lg transition-transform hover:scale-110" style={{ width: node.type === 'root' ? 88 : node.type === 'theme' ? 72 : isSelected ? 58 : 48, height: node.type === 'root' ? 88 : node.type === 'theme' ? 72 : isSelected ? 58 : 48, backgroundColor: style.fill, borderColor: style.stroke, boxShadow: isShared || isSelected ? `0 0 0 4px ${style.fill}33, 0 0 22px ${style.fill}66` : undefined }}><span className={node.type === 'root' || node.type === 'theme' ? 'text-xs sm:text-sm' : 'max-w-[4.5rem] text-[0.6rem] leading-tight'}>{node.label}</span></span>
               </motion.button> })}
             </div>
@@ -194,8 +180,8 @@ const KnowledgeGraph = ({ graph }: KnowledgeGraphProps) => {
           </div>
 
           <aside id="knowledge-graph-details" aria-label="Selected node details" aria-live="polite" className={`border-t border-cream/10 bg-primary/35 p-5 md:border-l md:border-t-0 md:p-6 ${detailsOpen ? 'block' : 'hidden md:block'}`}>
-            <div className="flex items-start justify-between gap-3"><div><p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-accent">{selectedNode ? styles[selectedNode.type].label : 'Node'}</p><h3 className="mt-2 text-xl font-semibold text-cream">{selectedNode?.label}</h3></div><button type="button" onClick={() => setDetailsOpen(value => !value)} className="rounded-lg border border-cream/10 bg-cream/5 p-2 text-cream/60 hover:border-accent/40 hover:text-accent md:hidden" aria-label={detailsOpen ? 'Close node details' : 'Open node details'}>{detailsOpen ? <ChevronDown size={16} /> : <ChevronUp size={16} />}</button>{selectedNode && <button type="button" onClick={() => toggleNode(selectedNode.id)} className="hidden rounded-lg border border-cream/10 bg-cream/5 p-2 text-cream/60 hover:border-accent/40 hover:text-accent md:block" aria-label={expanded.has(selectedNode.id) ? `Collapse ${selectedNode.label}` : `Expand ${selectedNode.label}`}>{expanded.has(selectedNode.id) ? <ChevronUp size={16} /> : <ChevronDown size={16} />}</button>}</div>
-            {selectedNode && <div className="mt-3"><p className="text-sm leading-relaxed text-cream/60">{selectedNode.summary}</p>{sharedIds.has(selectedNode.id) && <p className="mt-3 text-xs font-semibold text-accent">Shared connection across themes.</p>}{selectedNode.href && <a href={selectedNode.href} target={selectedNode.href.startsWith('http') ? '_blank' : undefined} rel={selectedNode.href.startsWith('http') ? 'noreferrer' : undefined} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline">Open portfolio page <ArrowUpRight size={14} /></a>}<div className="mt-5 border-t border-cream/10 pt-4"><p className="text-xs font-semibold uppercase tracking-[0.15em] text-cream/40">Related nodes</p><div className="mt-2 space-y-1">{selectedNode.connections.map(id => graph[id] && <button key={id} type="button" disabled={!visibleSet.has(id)} onClick={() => { if (visibleSet.has(id)) setSelected(id) }} aria-label={`Jump to ${graph[id].label} without changing expansion`} className={`block w-full rounded-md px-2 py-1.5 text-left text-sm ${visibleSet.has(id) ? 'text-accent hover:bg-cream/5' : 'text-cream/30'}`}>{graph[id].label}<span className="ml-1 text-[0.65rem] text-cream/35">{visibleSet.has(id) ? '· jump' : '· locked'}</span></button>)}</div></div><button type="button" onClick={resetGraph} className="mt-5 w-full rounded-lg border border-cream/10 bg-cream/5 px-3 py-2 text-xs font-semibold text-cream/60 hover:border-accent/40 hover:text-accent">Back to Connor</button></div>}
+            <div className="flex items-start justify-between gap-3"><div><p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-accent">{selectedNode ? styles[selectedNode.type].label : 'Node'}</p><h3 className="mt-2 text-xl font-semibold text-cream">{selectedNode?.label}</h3></div><button type="button" onClick={() => setDetailsOpen(value => !value)} className="rounded-lg border border-cream/10 bg-cream/5 p-2 text-cream/60 hover:border-accent/40 hover:text-accent md:hidden" aria-expanded={detailsOpen} aria-controls="knowledge-graph-details" aria-label={detailsOpen ? 'Close node details' : 'Open node details'}>{detailsOpen ? <ChevronDown size={16} /> : <ChevronUp size={16} />}</button>{selectedNode && selectedHasConnections && <button type="button" onClick={() => toggleNode(selectedNode.id)} className="hidden rounded-lg border border-cream/10 bg-cream/5 p-2 text-cream/60 hover:border-accent/40 hover:text-accent md:block" aria-label={expanded.has(selectedNode.id) ? `Collapse ${selectedNode.label}` : `Expand ${selectedNode.label}`}>{expanded.has(selectedNode.id) ? <ChevronUp size={16} /> : <ChevronDown size={16} />}</button>}</div>
+            {selectedNode && <div className="mt-3"><p className="text-sm leading-relaxed text-cream/60">{selectedNode.summary}</p>{sharedIds.has(selectedNode.id) && <p className="mt-3 text-xs font-semibold text-accent">Shared connection across themes.</p>}{selectedNode.href && <a href={selectedNode.href} target={selectedNode.href.startsWith('http') ? '_blank' : undefined} rel={selectedNode.href.startsWith('http') ? 'noreferrer' : undefined} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline">Open portfolio page <ArrowUpRight size={14} /></a>}<div className="mt-5 border-t border-cream/10 pt-4"><p className="text-xs font-semibold uppercase tracking-[0.15em] text-cream/40">Related nodes</p><div className="mt-2 space-y-1">{selectedNode.connections.map(id => graph[id] && <button key={id} type="button" disabled={!visibleSet.has(id)} onClick={() => { if (visibleSet.has(id)) { setSelected(id); focusBranch(id) } }} aria-label={`Jump to ${graph[id].label} without changing expansion`} className={`block w-full rounded-md px-2 py-1.5 text-left text-sm ${visibleSet.has(id) ? 'text-accent hover:bg-cream/5' : 'text-cream/30'}`}>{graph[id].label}<span className="ml-1 text-[0.65rem] text-cream/35">{visibleSet.has(id) ? '· jump' : '· locked'}</span></button>)}</div></div><button type="button" onClick={resetGraph} className="mt-5 w-full rounded-lg border border-cream/10 bg-cream/5 px-3 py-2 text-xs font-semibold text-cream/60 hover:border-accent/40 hover:text-accent">Back to Connor</button></div>}
           </aside>
         </div>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-cream/10 bg-primary/25 px-5 py-3 text-[0.68rem] font-semibold text-cream/55" aria-label="Knowledge graph key">{Object.entries(styles).map(([type, style]) => <span key={type} className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-full" style={{ backgroundColor: style.fill }} />{style.label}</span>)}</div>
