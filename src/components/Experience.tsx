@@ -30,7 +30,7 @@ export const experiences: ExperienceItem[] = [
     company: 'Happen Bank (formerly LendingClub)',
     duration: 'Jun 2026 – Aug 2026',
     logo: './assets/happen-bank.png',
-    logoAlt: 'Happen Bank logo',
+    logoAlt: 'Happen Bank white mark on an orange background',
     caseStudy: './case-studies/happen-bank.html',
     bullets: [
       'Built a Databricks Next Best Action pipeline for 1–120 DPD borrowers, using PySpark and SQL to predict seven-day payment probability',
@@ -92,28 +92,12 @@ export const experiences: ExperienceItem[] = [
     title: 'Ride Operator',
     company: 'Tilden Park Carousel',
     duration: 'Jun 2022 – Aug 2023',
+    logo: './assets/cal-hiking.png',
+    logoAlt: 'Tilden Park Carousel image',
     bullets: [
       'Operated and maintained the 110-year-old historic carousel in Tilden Regional Park',
       'Supervised groups of up to 50 riders while maintaining a safe, welcoming environment',
       'Trained nine ride attendants on operating the machine',
-    ]
-  },
-  {
-    title: 'Member',
-    company: 'Cal Hiking & Outdoor Society',
-    duration: 'UC Berkeley',
-    logo: './assets/cal-hiking.png',
-    logoAlt: 'Cal Hiking and Outdoor Society logo',
-    bullets: [
-      'Participate in Berkeley’s hiking and outdoor community',
-    ]
-  },
-  {
-    title: 'Participant',
-    company: 'Intramural Volleyball',
-    duration: 'UC Berkeley',
-    bullets: [
-      'Played intramural volleyball as part of Berkeley campus recreation',
     ]
   },
 ]
