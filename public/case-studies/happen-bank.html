@@ -24,12 +24,13 @@
       section { padding: 40px 0; border-top: 1px solid rgba(248,250,244,.12); }
       h2 { margin: 0 0 18px; color: #f8faf4; font-size: clamp(1.6rem, 4vw, 2.4rem); }
       ul { padding-left: 1.2rem; }
-      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+      .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+      .three-col { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
       .card { padding: 24px; }
       .card h3 { margin: 0 0 12px; color: #14b8a6; }
       footer { padding-top: 40px; color: rgba(248,250,244,.45); font-size: .95rem; }
-      @media (max-width: 760px) { .grid, .two-col { grid-template-columns: 1fr 1fr; } .grid .stat:last-child { grid-column: 1 / -1; } main { padding-top: 28px; } }
-      @media (max-width: 480px) { .grid, .two-col { grid-template-columns: 1fr; } .grid .stat:last-child { grid-column: auto; } }
+      @media (max-width: 760px) { .grid, .two-col, .three-col { grid-template-columns: 1fr 1fr; } .grid .stat:last-child { grid-column: 1 / -1; } main { padding-top: 28px; } }
+      @media (max-width: 480px) { .grid, .two-col, .three-col { grid-template-columns: 1fr; } .grid .stat:last-child { grid-column: auto; } }
     </style>
   </head>
   <body>
@@ -37,35 +38,46 @@
       <a class="back" href="../">Back to portfolio</a>
       <div class="eyebrow">Featured Work · Collections Strategy Intern</div>
       <h1>Happen Bank Collections Strategy</h1>
-      <p class="lede">Built data and machine-learning decision systems to help a collections strategy team evaluate borrower treatment choices at scale.</p>
+      <p class="lede">Explored how machine learning in Databricks could turn randomized collections history into individualized outreach decisions—choosing when, how, and whether to contact a borrower.</p>
 
       <img class="photo" src="../assets/happen-bank-presentation-optimized.jpg" alt="Connor presenting project results at the end of his Happen Bank internship" />
       <p class="caption">Presenting project results at the end of the internship. This page is a high-level portfolio summary and omits confidential implementation details.</p>
 
       <div class="grid">
-        <div class="stat"><strong>Scale</strong><span>73M+ records processed</span></div>
-        <div class="stat"><strong>Stack</strong><span>PySpark, SQL, Databricks</span></div>
-        <div class="stat"><strong>Modeling</strong><span>XGBoost uplift modeling</span></div>
-        <div class="stat"><strong>Result</strong><span>2.04% holdout-evaluated reduction</span></div>
-        <div class="stat"><strong>Value</strong><span>$20.4M modeled gross value</span></div>
+        <div class="stat"><strong>Scope</strong><span>1–120 days past due</span></div>
+        <div class="stat"><strong>Training</strong><span>55.6M borrower rows</span></div>
+        <div class="stat"><strong>Model</strong><span>Weighted XGBoost S-Learner</span></div>
+        <div class="stat"><strong>Quality</strong><span>0.965 test AUC · 0.1945 calibrated log loss</span></div>
+        <div class="stat"><strong>Modeled impact</strong><span>2.04% reduction · $20.35M annualized value</span></div>
       </div>
 
       <section>
         <h2>Problem</h2>
-        <p>Collections strategy requires making high-volume decisions under operational, compliance, and capacity constraints. The project focused on turning large-scale borrower and account data into a more measurable decision process.</p>
+        <p>Collections outreach was largely assigned without knowing which individual borrowers benefit from contact, when they are most receptive, or which channel is worth using. The presentation framed a “sleeping dogs” risk: roughly one third of borrowers may be actively harmed by over-outreach through fatigue, resistance, or unnecessary contact.</p>
+        <p>The project focused on the pre-charge-off window—borrowers at 1–120 days past due—where the team could help borrowers cure past-due balances while respecting compliance, contact eligibility, and daily operational capacity.</p>
       </section>
 
       <section>
         <h2>Approach</h2>
+        <div class="three-col">
+          <div class="card"><h3>Eligibility first</h3><p>Filtered ineligible, deceased, bankrupt, opted-out, and cooling-down borrowers before scoring, then applied compliance and capacity guardrails.</p></div>
+          <div class="card"><h3>Next Best Action</h3><p>Predicted the probability of a payment within seven days, using recency decay and inverse-propensity weighting before training a weighted XGBoost S-Learner.</p></div>
+          <div class="card"><h3>Daily execution</h3><p>Ranked feasible actions across dialer, SMS, push, email, physical letter, and no-contact options. The live design preserves at least one SMS or email touch every 14 days.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>What the model found</h2>
         <div class="two-col">
-          <div class="card"><h3>Data architecture</h3><p>Built production-oriented PySpark and SQL pipelines in Databricks, with feature construction and evaluation designed for large datasets.</p></div>
-          <div class="card"><h3>Decision modeling</h3><p>Applied XGBoost S- and T-Learner approaches to estimate treatment effects, then evaluated results on holdout data with business constraints in mind.</p></div>
+          <div class="card"><h3>Uplift was concentrated</h3><p>Model quality was strong after calibration, and the ranking curve showed that most modeled uplift came from roughly 25% of borrowers. The remaining population was more likely to self-cure or charge off regardless of outreach.</p></div>
+          <div class="card"><h3>Channel mix changed</h3><p>The modeled plan front-loaded SMS and email earlier in delinquency. Under the presentation’s constraints, SMS was recommended at 164% of today’s level after the initial spike, while email was recommended at 78% of today’s rate.</p></div>
         </div>
       </section>
 
       <section>
         <h2>Result</h2>
-        <p>The holdout evaluation showed a 2.04% reduction in charge-off rate; modeled results implied approximately $20.4M in gross value under the evaluation assumptions. The public summary intentionally excludes internal datasets, feature names, decision rules, and proprietary business context.</p>
+        <p>The holdout comparison estimated a 2.04% charge-off-rate reduction and approximately $20.35M in annualized value under the presentation’s assumptions, with a reported 95% bootstrap interval of $20.04M–$20.66M for the annual estimate. These are modeled results—not causal proof until a randomized live test—so the proposed rollout was staged: build a trusted Databricks base, validate with A/B testing, pilot on a monitored borrower population, then scale to downstream intensity, timing, and channel models.</p>
+        <p>The public summary intentionally excludes internal datasets, feature names, decision rules, and proprietary business context.</p>
       </section>
 
       <footer>© 2026 Connor van Herick.</footer>

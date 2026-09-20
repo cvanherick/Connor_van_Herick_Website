@@ -33,9 +33,9 @@ export const experiences: ExperienceItem[] = [
     logoAlt: 'Happen Bank logo',
     caseStudy: './case-studies/happen-bank.html',
     bullets: [
-      'Engineered PySpark and SQL decisioning pipelines in Databricks across 73M+ records',
-      'Built XGBoost S/T-Learners with 40 borrower features and 24 interaction features under compliance and capacity constraints',
-      'Reduced the holdout-evaluated charge-off rate by 2.04%; modeled results implied approximately $20.4M in gross value',
+      'Built a Databricks Next Best Action pipeline for 1–120 DPD borrowers, using PySpark and SQL to predict seven-day payment probability',
+      'Trained a weighted XGBoost S-Learner on 55.6M rows with compliance, eligibility, and capacity guardrails; test AUC reached 0.965',
+      'Estimated a 2.04% holdout charge-off reduction and approximately $20.35M in annualized modeled value, pending randomized live validation',
     ]
   },
   {
