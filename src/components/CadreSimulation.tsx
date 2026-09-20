@@ -130,7 +130,7 @@ const CadreSimulation = ({ open = true, className = '', autoStart = false, onCom
   const [status, setStatus] = useState<SimulationStatus>('idle')
   const [activeStage, setActiveStage] = useState(-1)
 
-  const completedStages = Math.max(0, activeStage)
+  const completedStages = status === 'complete' ? stages.length : Math.max(0, activeStage)
   const artifactCount = stages.slice(0, Math.max(0, activeStage + 1)).length
   const checkpointCount = stages.slice(0, Math.max(0, activeStage + 1)).filter((stage) => stage.id === 'review' || stage.id === 'validation').length
 
