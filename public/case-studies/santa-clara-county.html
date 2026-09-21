@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Santa Clara County Mental Health Outcomes | Connor van Herick</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #07111f; color: #f8faf4; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: linear-gradient(135deg, rgba(20,184,166,.12), transparent 42%), linear-gradient(180deg, #07111f 0%, #0b1925 100%); }
+      main { width: min(1040px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 72px; }
+      a { color: #14b8a6; }
+      .back { display: inline-flex; margin-bottom: 48px; color: #f8faf4; text-decoration: none; font-weight: 700; }
+      .eyebrow { color: #f59e0b; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; }
+      h1 { max-width: 860px; margin: 12px 0 22px; color: #f8faf4; font-size: clamp(2.4rem, 7vw, 5.2rem); line-height: .96; }
+      .lede { max-width: 800px; margin: 0; color: rgba(248,250,244,.75); font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.7; }
+      .grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 42px 0 56px; }
+      .stat, .card { border: 1px solid rgba(248,250,244,.12); border-radius: 14px; background: rgba(15,31,46,.7); }
+      .stat { min-height: 116px; padding: 18px; }
+      .stat strong { display: block; color: #f8faf4; font-size: 1.2rem; margin-bottom: 8px; }
+      .stat span, p, li { color: rgba(248,250,244,.72); line-height: 1.72; font-size: 1.02rem; }
+      section { padding: 40px 0; border-top: 1px solid rgba(248,250,244,.12); }
+      h2 { margin: 0 0 18px; color: #f8faf4; font-size: clamp(1.6rem, 4vw, 2.4rem); }
+      h3 { margin: 0 0 10px; color: #14b8a6; }
+      ul { padding-left: 1.2rem; }
+      .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+      .card { padding: 24px; }
+      footer { padding-top: 40px; color: rgba(248,250,244,.45); font-size: .95rem; }
+      @media (max-width: 760px) { .grid, .two-col { grid-template-columns: 1fr 1fr; } .grid .stat:last-child { grid-column: 1 / -1; } }
+      @media (max-width: 480px) { .grid, .two-col { grid-template-columns: 1fr; } .grid .stat:last-child { grid-column: auto; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="../">Back to portfolio</a>
+      <div class="eyebrow">Data Science Consultant · Santa Clara County</div>
+      <h1>Predicting mental health treatment outcomes</h1>
+      <p class="lede">A modeling project for Santa Clara County that used Child and Adolescent Needs and Strengths assessments to study whether a treatment episode would end successfully.</p>
+
+      <div class="grid">
+        <div class="stat"><strong>Source data</strong><span>71,558 rows · 782 columns</span></div>
+        <div class="stat"><strong>Modeling data</strong><span>46,269 episodes · 185 features</span></div>
+        <div class="stat"><strong>Assessment</strong><span>CANS needs, strengths, and risk domains</span></div>
+        <div class="stat"><strong>Best reported model</strong><span>LightGBM · 0.8425 test AUC</span></div>
+        <div class="stat"><strong>Analysis</strong><span>Feature importance and subgroup comparisons</span></div>
+      </div>
+
+      <section>
+        <h2>Project question</h2>
+        <p>Santa Clara County wanted to improve on its existing logistic regression approach. The team built classifiers that used at least two CANS assessments, including one before treatment and at least one after, to predict whether a client would have a successful exit from a mental health program.</p>
+        <p>The goal was to support treatment planning and program analysis while keeping the model grounded in the assessment data already used by mental health professionals.</p>
+      </section>
+
+      <section>
+        <h2>Data preparation</h2>
+        <div class="two-col">
+          <div class="card"><h3>Episode-level dataset</h3><p>The raw table mixed client information, administrative outcomes, and CANS responses. We removed unnecessary and administrative fields, converted the data so each row represented a treatment episode, and reduced the working dataset to 46,269 rows and 185 columns.</p></div>
+          <div class="card"><h3>Missing responses</h3><p>Rows with more than 15 missing domain responses were dropped. The remaining missing values were imputed with zero, preserving a consistent modeling matrix for the classifier comparisons.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Modeling approach</h2>
+        <p>We compared tree-based models and neural networks with the original logistic-regression baseline. Random Forest handled nonlinear feature interactions, LightGBM provided a fast gradient-boosted alternative, and TensorFlow and PyTorch networks tested denser representations. The project also combined model probabilities in an ensemble and used four-fold cross-validation, with fold AUCs ranging from 0.8175 to 0.8454.</p>
+        <p>LightGBM reached 0.9865 AUC on training data and 0.8425 on the test set in the final comparison. The project treated these as validation results rather than a guarantee of performance in a future clinical setting.</p>
+      </section>
+
+      <section>
+        <h2>What the analysis showed</h2>
+        <ul>
+          <li>Assessment frequency was associated with treatment length and several measured strengths. Clients with two or three assessments averaged 310 days of service, compared with 152.6 days for clients with four or more assessments.</li>
+          <li>Program type and agency type were both correlated with success-rate distributions in chi-squared tests.</li>
+          <li>Permutation importance, split gain, entropy-based importance, and SHAP gave the team several ways to inspect which features influenced model predictions.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>My contribution</h2>
+        <p>I worked across data cleaning, model comparison, and interpretation. The most important lesson was that a useful public-sector model needs more than a score: the dataset definition, subgroup behavior, and explanation path all matter when people use predictions to understand care outcomes.</p>
+      </section>
+
+      <footer>Public portfolio summary based on the Fall 2024 final deliverable. Sensitive client data and implementation details are omitted.</footer>
+    </main>
+  </body>
+</html>
