@@ -11,7 +11,7 @@
     --color-secondary: 245 158 11;
     --color-cream: 248 250 244;
     --page-gutter: clamp(1rem, 4vw, 1.5rem);
-    --nav-height: 7.5rem;
+    --nav-height: 10.5rem;
     --line-subtle: rgba(248, 250, 244, 0.1);
     --line-strong: rgba(20, 184, 166, 0.35);
     --surface-glass: rgba(15, 31, 46, 0.68);
@@ -109,6 +109,17 @@
   .signal-node strong { @apply block text-sm font-semibold text-cream; }
   .signal-node small { @apply mt-1 block text-xs text-cream/50; overflow-wrap: anywhere; }
   .signal-line { @apply ml-8 h-5 w-px bg-gradient-to-b from-accent/60 to-secondary/40; }
+  .skills-marquee { @apply relative z-[55] h-12 overflow-hidden border-y border-cream/10 bg-primary/80 text-cream/75 backdrop-blur-xl; }
+  .skills-marquee__viewport { @apply h-full overflow-hidden; }
+  .skills-marquee__track { display: flex; width: max-content; height: 100%; animation: skills-marquee-scroll 34s linear infinite; }
+  .skills-marquee__group { display: flex; flex-shrink: 0; align-items: center; min-width: 50vw; }
+  .skills-marquee__item { @apply inline-flex items-center whitespace-nowrap px-5 text-xs font-bold uppercase tracking-[0.16em] text-cream/70 md:px-8 md:text-sm; }
+  .skills-marquee__separator { @apply ml-5 text-secondary md:ml-8; }
+}
+
+@keyframes skills-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 html[data-theme='light'] .hero-panel {
@@ -119,7 +130,7 @@ html[data-theme='light'] .btn-primary { color: #ffffff; }
 
 @media (max-width: 767px) {
   :root {
-    --nav-height: 7rem;
+    --nav-height: 10rem;
   }
 
   section[id] {
