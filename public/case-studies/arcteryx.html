@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arc'teryx Retail Traffic Forecasting | Connor van Herick</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #07111f; color: #f8faf4; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: linear-gradient(135deg, rgba(20,184,166,.12), transparent 42%), linear-gradient(180deg, #07111f 0%, #0b1925 100%); }
+      main { width: min(1040px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 72px; }
+      a { color: #14b8a6; }
+      .back { display: inline-flex; margin-bottom: 48px; color: #f8faf4; text-decoration: none; font-weight: 700; }
+      .eyebrow { color: #f59e0b; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; }
+      h1 { max-width: 860px; margin: 12px 0 22px; color: #f8faf4; font-size: clamp(2.4rem, 7vw, 5.2rem); line-height: .96; }
+      .lede { max-width: 800px; margin: 0; color: rgba(248,250,244,.75); font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.7; }
+      .grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 42px 0 56px; }
+      .stat, .card { border: 1px solid rgba(248,250,244,.12); border-radius: 14px; background: rgba(15,31,46,.7); }
+      .stat { min-height: 116px; padding: 18px; }
+      .stat strong { display: block; color: #f8faf4; font-size: 1.2rem; margin-bottom: 8px; }
+      .stat span, p, li { color: rgba(248,250,244,.72); line-height: 1.72; font-size: 1.02rem; }
+      section { padding: 40px 0; border-top: 1px solid rgba(248,250,244,.12); }
+      h2 { margin: 0 0 18px; color: #f8faf4; font-size: clamp(1.6rem, 4vw, 2.4rem); }
+      h3 { margin: 0 0 10px; color: #14b8a6; }
+      ul { padding-left: 1.2rem; }
+      .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+      .card { padding: 24px; }
+      footer { padding-top: 40px; color: rgba(248,250,244,.45); font-size: .95rem; }
+      @media (max-width: 760px) { .grid, .two-col { grid-template-columns: 1fr 1fr; } .grid .stat:last-child { grid-column: 1 / -1; } }
+      @media (max-width: 480px) { .grid, .two-col { grid-template-columns: 1fr; } .grid .stat:last-child { grid-column: auto; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="../">Back to portfolio</a>
+      <div class="eyebrow">Machine Learning Project Lead · Arc'teryx</div>
+      <h1>Forecasting retail traffic for store staffing</h1>
+      <p class="lede">A Data Science Society project that compared forecasting models for Arc’teryx retail stores, with the practical goal of helping teams plan staffing around hourly traffic patterns.</p>
+
+      <div class="grid">
+        <div class="stat"><strong>Scope</strong><span>80+ North American stores</span></div>
+        <div class="stat"><strong>Data</strong><span>Hourly traffic, sales, and store metadata</span></div>
+        <div class="stat"><strong>Model families</strong><span>Linear, XGBoost, Prophet, NN, SARIMA(X)</span></div>
+        <div class="stat"><strong>Top reported MAE</strong><span>8.27 · fully connected neural network</span></div>
+        <div class="stat"><strong>Project lead</strong><span>9-person Berkeley team</span></div>
+      </div>
+
+      <section>
+        <h2>Project question</h2>
+        <p>Retail teams need to know when stores will be busy, but traffic depends on more than a repeating calendar. The team studied how hourly visits changed by store, weekday, holiday, season, location type, and external conditions, then compared models that made different tradeoffs between accuracy, interpretability, and operating cost.</p>
+      </section>
+
+      <section>
+        <h2>Data preparation</h2>
+        <div class="two-col">
+          <div class="card"><h3>One modeling table</h3><p>We concatenated raw CSVs, filled missing quantities, filtered returns and employee discounts, converted Canadian currency to USD, and aggregated sales and traffic into hourly store-level records.</p></div>
+          <div class="card"><h3>Consistent time features</h3><p>A shared feature pipeline converted timestamps into local store time, added weekday and holiday features, and joined traffic with store metadata. The final models could then compare patterns across regions and store types.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Model comparison</h2>
+        <p>The team evaluated a simple linear baseline, XGBoost, Facebook Prophet, a fully connected neural network, and SARIMA(X). The final summary reported mean absolute error of 8.27 for the neural network, 8.58 for XGBoost, 16.00 for SARIMA(X), 17.26 for linear regression, and 23.06 for Prophet. A same-day baseline scored 24.79 MAE.</p>
+        <p>Those numbers describe the project’s evaluation setup and show why no single model answered every business question. The neural network and XGBoost handled short-term patterns well, while SARIMA(X) was useful for some individual stores and Prophet was more relevant to longer-horizon experiments than daily operational forecasting.</p>
+      </section>
+
+      <section>
+        <h2>Business use cases</h2>
+        <ul>
+          <li>Staffing teams could align headcount with predicted busy hours.</li>
+          <li>Store teams could prepare inventory before expected traffic spikes.</li>
+          <li>Marketing teams could investigate quiet periods and test promotion timing.</li>
+        </ul>
+        <p>The recommendation was to make the modeling pipeline operational: standardize future CSV exports, verify store hours and metadata, add useful external predictors such as weather and nearby events, tune SARIMA(X) by store, and retrain on a regular schedule.</p>
+      </section>
+
+      <section>
+        <h2>My contribution</h2>
+        <p>I led the nine-person project team through data preparation, model comparison, and the final recommendations. The work sharpened my approach to applied ML: start with a transparent baseline, evaluate models against the actual operating decision, and leave the client with a path to maintain the system after the initial analysis.</p>
+      </section>
+
+      <footer>Public portfolio summary based on the May 2025 final deliverable. Client data and proprietary implementation details are omitted.</footer>
+    </main>
+  </body>
+</html>
