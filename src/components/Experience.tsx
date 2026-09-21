@@ -11,6 +11,7 @@ export interface ExperienceItem {
   logoAlt?: string
   caseStudy?: string
   website?: string
+  caseStudySteps?: string[]
 }
 
 export const experiences: ExperienceItem[] = [
@@ -46,11 +47,13 @@ export const experiences: ExperienceItem[] = [
     note: 'Confidential client project',
     logo: './assets/arcteryx-logo.png',
     logoAlt: "Arc'teryx logo",
+    caseStudy: './case-studies/arcteryx.html',
     bullets: [
       'Led a 9-person team building daily predictive models for retail labor allocation across 80+ North American stores',
-      'Engineered 14 external-factor features, including weather and promotions, through APIs',
-      'Evaluated TensorFlow, XGBoost, SARIMAX, and Prophet models with cross-validation and hyperparameter tuning in Databricks',
-    ]
+      'Prepared hourly sales and foot-traffic data across stores, local time zones, holidays, and location metadata',
+      'Compared linear regression, XGBoost, Prophet, TensorFlow, and SARIMA(X) models; the final comparison favored the neural network and XGBoost for short-term accuracy',
+    ],
+    caseStudySteps: ['80+ stores', 'Hourly traffic', '5 model families', 'MAE comparison', 'Next steps'],
   },
   {
     title: 'Data Science Consultant',
@@ -59,11 +62,13 @@ export const experiences: ExperienceItem[] = [
     note: 'Confidential client project',
     logo: './assets/santa-clara-county-seal.svg',
     logoAlt: 'Santa Clara County seal',
+    caseStudy: './case-studies/santa-clara-county.html',
     bullets: [
-      'Developed and tuned Random Forest, LightGBM, and neural network classifiers on 46K+ patient records',
-      'Used 50 CANS mental health assessment features to predict treatment outcomes, achieving up to 0.85 AUC under the project validation setup',
-      'Applied SHAP and permutation importance to identify five key clinical and demographic drivers',
-    ]
+      'Reshaped 71,558 raw records and 782 columns into 46,269 episode-level rows with 185 modeling features',
+      'Compared Random Forest, LightGBM, TensorFlow, PyTorch, and ensemble classifiers using CANS mental health assessment data',
+      'Used feature importance and subgroup analysis to connect assessment frequency, program type, agency, and treatment outcomes',
+    ],
+    caseStudySteps: ['46K+ episodes', 'CANS features', '5 model paths', '0.84 test AUC', 'Feature analysis'],
   },
   {
     title: 'Instructor & Team Lead',
@@ -151,7 +156,7 @@ const Experience = ({ archive = false }: ExperienceProps) => {
                   {exp.note && <p className="mt-4 inline-flex rounded-xl border border-accent/30 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">{exp.note}</p>}
                 </div>
                 {exp.caseStudy && <div className="mb-7 grid gap-2 sm:grid-cols-5">
-                  {['73M+ records', 'Feature engineering', 'Uplift models', 'Constraints', 'Decision impact'].map((step, stepIndex) => <div key={step} className="relative rounded-xl border border-cream/10 bg-primary/45 px-3 py-3 text-center text-[11px] font-semibold text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
+                  {(exp.caseStudySteps ?? ['73M+ records', 'Feature engineering', 'Uplift models', 'Constraints', 'Decision impact']).map((step, stepIndex) => <div key={step} className="relative rounded-xl border border-cream/10 bg-primary/45 px-3 py-3 text-center text-[11px] font-semibold text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
                 </div>}
                 <ul className="space-y-3 text-cream/70 leading-relaxed">
                   {exp.bullets.map((bullet, bIndex) => <li key={bIndex} className="flex items-start gap-3"><div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" /><span>{bullet}</span></li>)}
