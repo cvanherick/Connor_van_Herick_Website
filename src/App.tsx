@@ -42,6 +42,15 @@ function App() {
       <div role="status" className="relative z-[60] flex min-h-10 items-center justify-center bg-secondary px-4 py-2 text-center text-xs font-bold text-primary md:text-sm">
         This website is a work in progress and under development — excuse any mess.
       </div>
+      <div className="skills-marquee" aria-label="Skills and focus areas: 73M plus financial records, uplift modeling, ROS 2 robotics, XGBoost and LightGBM, computer vision, Databricks pipelines, and multi-agent systems">
+        <div className="skills-marquee__viewport">
+          <div className="skills-marquee__track" aria-hidden="true">
+            {[0, 1].map(copy => <div className="skills-marquee__group" key={copy}>
+              {['73M+ financial records', 'uplift modeling', 'ROS 2 robotics', 'XGBoost + LightGBM', 'computer vision', 'Databricks pipelines', 'multi-agent systems'].map(skill => <span className="skills-marquee__item" key={`${copy}-${skill}`}>{skill}<span className="skills-marquee__separator">·</span></span>)}
+            </div>)}
+          </div>
+        </div>
+      </div>
       <div className="pointer-events-none fixed inset-0 opacity-70 bg-[linear-gradient(120deg,rgba(20,184,166,0.08),transparent_35%,rgba(245,158,11,0.07)_68%,transparent)]" />
       <div className="relative z-10">
         <Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'dark' ? 'light' : 'dark')} mode={mode} onToggleMode={() => setMode(current => current === 'explore' ? 'recruiter' : 'explore')} />
