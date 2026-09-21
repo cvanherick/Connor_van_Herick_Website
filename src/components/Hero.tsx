@@ -13,7 +13,6 @@ const Hero = () => {
           </div>
           <h1 id="hero-title" className="max-w-4xl text-6xl font-semibold tracking-[-0.07em] text-cream md:text-8xl">Connor<br className="hidden md:block" /> van Herick</h1>
           <p className="mt-5 text-base font-medium text-cream/65 md:text-lg">UC Berkeley · Computer Science + Data Science · Graduating Spring 2027</p>
-          <p className="mt-6 max-w-2xl text-sm font-semibold leading-relaxed text-accent md:text-base">73M+ financial records · uplift modeling · ROS 2 robotics</p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a href="./Connor_van_Herick_Resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-primary inline-flex items-center gap-2">View Resume <ArrowUpRight size={17} /></a>
