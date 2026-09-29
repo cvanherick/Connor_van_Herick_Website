@@ -13,6 +13,7 @@ const Hero = () => {
           </div>
           <h1 id="hero-title" className="max-w-4xl text-6xl font-semibold tracking-[-0.07em] text-cream md:text-8xl">Connor<br className="hidden md:block" /> van Herick</h1>
           <p className="mt-5 text-base font-medium text-cream/65 md:text-lg">UC Berkeley · Computer Science + Data Science · Graduating Spring 2027</p>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-cream/80 md:text-xl">I build reliable machine learning, data, and robotics systems that turn messy inputs into useful decisions.</p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a href="./Connor_van_Herick_Resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-primary inline-flex items-center gap-2">View Resume <ArrowUpRight size={17} /></a>
@@ -26,7 +27,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .8, delay: .12 }} className="hero-panel relative overflow-hidden p-3 md:p-5">
-          <img src="./assets/connor-headshot.jpg?v=4" alt="Connor van Herick smiling outdoors" className="aspect-[4/5] w-full rounded-2xl object-cover object-center" />
+          <img src="./assets/connor-headshot.jpg?v=4" alt="Connor van Herick smiling outdoors" width="960" height="1200" fetchPriority="high" decoding="async" className="aspect-[4/5] w-full rounded-2xl object-cover object-center" />
         </motion.div>
       </div>
     </section>
