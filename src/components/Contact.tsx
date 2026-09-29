@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Mail, MapPin, ArrowUpRight } from 'lucide-react'
+import ConnectPrompt from './ConnectPrompt'
 
 const Contact = () => {
   return (
@@ -18,6 +19,8 @@ const Contact = () => {
             I’m exploring 2027 opportunities in ML engineering, AI engineering, software engineering, and applied data science.
           </p>
         </motion.div>
+
+        <ConnectPrompt />
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <motion.div
