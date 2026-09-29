@@ -111,8 +111,7 @@ interface ExperienceProps {
 }
 
 const Experience = ({ archive = false, mode = 'explore' }: ExperienceProps) => {
-  const selectedExperiences = mode === 'recruiter' ? experiences.filter(exp => exp.company !== 'Santa Clara County') : experiences
-  const visibleExperiences = archive ? experiences : selectedExperiences.slice(0, mode === 'recruiter' ? 3 : 4)
+  const visibleExperiences = archive ? experiences : experiences.slice(0, mode === 'recruiter' ? 4 : 4)
 
   return (
     <section id="experience" aria-labelledby="experience-title" className="py-28 px-6">
