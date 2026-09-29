@@ -52,7 +52,7 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
         <div className="flex justify-between items-center py-5">
           <Link 
             to="hero" 
-            className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cream via-white to-accent bg-clip-text text-transparent hover:scale-[1.02] transition-all duration-300"
+            className="site-name text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cream via-white to-accent bg-clip-text text-transparent hover:scale-[1.02] transition-all duration-300"
             onClick={() => scroll.scrollToTop()}
             smooth={true}
             duration={500}
