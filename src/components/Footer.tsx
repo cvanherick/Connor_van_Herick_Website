@@ -28,7 +28,6 @@ const Footer = ({ mode = 'explore' }: FooterProps) => {
               <Link to="projects" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 Projects
               </Link>
-              <Link to="skills" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">Skills</Link>
               {mode === 'explore' && <Link to="building" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">Currently</Link>}
               <Link to="contact" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 Contact
