@@ -34,7 +34,7 @@ export const experiences: ExperienceItem[] = [
     logo: './assets/happen-bank.png',
     logoAlt: 'Happen Bank white mark on an orange background',
     bullets: [
-      'Built a Databricks Next Best Action pipeline across 55.6M borrower rows using PySpark and SQL',
+      'Built a Databricks Next Best Action pipeline across 73M+ borrower rows using PySpark and SQL',
       'Trained a weighted tree-based treatment-effect model with compliance, eligibility, and operational capacity guardrails',
       'Modeled a 2.04% charge-off reduction and approximately $20.35M in annualized value, with randomized live validation identified as the next step',
     ]
@@ -126,7 +126,7 @@ const Experience = ({ archive = false, mode = 'explore' }: ExperienceProps) => {
 
         {!archive && <div className="mb-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" aria-label="Selected focus areas">
           {[
-            ['55.6M', 'rows modeled'],
+            ['73M+', 'borrower rows'],
             ['80+', 'stores studied'],
             ['46K+', 'episodes analyzed'],
             ['9-person', 'team led'],
