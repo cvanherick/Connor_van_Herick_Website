@@ -124,15 +124,6 @@ const Experience = ({ archive = false, mode = 'explore' }: ExperienceProps) => {
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">Applied machine learning, data science, and technical leadership experience.</p>
         </motion.div>
 
-        {!archive && <div className="mb-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" aria-label="Selected focus areas">
-          {[
-            ['73M+', 'borrower rows'],
-            ['80+', 'stores studied'],
-            ['46K+', 'episodes analyzed'],
-            ['9-person', 'team led'],
-          ].map(([value, label]) => <div key={label} className="rounded-2xl border border-accent/20 bg-accent/5 px-5 py-4 text-center"><strong className="block text-2xl font-bold text-accent">{value}</strong><span className="text-sm font-semibold text-cream/60">{label}</span></div>)}
-        </div>}
-
         <div className="grid md:grid-cols-2 gap-8">
           {visibleExperiences.map((exp, index) => (
             <motion.div key={exp.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: Math.min(index, 3) * 0.05 }} className="card group overflow-hidden rounded-3xl overflow-clip">
