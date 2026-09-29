@@ -40,6 +40,7 @@ const skills = [
 interface SkillsProps { mode?: 'explore' | 'recruiter' }
 
 const recruiterSkills = new Set(['Python', 'SQL', 'TensorFlow / PyTorch', 'XGBoost', 'LightGBM', 'Pandas', 'Scikit-learn', 'System Design', 'ROS 2', 'Git', 'Databricks', 'PySpark'])
+const recruiterStack = ['Python', 'SQL', 'PyTorch', 'XGBoost', 'ROS 2', 'Databricks', 'PySpark', 'React', 'Go', 'Docker', 'Git', 'System Design']
 
 const Skills = ({ mode = 'explore' }: SkillsProps) => {
   const visibleSkills = mode === 'recruiter' ? skills.filter(skill => recruiterSkills.has(skill.name)) : skills
@@ -61,8 +62,17 @@ const Skills = ({ mode = 'explore' }: SkillsProps) => {
           </p>
         </motion.div>
 
-        {/* Category groups */}
-        <div className="space-y-16 mb-24">
+        {mode === 'recruiter' ? (
+          <div className="mb-24 rounded-3xl border border-accent/20 bg-accent/5 p-6 md:p-8">
+            <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">
+              <h3 className="text-2xl font-bold text-accent">Core stack</h3>
+              <span className="text-sm text-cream/55">Selected for a quick technical read</span>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {recruiterStack.map(skill => <span key={skill} className="rounded-full border border-cream/10 bg-primary/45 px-4 py-2 text-sm font-semibold text-cream/80">{skill}</span>)}
+            </div>
+          </div>
+        ) : <div className="space-y-16 mb-24">
           <div>
             <h3 className="text-2xl font-bold text-accent mb-8 text-center">Languages</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
@@ -98,7 +108,7 @@ const Skills = ({ mode = 'explore' }: SkillsProps) => {
               ))}
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     </section>
   )
