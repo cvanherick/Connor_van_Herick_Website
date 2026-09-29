@@ -204,6 +204,8 @@ const Projects = ({ archive = false }: ProjectsProps) => {
                       <img
                         src={project.logo}
                         alt={project.logoAlt ?? `${project.title} logo`}
+                        loading="lazy"
+                        decoding="async"
                         className="h-24 w-24 object-contain invert opacity-80 drop-shadow-2xl transition-all duration-500 group-hover:scale-110 group-hover:opacity-100"
                       />
                     )}
