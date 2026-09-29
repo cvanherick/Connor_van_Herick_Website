@@ -34,9 +34,9 @@ export const experiences: ExperienceItem[] = [
     logo: './assets/happen-bank.png',
     logoAlt: 'Happen Bank white mark on an orange background',
     bullets: [
-      'Built a Databricks Next Best Action pipeline for delinquency-stage outreach using PySpark and SQL',
+      'Built a Databricks Next Best Action pipeline across 55.6M borrower rows using PySpark and SQL',
       'Trained a weighted tree-based treatment-effect model with compliance, eligibility, and operational capacity guardrails',
-      'Estimated positive offline modeled impact, with randomized live validation identified as the next step',
+      'Modeled a 2.04% charge-off reduction and approximately $20.35M in annualized value, with randomized live validation identified as the next step',
     ]
   },
   {
@@ -47,9 +47,9 @@ export const experiences: ExperienceItem[] = [
     logo: './assets/arcteryx-logo.png',
     logoAlt: "Arc'teryx logo",
     bullets: [
-      'Led a team on retail traffic forecasting for store staffing across a North American store network',
+      'Led a 9-person team on retail traffic forecasting across 80+ North American stores',
       'Prepared hourly sales and foot-traffic data with time-zone, holiday, and location features',
-      'Compared interpretable, tree-based, neural, and time-series approaches and translated results into operational recommendations',
+      'Compared interpretable, tree-based, neural, and time-series approaches; the best reported MAE was 8.27',
     ]
   },
   {
@@ -60,8 +60,8 @@ export const experiences: ExperienceItem[] = [
     logo: './assets/santa-clara-county-seal.svg',
     logoAlt: 'Santa Clara County seal',
     bullets: [
-      'Built episode-level classifiers from de-identified mental health assessment data',
-      'Compared tree-based and neural-network approaches for treatment outcome prediction',
+      'Built episode-level classifiers from 46,269 de-identified mental health assessment episodes',
+      'Compared tree-based and neural-network approaches; LightGBM reached a reported 0.8425 test AUC',
       'Used model interpretation and subgroup analysis to understand which patterns were associated with outcomes',
     ]
   },
@@ -126,10 +126,10 @@ const Experience = ({ archive = false, mode = 'explore' }: ExperienceProps) => {
 
         {!archive && <div className="mb-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" aria-label="Selected focus areas">
           {[
-            ['Decision', 'systems'],
-            ['Retail', 'forecasting'],
-            ['Public-sector', 'analytics'],
-            ['Team', 'leadership'],
+            ['55.6M', 'rows modeled'],
+            ['80+', 'stores studied'],
+            ['46K+', 'episodes analyzed'],
+            ['9-person', 'team led'],
           ].map(([value, label]) => <div key={label} className="rounded-2xl border border-accent/20 bg-accent/5 px-5 py-4 text-center"><strong className="block text-2xl font-bold text-accent">{value}</strong><span className="text-sm font-semibold text-cream/60">{label}</span></div>)}
         </div>}
 
