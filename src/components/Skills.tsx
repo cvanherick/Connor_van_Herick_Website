@@ -6,7 +6,7 @@ const skills = [
   { name: 'Java', evidence: 'Data structures, software design, and applications', icon: Code2, category: 'Languages' },
   { name: 'Go', evidence: 'Backend and systems programming', icon: Code2, category: 'Languages' },
   { name: 'C', evidence: 'Low-level programming and machine structures', icon: Code2, category: 'Languages' },
-  { name: 'SQL', evidence: '73M+ record decisioning workflows', icon: Database, category: 'Languages' },
+  { name: 'SQL', evidence: 'Decisioning workflows and analytical modeling', icon: Database, category: 'Languages' },
   { name: 'RISC-V', evidence: 'CPU architecture and assembly-level systems', icon: Code2, category: 'Languages' },
   { name: 'Scheme', evidence: 'Interpreters, abstraction, and recursion', icon: Code2, category: 'Languages' },
   { name: 'x86', evidence: 'Computer architecture and low-level debugging', icon: Code2, category: 'Languages' },
@@ -37,7 +37,13 @@ const skills = [
   { name: 'JUnit / Valgrind', evidence: 'Testing, profiling, and correctness checks', icon: Terminal, category: 'Tools' },
 ]
 
-const Skills = () => {
+interface SkillsProps { mode?: 'explore' | 'recruiter' }
+
+const recruiterSkills = new Set(['Python', 'SQL', 'TensorFlow / PyTorch', 'XGBoost', 'LightGBM', 'Pandas', 'Scikit-learn', 'System Design', 'ROS 2', 'Git', 'Databricks', 'PySpark'])
+
+const Skills = ({ mode = 'explore' }: SkillsProps) => {
+  const visibleSkills = mode === 'recruiter' ? skills.filter(skill => recruiterSkills.has(skill.name)) : skills
+
   return (
     <section id="skills" aria-labelledby="skills-title" className="py-32 px-6 bg-primary/35">
       <div className="max-w-6xl mx-auto">
@@ -60,7 +66,7 @@ const Skills = () => {
           <div>
             <h3 className="text-2xl font-bold text-accent mb-8 text-center">Languages</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {skills.filter(s => s.category === 'Languages').map((skill, index) => (
+              {visibleSkills.filter(s => s.category === 'Languages').map((skill, index) => (
                 <SkillBadge key={skill.name} skill={skill} index={index} />
               ))}
             </div>
@@ -69,7 +75,7 @@ const Skills = () => {
           <div>
             <h3 className="text-2xl font-bold text-accent mb-8 text-center">ML / Data</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {skills.filter(s => s.category === 'ML/Data').map((skill, index) => (
+              {visibleSkills.filter(s => s.category === 'ML/Data').map((skill, index) => (
                 <SkillBadge key={skill.name} skill={skill} index={index + 9} />
               ))}
             </div>
@@ -78,7 +84,7 @@ const Skills = () => {
           <div>
             <h3 className="text-2xl font-bold text-accent mb-8 text-center">Systems</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {skills.filter(s => s.category === 'Systems').map((skill, index) => (
+              {visibleSkills.filter(s => s.category === 'Systems').map((skill, index) => (
                 <SkillBadge key={skill.name} skill={skill} index={index + 17} />
               ))}
             </div>
@@ -87,7 +93,7 @@ const Skills = () => {
           <div>
             <h3 className="text-2xl font-bold text-accent mb-8 text-center">Tools</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {skills.filter(s => s.category === 'Tools').map((skill, index) => (
+              {visibleSkills.filter(s => s.category === 'Tools').map((skill, index) => (
                 <SkillBadge key={skill.name} skill={skill} index={index + 21} />
               ))}
             </div>
