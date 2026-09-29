@@ -89,8 +89,8 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
               {theme === 'dark' ? 'Light mode' : 'Dark mode'}
             </button>
-            <div role="group" aria-label="Portfolio view" className="ml-2 inline-flex rounded-xl border border-cream/10 bg-cream/5 p-1">
-              {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" aria-pressed={mode === option} onClick={() => mode !== option && onToggleMode()} className={`rounded-lg px-3 py-1.5 text-xs font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
+            <div role="radiogroup" aria-label="Portfolio view" className="ml-2 inline-flex rounded-xl border border-cream/10 bg-cream/5 p-1">
+              {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" role="radio" aria-checked={mode === option} onClick={() => mode !== option && onToggleMode()} className={`rounded-lg px-3 py-1.5 text-xs font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
             </div>
             <a 
               href="https://www.linkedin.com/in/connor-vanherick/" 
@@ -105,8 +105,8 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
 
           {/* Compact controls stay visible on smaller screens so the two views are discoverable. */}
           <div className="flex items-center gap-2 xl:hidden">
-            <div role="group" aria-label="Portfolio view" className="inline-flex rounded-xl border border-cream/10 bg-cream/5 p-1">
-              {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" aria-pressed={mode === option} onClick={() => mode !== option && onToggleMode()} className={`rounded-lg px-2 py-1 text-[11px] font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
+            <div role="radiogroup" aria-label="Portfolio view" className="inline-flex rounded-xl border border-cream/10 bg-cream/5 p-1">
+              {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" role="radio" aria-checked={mode === option} onClick={() => mode !== option && onToggleMode()} className={`rounded-lg px-2 py-1 text-[11px] font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
             </div>
             <button
               type="button"
@@ -157,8 +157,8 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
                 {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                 {theme === 'dark' ? 'Light mode' : 'Dark mode'}
               </button>
-              <div role="group" aria-label="Portfolio view" className="flex rounded-xl border border-cream/10 bg-cream/5 p-1">
-                {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" aria-pressed={mode === option} onClick={() => mode !== option && onToggleMode()} className={`flex-1 rounded-lg px-3 py-2 text-sm font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
+              <div role="radiogroup" aria-label="Portfolio view" className="flex rounded-xl border border-cream/10 bg-cream/5 p-1">
+                {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" role="radio" aria-checked={mode === option} onClick={() => mode !== option && onToggleMode()} className={`flex-1 rounded-lg px-3 py-2 text-sm font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
               </div>
               <a 
                 href="https://www.linkedin.com/in/connor-vanherick/" 
