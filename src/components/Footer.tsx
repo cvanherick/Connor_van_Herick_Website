@@ -1,7 +1,9 @@
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { Link } from 'react-scroll'
 
-const Footer = () => {
+interface FooterProps { mode?: 'explore' | 'recruiter' }
+
+const Footer = ({ mode = 'explore' }: FooterProps) => {
   return (
     <footer className="bg-primary/80 border-t border-cream/10 py-16 px-6">
       <div className="max-w-6xl mx-auto">
@@ -18,30 +20,22 @@ const Footer = () => {
           <div className="text-center">
             <h4 className="text-lg font-bold text-slate-200 mb-6">Links</h4>
             <div className="space-y-3">
-              <Link to="about" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
-                About
-              </Link>
-              <Link to="coursework" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
-                Coursework
-              </Link>
+              {mode === 'explore' && <Link to="about" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">About</Link>}
+              {mode === 'explore' && <Link to="coursework" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">Coursework</Link>}
               <Link to="experience" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 Experience
               </Link>
               <Link to="projects" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 Projects
               </Link>
-              <Link to="skills" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
-                Skills
-              </Link>
-              <Link to="building" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
-                Currently
-              </Link>
+              <Link to="skills" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">Skills</Link>
+              {mode === 'explore' && <Link to="building" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">Currently</Link>}
               <Link to="contact" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
                 Contact
               </Link>
-              <a href="./outside-work/" className="block text-cream/60 transition-colors hover:text-accent">
+              {mode === 'explore' && <a href="./outside-work/" className="block text-cream/60 transition-colors hover:text-accent">
                 Outside of work
-              </a>
+              </a>}
             </div>
           </div>
 
