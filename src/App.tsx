@@ -44,14 +44,11 @@ function App() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-primary">
       <a href="#main-content" className="skip-link">Skip to content</a>
-      <div role="status" className="relative z-[60] flex min-h-10 items-center justify-center bg-secondary px-4 py-2 text-center text-xs font-bold text-primary md:text-sm">
-        This website is a work in progress and under development — excuse any mess.
-      </div>
-      <div className="skills-marquee" aria-label="Skills and focus areas: 73M plus financial records, uplift modeling, ROS 2 robotics, XGBoost and LightGBM, computer vision, Databricks pipelines, and multi-agent systems">
+      <div className="skills-marquee" aria-label="Skills and focus areas: decision systems, uplift modeling, ROS 2 robotics, gradient boosting, computer vision, Databricks pipelines, and multi-agent systems">
         <div className="skills-marquee__viewport">
           <div className="skills-marquee__track" aria-hidden="true">
             {[0, 1].map(copy => <div className="skills-marquee__group" key={copy}>
-              {['73M+ financial records', 'uplift modeling', 'ROS 2 robotics', 'XGBoost + LightGBM', 'computer vision', 'Databricks pipelines', 'multi-agent systems'].map(skill => <span className="skills-marquee__item" key={`${copy}-${skill}`}>{skill}<span className="skills-marquee__separator">·</span></span>)}
+              {['decision systems', 'uplift modeling', 'ROS 2 robotics', 'XGBoost + LightGBM', 'computer vision', 'Databricks pipelines', 'multi-agent systems'].map(skill => <span className="skills-marquee__item" key={`${copy}-${skill}`}>{skill}<span className="skills-marquee__separator">·</span></span>)}
             </div>)}
           </div>
         </div>
@@ -63,10 +60,10 @@ function App() {
         <Experience />
         <Projects />
         {mode === 'explore' && <><WhatImBuilding /><About /></>}
-        <Skills />
-        <Coursework />
+        <Skills mode={mode} />
+        {mode === 'explore' && <Coursework />}
         <Contact /></main>
-        <Footer />
+        <Footer mode={mode} />
       </div>
     </div>
   )
