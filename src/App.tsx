@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import ConnectPrompt from './components/ConnectPrompt'
 import About from './components/About'
 import Coursework from './components/Coursework'
 import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import Skills from './components/Skills'
 import WhatImBuilding from './components/WhatImBuilding'
 import ArchivePage from './components/ArchivePage'
 import OutsideWorkPage from './components/OutsideWorkPage'
@@ -59,9 +57,7 @@ function App() {
         <main id="main-content"><Hero />
         <Experience mode={mode} />
         <Projects />
-        <ConnectPrompt />
         {mode === 'explore' && <><WhatImBuilding /><About /></>}
-        <Skills mode={mode} />
         {mode === 'explore' && <Coursework />}
         <Contact /></main>
         <Footer mode={mode} />
