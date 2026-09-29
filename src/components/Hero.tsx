@@ -12,8 +12,9 @@ const Hero = () => {
             ML / AI Systems / Software Engineering
           </div>
           <h1 id="hero-title" className="max-w-4xl text-6xl font-semibold tracking-[-0.07em] text-cream md:text-8xl">Connor<br className="hidden md:block" /> van Herick</h1>
-          <p className="mt-5 text-base font-medium text-cream/65 md:text-lg">UC Berkeley · Computer Science + Data Science · Graduating Spring 2027</p>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-cream/80 md:text-xl">I build reliable machine learning, data, and robotics systems that turn messy inputs into useful decisions.</p>
+          <p className="mt-5 text-base font-medium text-cream/65 md:text-lg">UC Berkeley · Computer Science + Data Science</p>
+          <p className="mt-2 text-sm font-semibold uppercase tracking-[0.16em] text-secondary">Graduating Spring 2027</p>
+          <p className="mt-7 max-w-2xl border-l-2 border-accent/50 pl-5 text-lg font-semibold leading-relaxed text-cream/85 md:text-xl">I build reliable machine learning, data, and robotics systems that turn messy inputs into useful decisions.</p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a href="./Connor_van_Herick_Resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-primary inline-flex items-center gap-2">View Resume <ArrowUpRight size={17} /></a>
