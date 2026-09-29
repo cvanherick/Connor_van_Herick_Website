@@ -55,7 +55,7 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
             smooth={true}
             duration={500}
           >
-            CV
+            Connor
           </Link>
 
           {/* Desktop menu */}
@@ -90,7 +90,7 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
               {theme === 'dark' ? 'Light mode' : 'Dark mode'}
             </button>
             <div role="radiogroup" aria-label="Portfolio view" className="ml-2 inline-flex rounded-xl border border-cream/10 bg-cream/5 p-1">
-              {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" role="radio" aria-checked={mode === option} onClick={() => mode !== option && onToggleMode()} className={`rounded-lg px-3 py-1.5 text-xs font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
+              {(['explore', 'recruiter'] as const).map(option => <label key={option} className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}><input className="sr-only" type="radio" name="portfolio-view-desktop" value={option} checked={mode === option} onChange={() => mode !== option && onToggleMode()} />{option}</label>)}
             </div>
             <a 
               href="https://www.linkedin.com/in/connor-vanherick/" 
@@ -106,7 +106,7 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
           {/* Compact controls stay visible on smaller screens so the two views are discoverable. */}
           <div className="flex items-center gap-2 xl:hidden">
             <div role="radiogroup" aria-label="Portfolio view" className="inline-flex rounded-xl border border-cream/10 bg-cream/5 p-1">
-              {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" role="radio" aria-checked={mode === option} onClick={() => mode !== option && onToggleMode()} className={`rounded-lg px-2 py-1 text-[11px] font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
+              {(['explore', 'recruiter'] as const).map(option => <label key={option} className={`cursor-pointer rounded-lg px-2 py-1 text-[11px] font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}><input className="sr-only" type="radio" name="portfolio-view-compact" value={option} checked={mode === option} onChange={() => mode !== option && onToggleMode()} />{option}</label>)}
             </div>
             <button
               type="button"
@@ -158,7 +158,7 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
                 {theme === 'dark' ? 'Light mode' : 'Dark mode'}
               </button>
               <div role="radiogroup" aria-label="Portfolio view" className="flex rounded-xl border border-cream/10 bg-cream/5 p-1">
-                {(['explore', 'recruiter'] as const).map(option => <button key={option} type="button" role="radio" aria-checked={mode === option} onClick={() => mode !== option && onToggleMode()} className={`flex-1 rounded-lg px-3 py-2 text-sm font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}>{option}</button>)}
+                {(['explore', 'recruiter'] as const).map(option => <label key={option} className={`flex-1 cursor-pointer rounded-lg px-3 py-2 text-center text-sm font-bold capitalize transition-colors ${mode === option ? 'bg-accent text-primary' : 'text-cream/60 hover:text-cream'}`}><input className="sr-only" type="radio" name="portfolio-view-mobile" value={option} checked={mode === option} onChange={() => mode !== option && onToggleMode()} />{option}</label>)}
               </div>
               <a 
                 href="https://www.linkedin.com/in/connor-vanherick/" 
