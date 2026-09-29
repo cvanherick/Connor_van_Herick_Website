@@ -126,6 +126,13 @@ html[data-theme='light'] .hero-panel {
   background-image: linear-gradient(rgba(109,40,217,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(109,40,217,.08) 1px, transparent 1px);
 }
 
+html[data-theme='light'] .site-name,
+html[data-theme='light'] #hero-title {
+  background-image: none;
+  color: #2b2150;
+  -webkit-text-fill-color: #2b2150;
+}
+
 html[data-theme='light'] .btn-primary { color: #ffffff; }
 
 @media (max-width: 767px) {
