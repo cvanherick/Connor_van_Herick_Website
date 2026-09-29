@@ -29,6 +29,11 @@ function App() {
   useEffect(() => {
     document.documentElement.dataset.mode = mode
     localStorage.setItem('portfolio-view-mode', mode)
+    const params = new URLSearchParams(window.location.search)
+    if (mode === 'recruiter') params.set('mode', 'recruiter')
+    else params.delete('mode')
+    const query = params.toString()
+    window.history.replaceState(null, '', `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`)
   }, [mode])
 
   if (pathname.includes('/experience')) return <ArchivePage kind="experience" />
