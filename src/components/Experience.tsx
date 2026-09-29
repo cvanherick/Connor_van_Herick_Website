@@ -107,10 +107,11 @@ export const experiences: ExperienceItem[] = [
 
 interface ExperienceProps {
   archive?: boolean
+  mode?: 'explore' | 'recruiter'
 }
 
-const Experience = ({ archive = false }: ExperienceProps) => {
-  const visibleExperiences = archive ? experiences : experiences.slice(0, 4)
+const Experience = ({ archive = false, mode = 'explore' }: ExperienceProps) => {
+  const visibleExperiences = archive ? experiences : experiences.slice(0, mode === 'recruiter' ? 3 : 4)
 
   return (
     <section id="experience" aria-labelledby="experience-title" className="py-28 px-6">
