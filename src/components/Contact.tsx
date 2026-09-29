@@ -26,7 +26,7 @@ const Contact = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="card p-8 flex items-start gap-4 hover:lift">
+            <div className="card p-8 flex items-start gap-4">
               <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
                 <Mail size={24} className="text-accent" />
               </div>
@@ -38,7 +38,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="card p-8 flex items-start gap-4 hover:lift">
+            <div className="card p-8 flex items-start gap-4">
               <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
                 <MapPin size={24} className="text-accent" />
               </div>
