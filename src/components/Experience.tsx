@@ -33,11 +33,10 @@ export const experiences: ExperienceItem[] = [
     duration: 'Jun 2026 – Aug 2026',
     logo: './assets/happen-bank.png',
     logoAlt: 'Happen Bank white mark on an orange background',
-    caseStudy: './case-studies/happen-bank.html',
     bullets: [
-      'Built a Databricks Next Best Action pipeline for 1–120 DPD borrowers, using PySpark and SQL to predict seven-day payment probability',
-      'Trained a weighted XGBoost S-Learner on 55.6M rows with compliance, eligibility, and capacity guardrails; test AUC reached 0.965',
-      'Estimated a 2.04% holdout charge-off reduction and approximately $20.35M in annualized modeled value, pending randomized live validation',
+      'Built a Databricks Next Best Action pipeline for delinquency-stage outreach using PySpark and SQL',
+      'Trained a weighted tree-based treatment-effect model with compliance, eligibility, and operational capacity guardrails',
+      'Estimated positive offline modeled impact, with randomized live validation identified as the next step',
     ]
   },
   {
@@ -47,13 +46,11 @@ export const experiences: ExperienceItem[] = [
     note: 'Confidential client project',
     logo: './assets/arcteryx-logo.png',
     logoAlt: "Arc'teryx logo",
-    caseStudy: './case-studies/arcteryx.html',
     bullets: [
-      'Led a 9-person team building daily predictive models for retail labor allocation across 80+ North American stores',
-      'Prepared hourly sales and foot-traffic data across stores, local time zones, holidays, and location metadata',
-      'Compared linear regression, XGBoost, Prophet, TensorFlow, and SARIMA(X) models; the final comparison favored the neural network and XGBoost for short-term accuracy',
-    ],
-    caseStudySteps: ['80+ stores', 'Hourly traffic', '5 model families', 'MAE comparison', 'Next steps'],
+      'Led a team on retail traffic forecasting for store staffing across a North American store network',
+      'Prepared hourly sales and foot-traffic data with time-zone, holiday, and location features',
+      'Compared interpretable, tree-based, neural, and time-series approaches and translated results into operational recommendations',
+    ]
   },
   {
     title: 'Data Science Consultant',
@@ -62,13 +59,11 @@ export const experiences: ExperienceItem[] = [
     note: 'Confidential client project',
     logo: './assets/santa-clara-county-seal.svg',
     logoAlt: 'Santa Clara County seal',
-    caseStudy: './case-studies/santa-clara-county.html',
     bullets: [
-      'Reshaped 71,558 raw records and 782 columns into 46,269 episode-level rows with 185 modeling features',
-      'Compared Random Forest, LightGBM, TensorFlow, PyTorch, and ensemble classifiers using CANS mental health assessment data',
-      'Used feature importance and subgroup analysis to connect assessment frequency, program type, agency, and treatment outcomes',
-    ],
-    caseStudySteps: ['46K+ episodes', 'CANS features', '5 model paths', '0.84 test AUC', 'Feature analysis'],
+      'Built episode-level classifiers from de-identified mental health assessment data',
+      'Compared tree-based and neural-network approaches for treatment outcome prediction',
+      'Used model interpretation and subgroup analysis to understand which patterns were associated with outcomes',
+    ]
   },
   {
     title: 'Instructor & Team Lead',
@@ -127,6 +122,15 @@ const Experience = ({ archive = false }: ExperienceProps) => {
           <p className="text-xl text-cream/60 max-w-2xl mx-auto">Applied machine learning, data science, and technical leadership experience.</p>
         </motion.div>
 
+        {!archive && <div className="mb-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" aria-label="Selected focus areas">
+          {[
+            ['Decision', 'systems'],
+            ['Retail', 'forecasting'],
+            ['Public-sector', 'analytics'],
+            ['Team', 'leadership'],
+          ].map(([value, label]) => <div key={label} className="rounded-2xl border border-accent/20 bg-accent/5 px-5 py-4 text-center"><strong className="block text-2xl font-bold text-accent">{value}</strong><span className="text-sm font-semibold text-cream/60">{label}</span></div>)}
+        </div>}
+
         <div className="grid md:grid-cols-2 gap-8">
           {visibleExperiences.map((exp, index) => (
             <motion.div key={exp.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: Math.min(index, 3) * 0.05 }} className="card group overflow-hidden rounded-3xl overflow-clip">
@@ -134,7 +138,7 @@ const Experience = ({ archive = false }: ExperienceProps) => {
               <div className="relative h-44 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden flex items-center justify-center">
                 {exp.logo && (
                   <div className={`h-24 rounded-3xl flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-105 ${exp.company === 'Happen Bank (formerly LendingClub)' ? 'w-40 bg-surface p-3' : 'w-24'} ${exp.company === 'Cal Climbing' ? 'bg-black p-2' : exp.company === 'UC Berkeley School of Law' ? 'bg-white/95 p-2' : exp.company === 'Happen Bank (formerly LendingClub)' ? '' : 'bg-white/95 p-5'}`}>
-                    <img src={exp.logo} alt={exp.logoAlt ?? `${exp.company} logo`} className="h-full w-full object-contain" />
+                    <img src={exp.logo} alt={exp.logoAlt ?? `${exp.company} logo`} loading="lazy" decoding="async" className="h-full w-full object-contain" />
                   </div>
                 )}
                 {!exp.logo && (
@@ -156,7 +160,7 @@ const Experience = ({ archive = false }: ExperienceProps) => {
                   {exp.note && <p className="mt-4 inline-flex rounded-xl border border-accent/30 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">{exp.note}</p>}
                 </div>
                 {exp.caseStudy && <div className="mb-7 grid gap-2 sm:grid-cols-5">
-                  {(exp.caseStudySteps ?? ['73M+ records', 'Feature engineering', 'Uplift models', 'Constraints', 'Decision impact']).map((step, stepIndex) => <div key={step} className="relative rounded-xl border border-cream/10 bg-primary/45 px-3 py-3 text-center text-[11px] font-semibold text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
+                  {(exp.caseStudySteps ?? ['Community', 'Operations', 'Trips', 'Leadership', 'Impact']).map((step, stepIndex) => <div key={step} className="relative rounded-xl border border-cream/10 bg-primary/45 px-3 py-3 text-center text-[11px] font-semibold text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
                 </div>}
                 <ul className="space-y-3 text-cream/70 leading-relaxed">
                   {exp.bullets.map((bullet, bIndex) => <li key={bIndex} className="flex items-start gap-3"><div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" /><span>{bullet}</span></li>)}
