@@ -13,12 +13,14 @@ interface NavbarProps {
 const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+  const [isScrolled, setIsScrolled] = useState(false)
 
   const sections = mode === 'explore' ? ['experience', 'projects', 'building', 'about', 'contact'] : ['experience', 'projects', 'contact']
   const sectionLabels: Record<string, string> = { experience: 'Work', building: 'Currently' }
 
   useEffect(() => {
     const handleScroll = () => {
+      setIsScrolled(window.scrollY > 24)
       let current = ''
       sections.forEach(section => {
         const element = document.getElementById(section)
@@ -45,7 +47,7 @@ const Navbar = ({ theme, onToggleTheme, mode, onToggleMode }: NavbarProps) => {
   }, [mode])
 
   return (
-    <nav aria-label="Primary navigation" className="fixed top-[5.5rem] w-full z-50 bg-primary/85 backdrop-blur-2xl border-b border-cream/10 shadow-2xl shadow-black/20">
+    <nav aria-label="Primary navigation" className={`fixed ${isScrolled ? 'top-0' : 'top-12'} w-full z-50 bg-primary/90 backdrop-blur-2xl border-b border-cream/10 shadow-2xl shadow-black/20 transition-[top] duration-300`}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex justify-between items-center py-5">
           <Link 
