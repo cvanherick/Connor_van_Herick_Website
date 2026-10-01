@@ -4,6 +4,7 @@ export interface Project {
   tech: string[];
   impact: string;
   course?: string;
+  courseUrl?: string;
   github?: string;
   demo?: string;
   logo?: string;

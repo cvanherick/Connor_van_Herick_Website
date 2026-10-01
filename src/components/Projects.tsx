@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Bot, Cpu, ExternalLink, Gamepad2, Github, LockKeyhole, Map, Network, Search, Shield, TrendingUp, Users, Play } from 'lucide-react'
+import { ExternalLink, Github, LockKeyhole, Play } from 'lucide-react'
 import { Project } from '../types'
 import CadreSimulation from './CadreSimulation'
+import ProjectArtwork from './ProjectArtwork'
 
 export const projects: Project[] = [
   {
@@ -11,7 +12,8 @@ export const projects: Project[] = [
     tech: ['Python', 'ROS 2', 'MoveIt 2', 'RealSense', 'NumPy'],
     impact: 'End-to-end hardware pipeline • Perception, planning, control',
     course: 'EECS C106A · Spring 2026',
-    demo: 'https://sites.google.com/berkeley.edu/blokushumanvsrobot/intro?authuser=0',
+    courseUrl: 'https://www2.eecs.berkeley.edu/Courses/EECSC106A/',
+    demo: 'https://sites.google.com/berkeley.edu/blokushumanvsrobot/results',
   },
   {
     title: 'Cadre Agent Team Framework',
@@ -21,11 +23,12 @@ export const projects: Project[] = [
     demo: './case-studies/cadre.html',
   },
   {
-    title: 'CS 180 Computer Vision Projects',
-    description: 'Portfolio of my UC Berkeley CS 180 computer vision work, including a dedicated Project 1 write-up with implementation details and results.',
-    tech: ['Computer Vision', 'Python', 'Image Processing'],
-    impact: 'Fall 2026 coursework • Project write-up and results',
+    title: 'CS 180 Color Reconstruction',
+    description: 'Reconstructed color photographs from stacked Prokudin-Gorskii glass plates by aligning RGB channels with a coarse-to-fine image pyramid.',
+    tech: ['Python', 'Computer Vision', 'Image Pyramids', 'Normalized Cross-Correlation'],
+    impact: 'Project 1 • Raw-pixel and edge-based alignment, with an interactive demo',
     course: 'CS 180 · Fall 2026',
+    courseUrl: 'https://www2.eecs.berkeley.edu/Courses/CS180/',
     demo: 'https://cvanherick.github.io/Connor_van_Herick_CS180/projects/project1/',
   },
   {
@@ -36,6 +39,7 @@ export const projects: Project[] = [
     demo: './case-studies/ngordnet.html',
     accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
     course: 'CS 61B · Fall 2024',
+    courseUrl: 'https://fa24.datastructur.es/projects/proj2b/',
   },
   {
     title: 'Build Your Own World',
@@ -45,6 +49,7 @@ export const projects: Project[] = [
     demo: './case-studies/byow.html',
     accessNote: 'Original Java code can be shared directly; recruiter run guide included.',
     course: 'CS 61B · Fall 2024',
+    courseUrl: 'https://fa24.datastructur.es/projects/proj3/',
   },
   {
     title: 'Snek Game Engine',
@@ -54,6 +59,7 @@ export const projects: Project[] = [
     demo: './case-studies/snek.html',
     accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
     course: 'CS 61C · Fall 2025',
+    courseUrl: 'https://www-inst.eecs.berkeley.edu/~cs61c/fa25/',
   },
   {
     title: 'CS61Classify',
@@ -63,13 +69,15 @@ export const projects: Project[] = [
     demo: './case-studies/cs61classify.html',
     accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
     course: 'CS 61C · Fall 2025',
+    courseUrl: 'https://www-inst.eecs.berkeley.edu/~cs61c/fa25/',
   },
   {
     title: 'Secure File Sharing System',
     description: 'Built a secure Go system for authenticated users, encrypted file storage, append operations, invitation-based sharing, and hierarchical access revocation.',
     tech: ['Go', 'Cryptography', 'System Design', 'Access Control', 'Testing'],
-    impact: '50+ adversarial tests • Tamper detection + recursive revocation',
+    impact: 'Adversarial testing • Tamper detection + recursive revocation',
     course: 'CS 161 · Spring 2026',
+    courseUrl: 'https://sp26.cs161.org/proj2/',
   },
   {
     title: 'Performance Attribution Dashboard',
@@ -79,10 +87,11 @@ export const projects: Project[] = [
   },
   {
     title: 'RISC-V CPU Design',
-    description: 'Designed a functional 32-register RISC-V CPU capable of executing arithmetic, memory, and control instructions with a 3-stage pipeline.',
-    tech: ['C', 'Verilog', 'Logisim', 'RISC-V'],
-    impact: 'Pipeline hazards handled with forwarding + branch control logic',
+    description: 'Built a RISC-V CPU in Logisim Evolution with a register file, ALU, instruction decode, memory access, and branch control.',
+    tech: ['Logisim Evolution', 'RISC-V', 'Digital Logic', 'Assembly Testing'],
+    impact: 'Pipelined datapath • Verified against Venus traces and custom assembly tests',
     course: 'CS 61C · Fall 2025',
+    courseUrl: 'https://www-inst.eecs.berkeley.edu/~cs61c/fa25/',
     demo: './case-studies/riscv-cpu.html',
     accessNote: 'Code private for academic integrity; shareable on request where appropriate.',
   },
@@ -92,14 +101,16 @@ export const projects: Project[] = [
     tech: ['Python', 'Interpreters', 'Functional Programming', 'Recursion'],
     impact: 'Language runtime • Environments, evaluation, and macros',
     course: 'CS 61A · Spring 2024',
+    courseUrl: 'https://www-inst.eecs.berkeley.edu/~cs61a/sp24/proj/scheme/',
     accessNote: 'Coursework project; code private for academic integrity.',
   },
   {
     title: '2048 Game',
-    description: 'Implemented the core game logic for a playable Java version of 2048, including board movement, tile merging, scoring, and game state updates.',
+    description: 'Implemented the Java game logic for 2048—tilts, merges, scoring, and end-state detection—within the course-provided interface.',
     tech: ['Java', 'Object-Oriented Design', 'Testing', 'Game Logic'],
     impact: 'Foundational Java project • Deterministic state transitions',
     course: 'CS 61B · Fall 2024',
+    courseUrl: 'https://fa24.datastructur.es/projects/proj0/',
     accessNote: 'Coursework project; code private for academic integrity.',
   },
   {
@@ -115,7 +126,7 @@ const relevanceOrder = [
   'Cadre Agent Team Framework',
   'Vision-Guided Robotic Game Player',
   'Secure File Sharing System',
-  'CS 180 Computer Vision Projects',
+  'CS 180 Color Reconstruction',
   'RISC-V CPU Design',
   'CS61Classify',
   'Performance Attribution Dashboard',
@@ -134,21 +145,8 @@ const projectCategory = (title: string) => {
   if (title.includes('Robotic') || title.includes('CS 180')) return 'Robotics/CV'
   if (title.includes('Secure') || title.includes('RISC-V') || title.includes('Snek') || title.includes('Ngordnet') || title.includes('World') || title.includes('2048')) return 'Systems'
   if (title.includes('Classify') || title.includes('Cadre')) return 'ML/AI'
-  if (title.includes('Attribution')) return 'Data'
+  if (title.includes('Attribution') || title.includes('Cook County')) return 'Data'
   return 'Coursework'
-}
-
-const projectIcon = (title: string) => {
-  if (title.includes('Robotic')) return Bot
-  if (title.includes('Cadre')) return Users
-  if (title.includes('Ngordnet')) return Search
-  if (title.includes('World')) return Map
-  if (title.includes('Snek')) return Gamepad2
-  if (title.includes('CS61Classify')) return Cpu
-  if (title.includes('Secure')) return Shield
-  if (title.includes('RISC-V')) return Cpu
-  if (title.includes('Attribution')) return TrendingUp
-  return Network
 }
 
 interface ProjectsProps {
@@ -185,8 +183,6 @@ const Projects = ({ archive = false }: ProjectsProps) => {
         <div className="grid gap-5 md:grid-cols-2">
           {visibleProjects.map((project, index) => (
             (() => {
-              const Icon = projectIcon(project.title)
-
               return (
                 <motion.div
                   key={project.title}
@@ -196,36 +192,10 @@ const Projects = ({ archive = false }: ProjectsProps) => {
                   transition={{ duration: 0.45, delay: Math.min(index, 5) * 0.05 }}
                   className={`group overflow-hidden rounded-2xl border border-cream/10 bg-surface/65 transition-colors hover:border-accent/35 ${index === 0 ? 'md:col-span-2' : ''}`}
                 >
-                  <div className="relative flex h-36 items-center justify-center overflow-hidden border-b border-cream/10 bg-primary/35 md:h-40">
-                    {project.title === 'Cadre Agent Team Framework' && <div className="flex w-full max-w-lg items-center gap-2 px-5" aria-hidden="true">
-                      {['Goal', '10 teams', 'Integrator', 'Human'].map((step, stepIndex) => <div key={step} className="flex min-w-0 flex-1 items-center gap-2"><div className={`flex h-14 min-w-0 flex-1 items-center justify-center rounded-lg border px-1 text-center text-[9px] font-bold uppercase tracking-[0.08em] ${stepIndex === 1 ? 'border-accent/40 bg-accent/10 text-accent' : 'border-cream/15 text-cream/55'}`}>{step}</div>{stepIndex < 3 && <span className="h-px w-2 shrink-0 bg-accent/30" />}</div>)}
-                    </div>}
-                    {project.title === 'Vision-Guided Robotic Game Player' && <div className="grid w-full max-w-sm grid-cols-3 gap-2 px-5" aria-hidden="true">
-                      {['Perceive', 'Plan', 'Place'].map((step, stepIndex) => <div key={step} className="rounded-lg border border-cream/10 px-3 py-4 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
-                    </div>}
-                    {project.title === 'Secure File Sharing System' && <div className="grid w-full max-w-sm grid-cols-3 gap-2 px-5" aria-hidden="true">
-                      {['Authenticate', 'Encrypt', 'Revoke'].map((step, stepIndex) => <div key={step} className="rounded-lg border border-cream/10 px-3 py-4 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
-                    </div>}
-                    {!['Cadre Agent Team Framework', 'Vision-Guided Robotic Game Player', 'Secure File Sharing System'].includes(project.title) && <>
-                    {project.logo && (
-                      <img
-                        src={project.logo}
-                        alt={project.logoAlt ?? `${project.title} logo`}
-                        loading="lazy"
-                        decoding="async"
-                        className="h-16 w-16 object-contain opacity-80 transition-opacity duration-300 group-hover:opacity-100"
-                      />
-                    )}
-                    {!project.logo && (
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 text-accent">
-                        <Icon size={22} />
-                      </div>
-                    )}
-                    </>}
-                  </div>
+                  <ProjectArtwork title={project.title} />
 
                   <div className="relative z-10 p-6 md:p-7">
-                    {project.course && <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.16em] text-secondary">{project.course}</p>}
+                    {project.course && <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.16em] text-secondary">{project.courseUrl ? <a href={project.courseUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-secondary/30 underline-offset-4 hover:decoration-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" aria-label={`${project.course} course or assignment page (opens in a new tab)`}>{project.course} ↗</a> : project.course}</p>}
                     <h3 className="mb-4 text-2xl font-semibold tracking-[-0.03em] text-cream transition-colors duration-200 group-hover:text-accent">
                       {project.title}
                     </h3>
