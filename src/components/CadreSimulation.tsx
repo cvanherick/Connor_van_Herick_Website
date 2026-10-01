@@ -1,18 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import {
-  Check,
-  CircleDot,
-  ClipboardCheck,
-  GitBranch,
-  Layers,
-  PackageCheck,
-  Play,
-  RotateCcw,
-  ShieldCheck,
-  Sparkles,
-  Users,
-  X,
-} from 'lucide-react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { ArrowRight, CirclePause, GitMerge, Play, RotateCcw, Users, X } from 'lucide-react'
 
 export interface CadreSimulationResult {
   artifactCount: number
@@ -28,211 +15,177 @@ export interface CadreSimulationProps {
   onClose?: () => void
 }
 
-type SimulationStatus = 'idle' | 'running' | 'complete'
+type Status = 'idle' | 'running' | 'complete'
 
-type CadreStage = {
-  id: string
-  number: string
-  name: string
-  purpose: string
-  artifact: string
-  agents: string[]
-  gate: string
-  tone: string
+type Team = {
+  role: string
+  shortName: string
+  handoff: string
+  focus: string
 }
 
-// Mirrors Cadre's product-development workflow: sequential gates, parallel
-// specialists inside each stage, and an explicit human-readable artifact handoff.
-const stages: CadreStage[] = [
-  {
-    id: 'discovery',
-    number: '01',
-    name: 'Discovery',
-    purpose: 'Frame the opportunity and user context',
-    artifact: 'Problem frame',
-    agents: ['Product Owner', 'Market Research', 'User Research', 'Enterprise Customer', 'Indie Developer', 'UX Designer'],
-    gate: 'Shared opportunity brief',
-    tone: 'border-sky-400/40 bg-sky-400/10 text-sky-300',
-  },
-  {
-    id: 'requirements',
-    number: '02',
-    name: 'Requirements',
-    purpose: 'Turn the brief into testable acceptance criteria',
-    artifact: 'Ready specification',
-    agents: ['Product Owner', 'Technical Writer', 'User Research', 'QA Engineer', 'Delivery Manager'],
-    gate: 'Ticket-readiness check',
-    tone: 'border-cyan-400/40 bg-cyan-400/10 text-cyan-300',
-  },
-  {
-    id: 'architecture',
-    number: '03',
-    name: 'Architecture',
-    purpose: 'Choose a reliable path through constraints and dependencies',
-    artifact: 'Technical plan',
-    agents: ['Technical Architect', 'ML Engineer', 'Data Platform', 'SRE / Platform', 'Database Engineer'],
-    gate: 'Architecture decision record',
-    tone: 'border-indigo-400/40 bg-indigo-400/10 text-indigo-300',
-  },
-  {
-    id: 'design',
-    number: '04',
-    name: 'Design',
-    purpose: 'Shape the experience around the accepted plan',
-    artifact: 'Interaction model',
-    agents: ['UX Designer', 'Product Owner'],
-    gate: 'Design direction approved',
-    tone: 'border-violet-400/40 bg-violet-400/10 text-violet-300',
-  },
-  {
-    id: 'implementation',
-    number: '05',
-    name: 'Implementation',
-    purpose: 'Build independent work packets in parallel',
-    artifact: 'Working increment',
-    agents: ['Backend Engineer', 'Frontend Engineer', 'AI Dev Expert', 'ML Engineer', 'TypeScript Engineer', 'Systems Engineer'],
-    gate: 'Integrated change set',
-    tone: 'border-amber-400/50 bg-amber-400/10 text-amber-300',
-  },
-  {
-    id: 'review',
-    number: '06',
-    name: 'Review',
-    purpose: 'Challenge correctness, safety, delivery, and quality',
-    artifact: 'Review findings',
-    agents: ['Security Engineer', 'DevOps Engineer', 'AI Dev Expert', 'QA Engineer', 'Technical Writer'],
-    gate: 'No open high-severity findings',
-    tone: 'border-rose-400/50 bg-rose-400/10 text-rose-300',
-  },
-  {
-    id: 'validation',
-    number: '07',
-    name: 'Validation',
-    purpose: 'Confirm the result solves the original problem',
-    artifact: 'Validated outcome',
-    agents: ['Enterprise Customer', 'Indie Developer', 'Product Owner'],
-    gate: 'Acceptance criteria met',
-    tone: 'border-fuchsia-400/40 bg-fuchsia-400/10 text-fuchsia-300',
-  },
-  {
-    id: 'retrospective',
-    number: '08',
-    name: 'Retrospective',
-    purpose: 'Learn from the iteration and improve the system',
-    artifact: 'Action backlog',
-    agents: ['Engineering Coach', 'Product Owner', 'Delivery Manager'],
-    gate: 'Next actions recorded',
-    tone: 'border-emerald-400/50 bg-emerald-400/10 text-emerald-300',
-  },
+// Mirrors CADRE_ROLES in tools/openai_cadre_runtime.py. The text below is
+// illustrative; the portfolio simulation never calls a model or runs a task.
+const teams: Team[] = [
+  { role: 'Product Lead', shortName: 'Product', handoff: 'Opportunity brief', focus: 'Scope, user value, and acceptance criteria' },
+  { role: 'Research Lead', shortName: 'Research', handoff: 'Evidence memo', focus: 'Sources, assumptions, and open questions' },
+  { role: 'Architecture Lead', shortName: 'Architecture', handoff: 'System plan', focus: 'Interfaces, constraints, and tradeoffs' },
+  { role: 'Design Lead', shortName: 'Design', handoff: 'Experience direction', focus: 'Interaction, accessibility, and clarity' },
+  { role: 'Plan / Delivery Lead', shortName: 'Delivery', handoff: 'Work plan', focus: 'Dependencies, sequencing, and ownership' },
+  { role: 'Builder A', shortName: 'Builder A', handoff: 'Implementation A', focus: 'First independent build path' },
+  { role: 'Builder B', shortName: 'Builder B', handoff: 'Implementation B', focus: 'Second independent build path' },
+  { role: 'Critic', shortName: 'Critic', handoff: 'Challenge memo', focus: 'Weak assumptions and alternative approaches' },
+  { role: 'QA', shortName: 'QA', handoff: 'Validation notes', focus: 'Checks, edge cases, and failure modes' },
+  { role: 'Integrator', shortName: 'Integrator', handoff: 'Integration notes', focus: 'Dependencies and final synthesis' },
 ]
 
-const CadreSimulation = ({ open = true, className = '', autoStart = false, onComplete, onClose }: CadreSimulationProps) => {
-  const [status, setStatus] = useState<SimulationStatus>('idle')
-  const [activeStage, setActiveStage] = useState(-1)
+const phases = [
+  { label: 'Frame', detail: 'Goal and constraints are packaged into a shared brief.' },
+  { label: 'Dispatch', detail: 'The first five role teams begin in parallel.' },
+  { label: 'Parallel work', detail: 'A second wave starts as capacity opens; workers propose independently.' },
+  { label: 'Peer debate', detail: 'Workers compare reports and challenge one another.' },
+  { label: 'Team handoffs', detail: 'Each team lead reconciles its worker reports into one handoff.' },
+  { label: 'Integrate', detail: 'The integrator combines ten handoffs into a reviewable result.' },
+  { label: 'Human review', detail: 'The result awaits a person to approve, revise, or redirect.' },
+] as const
 
-  const completedStages = status === 'complete' ? stages.length : Math.max(0, activeStage)
-  const artifactCount = stages.slice(0, Math.max(0, activeStage + 1)).length
-  const checkpointCount = stages.slice(0, Math.max(0, activeStage + 1)).filter((stage) => stage.id === 'review' || stage.id === 'validation').length
+const activity = [
+  'Shared brief prepared',
+  'Five role teams dispatched',
+  'Remaining teams start as capacity opens',
+  'Peer critiques exchanged',
+  'Ten team handoffs prepared',
+  'Integrated result assembled',
+  'Human decision requested',
+]
+
+const workerLabels = ['Worker 01', 'Worker 02', 'Worker 03']
+const perspectives = [
+  { name: 'Analyst', focus: 'Evidence' },
+  { name: 'Skeptic', focus: 'Risks' },
+  { name: 'Alternative', focus: 'Other path' },
+] as const
+
+const CadreSimulation = ({ open = true, className = '', autoStart = false, onComplete, onClose }: CadreSimulationProps) => {
+  const [status, setStatus] = useState<Status>('idle')
+  const [phase, setPhase] = useState(0)
+  const [selectedTeam, setSelectedTeam] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const completedRun = useRef(false)
 
   const runSimulation = useCallback(() => {
-    setActiveStage(-1)
+    completedRun.current = false
+    setPhase(0)
+    setPaused(false)
     setStatus('running')
   }, [])
 
   useEffect(() => {
-    if (autoStart) runSimulation()
-  }, [autoStart, runSimulation])
+    if (open && autoStart) runSimulation()
+  }, [autoStart, open, runSimulation])
 
   useEffect(() => {
-    if (status !== 'running') return undefined
+    if (!open || status !== 'running' || paused) return undefined
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const timer = window.setTimeout(() => {
+      if (phase === phases.length - 1) {
+        setStatus('complete')
+      } else {
+        setPhase(current => current + 1)
+      }
+    }, reducedMotion ? 120 : 950)
+    return () => window.clearTimeout(timer)
+  }, [open, paused, phase, status])
 
-    const timer = window.setInterval(() => {
-      setActiveStage((current) => {
-        const next = current + 1
-        if (next >= stages.length) {
-          setStatus('complete')
-          onComplete?.({ artifactCount: stages.length, checkpointCount: 2, completedAt: Date.now() })
-          return stages.length - 1
-        }
-        return next
-      })
-    }, 850)
-
-    return () => window.clearInterval(timer)
+  useEffect(() => {
+    if (status === 'complete' && !completedRun.current) {
+      completedRun.current = true
+      onComplete?.({ artifactCount: teams.length + 1, checkpointCount: 1, completedAt: Date.now() })
+    }
   }, [onComplete, status])
-
-  const statusLabel = useMemo(() => {
-    if (status === 'idle') return 'Ready to dispatch a Cadre team'
-    if (status === 'complete') return 'Iteration complete — ready for human review'
-    return `${stages[activeStage]?.name ?? 'Dispatch'} stage in progress`
-  }, [activeStage, status])
 
   if (!open) return null
 
+  const selected = teams[selectedTeam]
+  const activePhase = status === 'idle' ? -1 : phase
+  const teamState = (index: number) => {
+    if (activePhase < 1) return 'queued'
+    if (activePhase === 1) return index < 5 ? 'working' : 'queued'
+    if (activePhase === 2) return index < 5 ? 'ready' : 'working'
+    if (activePhase === 3) return 'debating'
+    if (activePhase === 4) return 'handoff'
+    return 'ready'
+  }
+
   return (
-    <section aria-labelledby="cadre-simulation-title" className={`rounded-3xl border border-cream/10 bg-surface/70 p-5 shadow-2xl shadow-black/20 backdrop-blur-sm md:p-8 ${className}`}>
-      <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-        <div className="min-w-0">
-          <p className="section-kicker mb-3">Cadre workflow simulation</p>
-          <h2 id="cadre-simulation-title" className="text-2xl font-semibold text-cream md:text-3xl">One orchestrator. Eight gates. Many specialists in parallel.</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-cream/60 md:text-base">Cadre turns a goal into inspectable work packets, routes each stage through the right specialists, and keeps review and human control explicit before delivery.</p>
+    <section id="cadre-simulation" aria-labelledby="cadre-simulation-title" className={`cadre-simulation mt-8 overflow-hidden rounded-2xl border border-cream/10 bg-primary ${className}`}>
+      <div className="border-b border-cream/10 px-5 py-6 md:px-7">
+        <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+          <div className="max-w-2xl">
+            <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.18em] text-accent">Cadre / interactive model</p>
+            <h2 id="cadre-simulation-title" className="text-2xl font-semibold tracking-[-0.04em] text-cream md:text-[1.75rem]">A team of teams, in motion.</h2>
+            <p className="mt-2 text-sm leading-relaxed text-cream/65">Watch a sample goal pass through independent workers, peer debate, team leads, and a final human checkpoint.</p>
+          </div>
+          <div className="flex shrink-0 items-center gap-2">
+            <button type="button" onClick={runSimulation} className="btn btn-primary gap-2 text-sm" aria-label={status === 'idle' ? 'Run Cadre simulation' : 'Replay Cadre simulation'}>
+              {status === 'idle' ? <Play size={15} fill="currentColor" aria-hidden="true" /> : <RotateCcw size={15} aria-hidden="true" />}
+              {status === 'idle' ? 'Run simulation' : 'Replay'}
+            </button>
+            {status === 'running' && <button type="button" onClick={() => setPaused(current => !current)} className="btn btn-secondary gap-2 px-3 text-sm" aria-label={paused ? 'Resume simulation' : 'Pause simulation'}>{paused ? <Play size={15} aria-hidden="true" /> : <CirclePause size={15} aria-hidden="true" />}<span className="hidden sm:inline">{paused ? 'Resume' : 'Pause'}</span></button>}
+            {onClose && <button type="button" onClick={onClose} className="btn btn-secondary px-3" aria-label="Close Cadre simulation"><X size={16} aria-hidden="true" /></button>}
+          </div>
         </div>
-        <div className="flex shrink-0 flex-wrap gap-2">
-          <button type="button" onClick={runSimulation} aria-label={status === 'running' ? 'Restart Cadre simulation' : 'Run Cadre simulation'} className="btn btn-primary gap-2">
-            {status === 'running' ? <RotateCcw size={17} aria-hidden="true" /> : <Play size={17} fill="currentColor" aria-hidden="true" />}
-            {status === 'running' ? 'Restart simulation' : 'Run simulation'}
-          </button>
-          {onClose && <button type="button" onClick={onClose} aria-label="Close Cadre simulation" className="btn btn-secondary px-4"><X size={17} aria-hidden="true" /></button>}
-        </div>
-      </div>
-
-      <div className="mb-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-cream/55" aria-live="polite">
-        <span className="inline-flex items-center gap-2"><CircleDot size={14} className={status === 'running' ? 'animate-pulse text-accent' : 'text-cream/40'} aria-hidden="true" />{statusLabel}</span>
-        <span>{completedStages} of {stages.length} stages complete</span>
-        <span>{checkpointCount} review gates passed</span>
-        <span>{artifactCount} artifacts handed off</span>
-      </div>
-
-      <div className="relative overflow-hidden rounded-2xl border border-cream/10 bg-primary/45 p-3 md:p-5">
-        <div className="pointer-events-none absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(248,250,244,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(248,250,244,.04)_1px,transparent_1px)] [background-size:24px_24px]" />
-
-        <div className="relative mb-5 grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-center">
-          <div className="rounded-xl border border-secondary/50 bg-secondary/10 p-4 text-secondary"><div className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.16em] opacity-75"><ClipboardCheck size={14} /> Input</div><strong className="mt-2 block text-sm text-cream">User goal + constraints</strong><span className="mt-1 block text-xs text-cream/55">Brief, data, tools, success criteria</span></div>
-          <GitBranch className="mx-auto hidden text-accent md:block" size={22} aria-hidden="true" />
-          <div className="rounded-xl border border-accent/50 bg-accent/10 p-4 text-accent"><div className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.16em] opacity-75"><Users size={14} /> Orchestrator</div><strong className="mt-2 block text-sm text-cream">Product Owner</strong><span className="mt-1 block text-xs text-cream/55">Plans, delegates, monitors, and resolves</span></div>
-        </div>
-
-        <div className="relative grid gap-3 lg:grid-cols-2" role="list" aria-label="Cadre workflow stages">
-          {stages.map((stage, index) => {
-            const isComplete = index < activeStage
-            const isActive = index === activeStage && status === 'running'
-            const isWaiting = index > activeStage
-
-            return (
-              <article key={stage.id} role="listitem" className={`rounded-2xl border p-4 transition-all duration-500 ${stage.tone} ${isActive ? 'scale-[1.015] shadow-lg shadow-accent/10' : ''} ${isWaiting ? 'opacity-45 grayscale' : 'opacity-100'}`} aria-label={`${stage.name} stage with ${stage.agents.length} parallel agents. ${isComplete ? 'Complete.' : isActive ? 'Active.' : 'Waiting.'}`}>
-                <div className="flex items-start justify-between gap-3">
-                  <div><div className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.16em] opacity-75"><span>{stage.number}</span>{isComplete ? <Check size={14} aria-hidden="true" /> : isActive ? <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-current" /> : null}</div><h3 className="mt-1 text-base font-semibold text-cream">{stage.name}</h3><p className="mt-1 text-xs leading-relaxed text-cream/55">{stage.purpose}</p></div>
-                  <span className="shrink-0 rounded-full bg-cream/5 px-2 py-1 text-[0.65rem] font-bold text-cream/60">{stage.agents.length} parallel</span>
-                </div>
-
-                <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                  {stage.agents.map((agent) => <div key={agent} className={`rounded-lg border border-cream/10 bg-primary/25 px-2 py-2 text-[0.68rem] leading-tight text-cream/70 transition-all duration-500 ${isActive || isComplete ? 'translate-y-0 opacity-100' : 'translate-y-1 opacity-60'}`}><span className="mb-1 block h-1 w-1 rounded-full bg-current opacity-70" />{agent}</div>)}
-                </div>
-
-                <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-cream/10 pt-3 text-[0.68rem]"><span className="inline-flex items-center gap-1.5 text-cream/55"><Layers size={13} /> {isComplete || isActive ? stage.artifact : 'Awaiting packet'}</span><span className="inline-flex items-center gap-1.5 text-cream/55"><ShieldCheck size={13} /> Gate: {stage.gate}</span></div>
-              </article>
-            )
-          })}
-        </div>
-
-        <div className="relative mt-5 grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-center">
-          <div className="rounded-xl border border-emerald-400/50 bg-emerald-400/10 p-4 text-emerald-300"><div className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.16em] opacity-75"><PackageCheck size={14} /> Output</div><strong className="mt-2 block text-sm text-cream">Delivered result</strong><span className="mt-1 block text-xs text-cream/55">Decision record, artifacts, and next actions</span></div>
-          <GitBranch className="mx-auto hidden rotate-180 text-emerald-300 md:block" size={22} aria-hidden="true" />
-          <div className="rounded-xl border border-cream/10 bg-cream/5 p-4 text-cream/70"><div className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.16em] opacity-75"><ShieldCheck size={14} /> Human control</div><strong className="mt-2 block text-sm text-cream">Review, approve, or redirect</strong><span className="mt-1 block text-xs text-cream/55">Cadre makes the work inspectable; people keep the decision</span></div>
+        <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-t border-cream/10 pt-4 text-xs text-cream/50">
+          <span><strong className="font-semibold text-cream">10</strong> role teams</span>
+          <span><strong className="font-semibold text-cream">3</strong> workers per team</span>
+          <span><strong className="font-semibold text-cream">5</strong> teams concurrently</span>
+          <span>Illustrative run · no live agents</span>
         </div>
       </div>
 
-      <div className="mt-5 flex items-center gap-2 text-xs text-cream/50"><Sparkles size={14} className="text-secondary" aria-hidden="true" /><span>{status === 'complete' ? 'All stage gates passed — the result is ready for human review.' : 'Parallel specialists work inside each stage; gates control when the next stage begins.'}</span></div>
+      <div className="grid gap-0 lg:grid-cols-[minmax(0,1.7fr)_minmax(17rem,.8fr)]">
+        <div className="min-w-0 p-5 md:p-7">
+          <div className="mb-6 flex items-start gap-3 rounded-xl border border-cream/10 bg-surface/40 p-4">
+            <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-accent/30 text-accent"><Users size={16} aria-hidden="true" /></div>
+            <div className="min-w-0"><p className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent">Operator brief</p><p className="mt-1 text-sm font-medium leading-relaxed text-cream/85">Build a reliable feature from a user goal, with clear evidence and review.</p></div>
+          </div>
+
+          <ol className="mb-6 grid grid-cols-4 gap-1.5 sm:grid-cols-7" aria-label="Simulation phases">
+            {phases.map((item, index) => <li key={item.label} className={`min-w-0 border-t-2 pt-2 transition-colors duration-300 ${index < activePhase ? 'border-accent text-cream/70' : index === activePhase ? 'border-accent text-cream' : 'border-cream/15 text-cream/35'}`}><span className="block text-[9px] font-bold tabular-nums">0{index + 1}</span><span className="mt-1 block text-[10px] font-semibold leading-tight">{item.label}</span></li>)}
+          </ol>
+
+          <div className="mb-3 flex items-center justify-between gap-3"><h3 className="text-sm font-semibold text-cream">Role teams</h3><span className="text-xs text-cream/45">Select a team to inspect</span></div>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-5" role="group" aria-label="Cadre role teams">
+            {teams.map((team, index) => {
+              const state = teamState(index)
+              const selectedCard = selectedTeam === index
+              const progressing = state === 'working' || state === 'debating'
+              return <button key={team.role} type="button" onClick={() => setSelectedTeam(index)} aria-pressed={selectedCard} aria-label={`${team.role}: ${state}. Inspect team`} className={`min-h-[7.2rem] rounded-xl border p-3 text-left transition-colors duration-300 ${selectedCard ? 'border-accent/65 bg-accent/10' : progressing ? 'border-accent/30 bg-surface/70' : 'border-cream/10 bg-surface/35 hover:border-cream/30'} `}>
+                <span className="flex items-center justify-between gap-2"><span className="text-[10px] font-semibold tabular-nums text-cream/40">{String(index + 1).padStart(2, '0')}</span><span className={`h-1.5 w-1.5 rounded-full ${progressing ? 'animate-pulse bg-accent' : state === 'ready' || state === 'handoff' ? 'bg-accent' : 'bg-cream/20'}`} aria-hidden="true" /></span>
+                <span className="mt-3 block text-xs font-semibold leading-tight text-cream">{team.shortName}</span>
+                <span className="mt-3 flex gap-1" aria-hidden="true">{workerLabels.map(label => <span key={label} className={`h-1.5 w-5 rounded-full transition-colors duration-300 ${state === 'queued' ? 'bg-cream/10' : 'bg-accent/70'}`} />)}</span>
+                <span className="mt-2 block text-[10px] capitalize text-cream/45">{state === 'working' ? 'Workers active' : state === 'debating' ? 'Peer debate' : state === 'handoff' ? 'Lead handoff' : state === 'ready' ? 'Handoff ready' : 'Queued'}</span>
+              </button>
+            })}
+          </div>
+
+          <div className="mt-5 flex items-center gap-3 border-t border-cream/10 pt-5 text-cream/55"><GitMerge size={17} className={activePhase >= 5 ? 'text-accent' : ''} aria-hidden="true" /><ArrowRight size={15} aria-hidden="true" /><span className={`text-sm font-semibold ${activePhase >= 5 ? 'text-cream' : ''}`}>Final synthesis</span><ArrowRight size={15} aria-hidden="true" /><span className={`text-sm font-semibold ${status === 'complete' ? 'text-accent' : ''}`}>Human review</span></div>
+        </div>
+
+        <aside className="border-t border-cream/10 bg-surface/25 p-5 lg:border-l lg:border-t-0 md:p-7" aria-label="Simulation details">
+          <div className="min-h-[5.5rem] border-b border-cream/10 pb-5" aria-live="polite" aria-atomic="true"><p className="text-[10px] font-bold uppercase tracking-[0.16em] text-accent">{status === 'idle' ? 'Ready' : status === 'complete' ? 'Awaiting a person' : paused ? 'Paused' : `Stage 0${phase + 1} / 07`}</p><p className="mt-2 text-lg font-semibold tracking-[-0.025em] text-cream">{status === 'idle' ? 'Ready to run' : phases[phase].label}</p><p className="mt-1 text-sm leading-relaxed text-cream/60">{status === 'idle' ? 'Press Run simulation to see the handoffs.' : phases[phase].detail}</p></div>
+
+          <div className="border-b border-cream/10 py-5"><p className="text-[10px] font-bold uppercase tracking-[0.16em] text-cream/45">Selected team</p><h3 className="mt-2 text-base font-semibold text-cream">{selected.role}</h3><p className="mt-1 text-sm leading-relaxed text-cream/60">{selected.focus}</p>
+            <div className="mt-4 grid grid-cols-3 gap-1.5" aria-label="Three worker perspectives">
+              {perspectives.map(worker => <div key={worker.name} className={`rounded-lg border px-2 py-2 transition-colors duration-300 ${activePhase >= 3 ? 'border-accent/35 bg-accent/5' : 'border-cream/10'}`}><span className="block text-[10px] font-semibold text-cream/75">{worker.name}</span><span className="mt-1 block text-[10px] text-cream/40">{worker.focus}</span></div>)}
+            </div>
+            <div className="mt-3 flex items-center gap-2 text-xs text-cream/55"><span className={activePhase >= 3 ? 'text-accent' : ''}>Peer debate</span><ArrowRight size={13} aria-hidden="true" /><span className={activePhase >= 4 ? 'text-accent' : ''}>Lead synthesis</span></div>
+            <p className="mt-3 text-xs text-cream/45">Sample handoff: <span className="text-cream/75">{selected.handoff}</span></p>
+          </div>
+
+          <div className="pt-5"><p className="text-[10px] font-bold uppercase tracking-[0.16em] text-cream/45">Activity</p><ol className="mt-3 space-y-3">{activity.slice(0, status === 'idle' ? 0 : phase + 1).slice(-4).map((entry, index, entries) => <li key={entry} className="flex gap-3 text-xs leading-relaxed text-cream/60"><span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${index === entries.length - 1 && status === 'running' ? 'bg-accent' : 'bg-cream/25'}`} aria-hidden="true" />{entry}</li>)}</ol>{status === 'idle' && <p className="mt-3 text-xs text-cream/40">No events yet.</p>}</div>
+        </aside>
+      </div>
     </section>
   )
 }

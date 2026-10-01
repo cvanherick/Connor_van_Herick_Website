@@ -197,8 +197,8 @@ const Projects = ({ archive = false }: ProjectsProps) => {
                   className={`group overflow-hidden rounded-2xl border border-cream/10 bg-surface/65 transition-colors hover:border-accent/35 ${index === 0 ? 'md:col-span-2' : ''}`}
                 >
                   <div className="relative flex h-36 items-center justify-center overflow-hidden border-b border-cream/10 bg-primary/35 md:h-40">
-                    {project.title === 'Cadre Agent Team Framework' && <div className="grid w-full max-w-md grid-cols-4 gap-2 px-5" aria-hidden="true">
-                      {['Brief', 'Research', 'Review', 'Output'].map((step, stepIndex) => <div key={step} className={`relative rounded-lg border px-2 py-3 text-center text-[9px] font-bold uppercase tracking-[0.1em] ${stepIndex === 0 ? 'border-cream/15 text-cream/60' : stepIndex === 3 ? 'border-accent/40 bg-accent/10 text-accent' : 'border-cream/10 text-cream/50'}`}><span className="mb-1 block text-accent/70">0{stepIndex + 1}</span>{step}{stepIndex < 3 && <span className="absolute -right-2 top-1/2 z-10 h-px w-2 bg-accent/30" />}</div>)}
+                    {project.title === 'Cadre Agent Team Framework' && <div className="flex w-full max-w-lg items-center gap-2 px-5" aria-hidden="true">
+                      {['Goal', '10 teams', 'Integrator', 'Human'].map((step, stepIndex) => <div key={step} className="flex min-w-0 flex-1 items-center gap-2"><div className={`flex h-14 min-w-0 flex-1 items-center justify-center rounded-lg border px-1 text-center text-[9px] font-bold uppercase tracking-[0.08em] ${stepIndex === 1 ? 'border-accent/40 bg-accent/10 text-accent' : 'border-cream/15 text-cream/55'}`}>{step}</div>{stepIndex < 3 && <span className="h-px w-2 shrink-0 bg-accent/30" />}</div>)}
                     </div>}
                     {project.title === 'Vision-Guided Robotic Game Player' && <div className="grid w-full max-w-sm grid-cols-3 gap-2 px-5" aria-hidden="true">
                       {['Perceive', 'Plan', 'Place'].map((step, stepIndex) => <div key={step} className="rounded-lg border border-cream/10 px-3 py-4 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
@@ -252,7 +252,7 @@ const Projects = ({ archive = false }: ProjectsProps) => {
 
                     {/* Links */}
                     <div className="flex flex-wrap gap-4 pt-1">
-                      {project.title === 'Cadre Agent Team Framework' && <button type="button" onClick={() => setCadreSimulationOpen(current => !current)} className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-cream">
+                      {project.title === 'Cadre Agent Team Framework' && <button type="button" onClick={() => { const next = !cadreSimulationOpen; setCadreSimulationOpen(next); if (next) window.setTimeout(() => document.getElementById('cadre-simulation')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' }), 100) }} aria-expanded={cadreSimulationOpen} aria-controls="cadre-simulation" className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-cream">
                         <Play size={16} /> {cadreSimulationOpen ? 'Hide simulation' : 'Run simulation'}
                       </button>}
                       {project.github && (
@@ -274,7 +274,7 @@ const Projects = ({ archive = false }: ProjectsProps) => {
                         </span>
                       )}
                     </div>
-                    {project.title === 'Cadre Agent Team Framework' && <CadreSimulation open={cadreSimulationOpen} onClose={() => setCadreSimulationOpen(false)} />}
+                    {project.title === 'Cadre Agent Team Framework' && <CadreSimulation open={cadreSimulationOpen} autoStart={cadreSimulationOpen} onClose={() => setCadreSimulationOpen(false)} />}
                   </div>
                 </motion.div>
               )
