@@ -28,21 +28,21 @@ const Coursework = ({ archive = false }: CourseworkProps) => {
   const visibleCourses = archive ? courses : courses.filter((course) => selectedCodes.includes(course.code))
 
   return (
-    <section id="coursework" aria-labelledby="coursework-title" className="py-28 px-6 bg-primary/35">
+    <section id="coursework" aria-labelledby="coursework-title" className="px-6 py-24 md:py-28">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 max-w-2xl">
           <h2 className="section-heading mb-6"><span id="coursework-title">{archive ? 'Coursework Archive' : 'Selected Coursework'}</span></h2>
-          <p className="text-xl text-cream/60 max-w-2xl mx-auto">{archive ? 'Transcript-derived coursework across computer science, data science, mathematics, and robotics.' : 'Selected ML, systems, robotics, and data science courses.'}</p>
+          <p className="max-w-xl text-lg leading-relaxed text-cream/65">{archive ? 'Transcript-derived coursework across computer science, data science, mathematics, and robotics.' : 'Selected ML, systems, robotics, and data science courses.'}</p>
         </motion.div>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid border-t border-cream/10 md:grid-cols-2 xl:grid-cols-3">
           {visibleCourses.map((course, index) => (
-            <motion.div key={course.code} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: Math.min(index, 5) * 0.04 }} className="card p-6 group">
-              <div className="flex items-start gap-4">
-                <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-accent/20 to-secondary/15 border border-cream/10 flex items-center justify-center text-accent flex-shrink-0"><course.icon size={24} /></div>
-                <div><p className="text-sm font-bold uppercase tracking-wide text-secondary">{course.code}</p><h3 className="mt-1 text-xl font-bold text-cream leading-snug">{course.name}</h3><p className="mt-2 text-xs font-semibold uppercase tracking-wider text-cream/45">{course.status}</p></div>
+            <motion.article key={course.code} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.35, delay: Math.min(index, 5) * 0.04 }} className="border-b border-cream/10 p-5 transition-colors hover:bg-surface/30 md:border-r md:last:border-r-0">
+              <div className="flex items-start gap-3">
+                <course.icon size={18} className="mt-0.5 shrink-0 text-accent" />
+                <div><p className="text-[11px] font-bold uppercase tracking-[0.14em] text-secondary">{course.code} <span className="ml-2 text-cream/35">{course.status}</span></p><h3 className="mt-2 text-lg font-semibold leading-snug tracking-[-0.02em] text-cream">{course.name}</h3></div>
               </div>
-              <div className="mt-6 flex flex-wrap gap-2">{course.skills.map((skill) => <span key={skill} className="rounded-xl border border-cream/10 bg-cream/5 px-3 py-2 text-sm font-medium text-cream/70">{skill}</span>)}</div>
-            </motion.div>
+              <p className="mt-4 text-sm leading-relaxed text-cream/55">{course.skills.join(' · ')}</p>
+            </motion.article>
           ))}
         </div>
         {!archive && <div className="mt-10 text-center"><a href="./coursework/" className="btn btn-secondary inline-flex">View More Coursework <span aria-hidden="true">→</span></a></div>}

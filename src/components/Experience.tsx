@@ -115,55 +115,43 @@ const Experience = ({ archive = false, mode = 'explore' }: ExperienceProps) => {
   const visibleExperiences = archive ? experiences : experiences.slice(0, mode === 'recruiter' ? 4 : 4)
 
   return (
-    <section id="experience" aria-labelledby="experience-title" className="py-28 px-6">
+    <section id="experience" aria-labelledby="experience-title" className="px-6 py-24 md:py-28">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 max-w-2xl">
           <h2 className="section-heading mb-6">
             <span id="experience-title">{archive ? 'Experience' : 'Selected Experience'}</span>
           </h2>
-          <p className="text-xl text-cream/60 max-w-2xl mx-auto">Applied machine learning, data science, and technical leadership experience.</p>
+          <p className="max-w-xl text-lg leading-relaxed text-cream/65">Applied machine learning, data science, and technical leadership experience.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="border-t border-cream/10">
           {visibleExperiences.map((exp, index) => (
-            <motion.div key={exp.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: Math.min(index, 3) * 0.05 }} className="card group overflow-hidden rounded-3xl overflow-clip">
-              <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-44 rounded-t-3xl" />
-              <div className="relative h-44 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden flex items-center justify-center">
+            <motion.article key={exp.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: Math.min(index, 3) * 0.05 }} className="group grid gap-6 border-b border-cream/10 py-8 md:grid-cols-[3.5rem_minmax(0,1fr)_minmax(16rem,.8fr)] md:gap-8">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-cream/10 bg-surface/60 md:mt-1">
                 {exp.logo && (
-                  <div className={`h-24 rounded-3xl flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-105 ${exp.company === 'Happen Bank (formerly LendingClub)' ? 'w-40 bg-surface p-3' : 'w-24'} ${exp.company === 'Cal Climbing' ? 'bg-black p-2' : exp.company === 'UC Berkeley School of Law' ? 'bg-white/95 p-2' : exp.company === 'Happen Bank (formerly LendingClub)' ? '' : 'bg-white/95 p-5'}`}>
-                    <img src={exp.logo} alt={exp.logoAlt ?? `${exp.company} logo`} loading="lazy" decoding="async" className="h-full w-full object-contain" />
-                  </div>
+                  <img src={exp.logo} alt={exp.logoAlt ?? `${exp.company} logo`} loading="lazy" decoding="async" className={`h-8 w-8 object-contain ${exp.company === 'Happen Bank (formerly LendingClub)' ? 'w-10' : ''}`} />
                 )}
                 {!exp.logo && (
-                  <div className="h-24 w-24 rounded-3xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent shadow-2xl">
-                    {index === 0 && <BriefcaseBusiness size={44} />}
-                    {index === 2 && <Users size={44} />}
-                    {index === 3 && <Briefcase size={44} />}
-                    {index === 4 && <Users size={44} />}
-                    {index > 4 && <BriefcaseBusiness size={44} />}
-                  </div>
+                  <>{index === 0 && <BriefcaseBusiness size={20} className="text-accent" />}{index === 2 && <Users size={20} className="text-accent" />}{index === 3 && <Briefcase size={20} className="text-accent" />}{index > 3 && <BriefcaseBusiness size={20} className="text-accent" />}</>
                 )}
               </div>
 
-              <div className="p-8 relative z-10">
-                <div className="mb-6">
-                  <div className="flex items-center gap-2 text-accent font-semibold mb-3"><BrainCog size={18} /><span>{exp.duration}</span></div>
-                  <h3 className="text-2xl font-bold text-cream mb-3 group-hover:text-accent transition-colors duration-300">{exp.caseStudy ? <a href={exp.caseStudy} className="focus-visible:rounded-sm">{exp.title}</a> : exp.title}</h3>
-                  <p className="text-cream/70 font-medium leading-relaxed">{exp.company}</p>
-                  {exp.note && <p className="mt-4 inline-flex rounded-xl border border-accent/30 bg-accent/10 px-3 py-1 text-sm font-semibold text-accent">{exp.note}</p>}
-                </div>
-                {exp.caseStudy && <div className="mb-7 grid gap-2 sm:grid-cols-5">
-                  {(exp.caseStudySteps ?? ['Community', 'Operations', 'Trips', 'Leadership', 'Impact']).map((step, stepIndex) => <div key={step} className="relative rounded-xl border border-cream/10 bg-primary/45 px-3 py-3 text-center text-[11px] font-semibold text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
-                </div>}
-                <ul className="space-y-3 text-cream/70 leading-relaxed">
+              <div>
+                <p className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary"><BrainCog size={14} className="text-accent" /><span>{exp.duration}</span></p>
+                <h3 className="text-xl font-semibold tracking-[-0.025em] text-cream transition-colors group-hover:text-accent">{exp.caseStudy ? <a href={exp.caseStudy} className="focus-visible:rounded-sm">{exp.title}</a> : exp.title}</h3>
+                <p className="mt-2 font-medium text-cream/65">{exp.company}</p>
+                {exp.note && <p className="mt-3 text-sm font-medium text-accent">{exp.note}</p>}
+              </div>
+              <div>
+                <ul className="space-y-2.5 text-sm leading-relaxed text-cream/64">
                   {exp.bullets.map((bullet, bIndex) => <li key={bIndex} className="flex items-start gap-3"><div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" /><span>{bullet}</span></li>)}
                 </ul>
                 {(exp.caseStudy || exp.website) && <div className="mt-7 flex flex-wrap gap-3">
-                  {exp.caseStudy && <a href={exp.caseStudy} className="inline-flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 font-semibold text-accent transition-colors hover:bg-accent/20">Read the write-up <span aria-hidden="true">→</span></a>}
-                  {exp.website && <a href={exp.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-cream/15 px-4 py-3 font-semibold text-cream/70 transition-colors hover:border-accent/40 hover:text-accent">Cal Climbing website <span aria-hidden="true">↗</span></a>}
+                  {exp.caseStudy && <a href={exp.caseStudy} className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-cream">Read the write-up <span aria-hidden="true">→</span></a>}
+                  {exp.website && <a href={exp.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-cream/60 transition-colors hover:text-accent">Cal Climbing website <span aria-hidden="true">↗</span></a>}
                 </div>}
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 

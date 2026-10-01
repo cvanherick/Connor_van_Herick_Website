@@ -4,57 +4,24 @@ import { Link } from 'react-scroll'
 interface FooterProps { mode?: 'explore' | 'recruiter' }
 
 const Footer = ({ mode = 'explore' }: FooterProps) => {
+  const links = mode === 'explore' ? ['experience', 'projects', 'building', 'about', 'coursework', 'contact'] : ['experience', 'projects', 'contact']
+  const labels: Record<string, string> = { experience: 'Work', building: 'Currently' }
+
   return (
-    <footer className="bg-primary/80 border-t border-cream/10 py-16 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 items-center">
-          <div className="text-center lg:text-left">
-            <Link to="hero" smooth={true} duration={800} className="text-2xl font-bold bg-gradient-to-r from-cream to-accent bg-clip-text text-transparent hover:scale-105 transition-transform mb-4 inline-block">
-              Connor van Herick
-            </Link>
-            <p className="text-cream/45 text-sm max-w-md mx-auto lg:mx-0">
-              Computer Science BA + Data Science BA · Robotics emphasis @ UC Berkeley
-            </p>
-          </div>
-
-          <div className="text-center">
-            <h4 className="text-lg font-bold text-slate-200 mb-6">Links</h4>
-            <div className="space-y-3">
-              {mode === 'explore' && <Link to="about" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">About</Link>}
-              {mode === 'explore' && <Link to="coursework" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">Coursework</Link>}
-              <Link to="experience" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
-                Experience
-              </Link>
-              <Link to="projects" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
-                Projects
-              </Link>
-              {mode === 'explore' && <Link to="building" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">Currently</Link>}
-              <Link to="contact" smooth={true} duration={800} className="block text-cream/60 hover:text-accent transition-colors font-medium">
-                Contact
-              </Link>
-              {mode === 'explore' && <a href="./outside-work/" className="block text-cream/60 transition-colors hover:text-accent">
-                Outside of work
-              </a>}
-            </div>
-          </div>
-
-          <div className="text-center lg:col-span-2">
-            <h4 className="text-lg font-bold text-slate-200 mb-8">Connect</h4>
-            <div className="flex justify-center lg:justify-start gap-6 mb-8">
-              <a aria-label="LinkedIn" href="https://www.linkedin.com/in/connor-vanherick/" target="_blank" rel="noopener noreferrer" className="w-16 h-16 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent/15 hover:scale-110 transition-all duration-300 group border border-cream/10 hover:border-accent/50">
-                <Linkedin size={24} className="group-hover:rotate-12" />
-              </a>
-              <a aria-label="GitHub" href="https://github.com/cvanherick" target="_blank" rel="noopener noreferrer" className="w-16 h-16 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent/15 hover:scale-110 transition-all duration-300 group border border-cream/10 hover:border-accent/50">
-                <Github size={24} className="group-hover:rotate-12" />
-              </a>
-              <a aria-label="Email Connor" href="mailto:cvanherick@berkeley.edu" className="w-16 h-16 bg-cream/5 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-accent/15 hover:scale-110 transition-all duration-300 group border border-cream/10 hover:border-accent/50">
-                <Mail size={24} className="group-hover:rotate-12" />
-              </a>
-            </div>
-            <p className="text-cream/35 text-sm text-center lg:text-left">
-              © 2026 Connor van Herick. UC Berkeley Computer Science BA + Data Science BA.
-            </p>
-          </div>
+    <footer className="border-t border-cream/10 px-6 py-10">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-end md:justify-between">
+        <div>
+          <Link to="hero" smooth duration={500} className="site-name cursor-pointer text-lg font-semibold tracking-[-0.04em] text-cream">Connor van Herick</Link>
+          <p className="mt-2 text-sm text-cream/45">Computer Science + Data Science · UC Berkeley</p>
+          <p className="mt-5 text-xs text-cream/35">© 2026 Connor van Herick</p>
+        </div>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
+          {links.map(link => <Link key={link} to={link} smooth duration={500} className="cursor-pointer text-cream/55 transition-colors hover:text-accent">{labels[link] ?? link.charAt(0).toUpperCase() + link.slice(1)}</Link>)}
+          {mode === 'explore' && <a href="./outside-work/" className="text-cream/55 transition-colors hover:text-accent">Outside work</a>}
+          <span className="hidden h-4 w-px bg-cream/15 sm:block" />
+          <a aria-label="LinkedIn" href="https://www.linkedin.com/in/connor-vanherick/" target="_blank" rel="noopener noreferrer" className="text-cream/55 transition-colors hover:text-accent"><Linkedin size={17} /></a>
+          <a aria-label="GitHub" href="https://github.com/cvanherick" target="_blank" rel="noopener noreferrer" className="text-cream/55 transition-colors hover:text-accent"><Github size={17} /></a>
+          <a aria-label="Email Connor" href="mailto:cvanherick@berkeley.edu" className="text-cream/55 transition-colors hover:text-accent"><Mail size={17} /></a>
         </div>
       </div>
     </footer>

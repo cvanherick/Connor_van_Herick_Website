@@ -42,16 +42,6 @@ function App() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-primary">
       <a href="#main-content" className="skip-link">Skip to content</a>
-      <div className="skills-marquee" aria-label="Skills and focus areas: decision systems, uplift modeling, ROS 2 robotics, gradient boosting, computer vision, Databricks pipelines, and multi-agent systems">
-        <div className="skills-marquee__viewport">
-          <div className="skills-marquee__track" aria-hidden="true">
-            {[0, 1].map(copy => <div className="skills-marquee__group" key={copy}>
-              {['decision systems', 'uplift modeling', 'ROS 2 robotics', 'XGBoost + LightGBM', 'computer vision', 'Databricks pipelines', 'multi-agent systems'].map(skill => <span className="skills-marquee__item" key={`${copy}-${skill}`}>{skill}<span className="skills-marquee__separator">·</span></span>)}
-            </div>)}
-          </div>
-        </div>
-      </div>
-      <div className="pointer-events-none fixed inset-0 opacity-70 bg-[linear-gradient(120deg,rgba(20,184,166,0.08),transparent_35%,rgba(245,158,11,0.07)_68%,transparent)]" />
       <div className="relative z-10">
         <Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'dark' ? 'light' : 'dark')} mode={mode} onToggleMode={() => setMode(current => current === 'explore' ? 'recruiter' : 'explore')} />
         <main id="main-content"><Hero />

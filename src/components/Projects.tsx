@@ -161,18 +161,18 @@ const Projects = ({ archive = false }: ProjectsProps) => {
   const visibleProjects = (archive ? sortedProjects : featuredProjects).filter((project) => category === 'All' || projectCategory(project.title) === category)
 
   return (
-    <section id="projects" aria-labelledby="projects-title" className="py-32 px-6">
+    <section id="projects" aria-labelledby="projects-title" className="px-6 py-24 md:py-28">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-24"
+          className="mb-12 max-w-2xl"
         >
           <h2 className="section-heading mb-6">
             <span id="projects-title">Projects</span>
           </h2>
-          <p className="text-xl text-cream/60 max-w-2xl mx-auto">
+          <p className="max-w-xl text-lg leading-relaxed text-cream/65">
             {archive ? 'A complete record of coursework, systems, ML, robotics, and data projects.' : 'Selected work across machine learning, computer vision, robotics, systems, and data products.'}
           </p>
         </motion.div>
@@ -182,7 +182,7 @@ const Projects = ({ archive = false }: ProjectsProps) => {
         </div>}
         {archive && <p className="mb-8 text-center text-sm text-cream/60" aria-live="polite">Showing {visibleProjects.length} {visibleProjects.length === 1 ? 'project' : 'projects'}{category !== 'All' ? ` in ${category}` : ''}.</p>}
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid gap-5 md:grid-cols-2">
           {visibleProjects.map((project, index) => (
             (() => {
               const Icon = projectIcon(project.title)
@@ -190,80 +190,86 @@ const Projects = ({ archive = false }: ProjectsProps) => {
               return (
                 <motion.div
                   key={project.title}
-                  initial={{ opacity: 0, y: 50 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: Math.min(index, 5) * 0.05 }}
-                  className={`card group overflow-hidden rounded-3xl overflow-clip ${index === 0 ? 'lg:col-span-2' : ''}`}
+                  className={`group overflow-hidden rounded-2xl border border-cream/10 bg-surface/65 transition-colors hover:border-accent/35 ${index === 0 ? 'md:col-span-2' : ''}`}
                 >
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-accent/5 to-transparent h-48 rounded-t-3xl" />
-
-                  <div className="relative h-48 bg-gradient-to-br from-surface via-primary to-surface rounded-t-3xl overflow-hidden group-hover:from-accent/10 group-hover:to-secondary/10 transition-all duration-700 flex items-center justify-center">
+                  <div className="relative flex h-36 items-center justify-center overflow-hidden border-b border-cream/10 bg-primary/35 md:h-40">
+                    {project.title === 'Cadre Agent Team Framework' && <div className="grid w-full max-w-md grid-cols-4 gap-2 px-5" aria-hidden="true">
+                      {['Brief', 'Research', 'Review', 'Output'].map((step, stepIndex) => <div key={step} className={`relative rounded-lg border px-2 py-3 text-center text-[9px] font-bold uppercase tracking-[0.1em] ${stepIndex === 0 ? 'border-cream/15 text-cream/60' : stepIndex === 3 ? 'border-accent/40 bg-accent/10 text-accent' : 'border-cream/10 text-cream/50'}`}><span className="mb-1 block text-accent/70">0{stepIndex + 1}</span>{step}{stepIndex < 3 && <span className="absolute -right-2 top-1/2 z-10 h-px w-2 bg-accent/30" />}</div>)}
+                    </div>}
+                    {project.title === 'Vision-Guided Robotic Game Player' && <div className="grid w-full max-w-sm grid-cols-3 gap-2 px-5" aria-hidden="true">
+                      {['Perceive', 'Plan', 'Place'].map((step, stepIndex) => <div key={step} className="rounded-lg border border-cream/10 px-3 py-4 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
+                    </div>}
+                    {project.title === 'Secure File Sharing System' && <div className="grid w-full max-w-sm grid-cols-3 gap-2 px-5" aria-hidden="true">
+                      {['Authenticate', 'Encrypt', 'Revoke'].map((step, stepIndex) => <div key={step} className="rounded-lg border border-cream/10 px-3 py-4 text-center text-[10px] font-bold uppercase tracking-[0.1em] text-cream/60"><span className="mb-1 block text-accent">0{stepIndex + 1}</span>{step}</div>)}
+                    </div>}
+                    {!['Cadre Agent Team Framework', 'Vision-Guided Robotic Game Player', 'Secure File Sharing System'].includes(project.title) && <>
                     {project.logo && (
                       <img
                         src={project.logo}
                         alt={project.logoAlt ?? `${project.title} logo`}
                         loading="lazy"
                         decoding="async"
-                        className="h-24 w-24 object-contain invert opacity-80 drop-shadow-2xl transition-all duration-500 group-hover:scale-110 group-hover:opacity-100"
+                        className="h-16 w-16 object-contain opacity-80 transition-opacity duration-300 group-hover:opacity-100"
                       />
                     )}
                     {!project.logo && (
-                      <div className="h-24 w-24 rounded-3xl bg-gradient-to-br from-accent/20 to-secondary/15 border border-cream/10 flex items-center justify-center text-accent shadow-2xl transition-all duration-500 group-hover:scale-110">
-                        <Icon size={44} />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 text-accent">
+                        <Icon size={22} />
                       </div>
                     )}
+                    </>}
                   </div>
 
-                  <div className="p-8 relative z-10">
-                    <h3 className="text-2xl font-bold mb-4 text-cream group-hover:text-accent transition-colors duration-300">
+                  <div className="relative z-10 p-6 md:p-7">
+                    {project.course && <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.16em] text-secondary">{project.course}</p>}
+                    <h3 className="mb-4 text-2xl font-semibold tracking-[-0.03em] text-cream transition-colors duration-200 group-hover:text-accent">
                       {project.title}
                     </h3>
-                    {project.course && <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-secondary">{project.course}</p>}
-                    <p className="text-cream/65 mb-6 leading-relaxed">{project.description}</p>
+                    <p className="mb-6 leading-relaxed text-cream/68">{project.description}</p>
 
                     {/* Tech badges */}
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="mb-6 flex flex-wrap gap-x-3 gap-y-2 text-sm text-cream/55">
                       {project.tech.map((tech, tIndex) => (
-                        <span key={tIndex} className="px-4 py-2 bg-cream/5 backdrop-blur-sm rounded-2xl text-sm font-medium border border-cream/10 hover:bg-cream/10 transition-all group-hover:border-accent/50">
-                          {tech}
-                        </span>
+                        <span key={tIndex}>{tech}{tIndex < project.tech.length - 1 && <span className="ml-3 text-cream/25">/</span>}</span>
                       ))}
                     </div>
 
                     {/* Impact */}
-                    <p className="font-semibold text-accent text-xl mb-6 bg-accent/5 px-4 py-2 rounded-xl">
+                    <p className="mb-6 border-l-2 border-accent/45 pl-3 text-sm font-semibold leading-relaxed text-cream/82">
                       {project.impact}
                     </p>
 
                     {project.accessNote && (
-                      <p className="mb-6 flex items-start gap-2 rounded-xl border border-secondary/25 bg-secondary/10 px-4 py-3 text-sm font-medium leading-relaxed text-cream/75">
+                      <p className="mb-6 flex items-start gap-2 border-l-2 border-secondary/60 pl-3 text-sm leading-relaxed text-cream/65">
                         <LockKeyhole size={16} className="mt-0.5 flex-shrink-0 text-secondary" />
                         {project.accessNote}
                       </p>
                     )}
 
                     {/* Links */}
-                    <div className="flex gap-4 pt-4">
-                      {project.title === 'Cadre Agent Team Framework' && <button type="button" onClick={() => setCadreSimulationOpen(current => !current)} className="flex items-center gap-2 rounded-2xl border border-accent/30 bg-accent/10 p-4 font-semibold text-accent transition-all hover:bg-accent/20">
-                        <Play size={20} /> {cadreSimulationOpen ? 'Hide simulation' : 'Run simulation'}
+                    <div className="flex flex-wrap gap-4 pt-1">
+                      {project.title === 'Cadre Agent Team Framework' && <button type="button" onClick={() => setCadreSimulationOpen(current => !current)} className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-cream">
+                        <Play size={16} /> {cadreSimulationOpen ? 'Hide simulation' : 'Run simulation'}
                       </button>}
                       {project.github && (
-                        <a href={project.github} target="_blank" rel="noopener" className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 hover:bg-cream/10 border border-cream/10 text-cream/70 hover:text-accent transition-all group-hover:scale-105 flex-1 justify-center">
-                          <Github size={20} />
+                        <a href={project.github} target="_blank" rel="noopener" className="inline-flex items-center gap-2 text-sm font-semibold text-cream/65 transition-colors hover:text-accent">
+                          <Github size={16} />
                           Code
                         </a>
                       )}
                       {project.demo && (
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-4 rounded-2xl bg-gradient-to-r from-accent to-secondary hover:from-secondary hover:to-accent text-primary font-semibold shadow-lg hover:shadow-accent/30 transition-all group-hover:scale-105 flex-1 justify-center">
-                          <ExternalLink size={20} />
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-cream/65 transition-colors hover:text-accent">
+                          <ExternalLink size={16} />
                           {project.demo.startsWith('./case-studies') ? 'Case Study' : 'View Project'}
                         </a>
                       )}
                       {!project.github && !project.demo && (
-                          <span className="flex items-center gap-2 p-4 rounded-2xl bg-cream/5 border border-cream/10 text-cream/55 flex-1 justify-center text-center">
-                            <Github size={20} />
+                          <span className="inline-flex items-center gap-2 text-sm text-cream/50">
+                            <Github size={16} />
                           Private project · summary available
                         </span>
                       )}
