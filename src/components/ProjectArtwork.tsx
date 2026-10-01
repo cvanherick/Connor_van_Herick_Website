@@ -21,8 +21,8 @@ const Window = ({ children }: { children: ReactNode }) => (
 function ArtworkScene({ title }: { title: string }) {
   if (title.startsWith('Cadre')) return <>
     <path d="M280 73V91M136 113H424M136 91v22m72-22v22m72-22v22m72-22v22m72-22v22" stroke={muted} strokeWidth="1.5" />
-    <rect x="229" y="40" width="102" height="34" rx="9" fill="#183b3c" stroke={mint} /><Label x={247} y={61} color={mint}>ORCHESTRATOR</Label>
-    {['RESEARCH', 'ENGINEER', 'REVIEW', 'INTEGRATE', 'OUTPUT'].map((item, i) => <g key={item}><rect x={101 + i * 73} y="112" width="68" height="29" rx="6" fill={i === 4 ? '#3d3928' : '#1e3438'} stroke={i === 4 ? gold : '#48645f'} /><Label x={107 + i * 73} y={130} color={i === 4 ? gold : ink}>{item}</Label></g>)}
+    <rect x="225" y="40" width="110" height="34" rx="9" fill="#183b3c" stroke={mint} /><Label x={235} y={61} color={mint}>PRODUCT OWNER</Label>
+    {['DISCOVER', 'DEFINE', 'BUILD', 'REVIEW', 'HUMAN'].map((item, i) => <g key={item}><rect x={101 + i * 73} y="112" width="68" height="29" rx="6" fill={i === 4 ? '#3d3928' : '#1e3438'} stroke={i === 4 ? gold : '#48645f'} /><Label x={107 + i * 73} y={130} color={i === 4 ? gold : ink}>{item}</Label></g>)}
   </>
   if (title.startsWith('Vision-Guided')) return <>
     <path d="M118 133h116M194 133l28-35 32 5 28-42" stroke={ink} strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
