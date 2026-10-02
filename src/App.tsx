@@ -15,7 +15,8 @@ function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>(() => (localStorage.getItem('portfolio-theme') as 'dark' | 'light') || 'dark')
   const [mode, setMode] = useState<'explore' | 'recruiter'>(() => {
     const queryMode = new URLSearchParams(window.location.search).get('mode')
-    return queryMode === 'recruiter' ? 'recruiter' : (localStorage.getItem('portfolio-view-mode') as 'explore' | 'recruiter') || 'explore'
+    if (queryMode === 'explore' || queryMode === 'recruiter') return queryMode
+    return localStorage.getItem('portfolio-view-mode') === 'recruiter' ? 'recruiter' : 'explore'
   })
   const pathname = window.location.pathname
 
@@ -43,7 +44,7 @@ function App() {
     <div className="relative min-h-screen overflow-hidden bg-primary">
       <a href="#main-content" className="skip-link">Skip to content</a>
       <div className="relative z-10">
-        <Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'dark' ? 'light' : 'dark')} mode={mode} onToggleMode={() => setMode(current => current === 'explore' ? 'recruiter' : 'explore')} />
+        <Navbar theme={theme} onToggleTheme={() => setTheme(current => current === 'dark' ? 'light' : 'dark')} mode={mode} onSetMode={(nextMode) => { if (nextMode === mode) return; setMode(nextMode); window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }) }} />
         <main id="main-content"><Hero />
         <Experience mode={mode} />
         <Projects />
