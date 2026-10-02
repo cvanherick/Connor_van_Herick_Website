@@ -6,7 +6,14 @@ export interface ExperienceItem {
   company: string
   duration: string
   note?: string
-  bullets: string[]
+  bullets?: string[]
+  projectWriteup?: {
+    title: string
+    problem: string
+    approach: string
+    result: string
+  }
+  projectImage?: { src: string; alt: string }
   logo?: string
   logoAlt?: string
   caseStudy?: string
@@ -34,11 +41,16 @@ export const experiences: ExperienceItem[] = [
     logo: './assets/happen-bank.png',
     logoAlt: 'Happen Bank white mark on an orange background',
     caseStudy: './case-studies/happen-bank.html',
-    bullets: [
-      'Built a Databricks Next Best Action pipeline across 73M+ borrower rows using PySpark and SQL',
-      'Trained a weighted tree-based treatment-effect model with compliance, eligibility, and operational capacity guardrails',
-      'Modeled a 2.04% charge-off reduction and approximately $20.35M in annualized value, with randomized live validation identified as the next step',
-    ]
+    projectImage: {
+      src: './assets/happen-bank-presentation-optimized.jpg',
+      alt: 'Connor presenting the Happen Bank collections strategy project',
+    },
+    projectWriteup: {
+      title: 'Next Best Action for Collections',
+      problem: 'Decide who benefits from outreach, when to contact them, and which channel to use—without ignoring compliance or capacity limits.',
+      approach: 'Built a Databricks decisioning pipeline across 73M+ borrower rows and trained a weighted XGBoost S-Learner to rank eligible actions.',
+      result: 'A holdout analysis estimated a 2.04% lower charge-off rate and about $20.35M in annualized value. Randomized live validation was the proposed next step.',
+    },
   },
   {
     title: 'Machine Learning Project Lead',
@@ -141,13 +153,26 @@ const Experience = ({ archive = false, mode = 'explore' }: ExperienceProps) => {
                 <h3 className="text-xl font-semibold tracking-[-0.025em] text-cream transition-colors group-hover:text-accent">{exp.caseStudy ? <a href={exp.caseStudy} className="focus-visible:rounded-sm">{exp.title}</a> : exp.title}</h3>
                 <p className="mt-2 font-medium text-cream/65">{exp.company}</p>
                 {exp.note && <p className="mt-3 text-sm font-medium text-accent">{exp.note}</p>}
+                {exp.projectImage && exp.caseStudy && <a href={exp.caseStudy} aria-label={`View ${exp.company} project write-up`} className="mt-5 block w-full max-w-[21rem] overflow-hidden rounded-xl border border-cream/10 transition-colors hover:border-accent/40"><img src={exp.projectImage.src} alt={exp.projectImage.alt} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover object-[center_38%]" /></a>}
               </div>
               <div>
-                <ul className="space-y-2.5 text-sm leading-relaxed text-cream/64">
-                  {exp.bullets.map((bullet, bIndex) => <li key={bIndex} className="flex items-start gap-3"><div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" /><span>{bullet}</span></li>)}
-                </ul>
+                {exp.projectWriteup ? (
+                  <div>
+                    <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.15em] text-secondary">Internship project</p>
+                    <h4 className="text-lg font-semibold tracking-[-0.025em] text-cream">{exp.projectWriteup.title}</h4>
+                    <dl className="mt-4 space-y-3 border-l-2 border-accent/40 pl-4 text-sm leading-relaxed">
+                      <div><dt className="inline font-semibold text-cream/85">Problem · </dt><dd className="inline text-cream/64">{exp.projectWriteup.problem}</dd></div>
+                      <div><dt className="inline font-semibold text-cream/85">Approach · </dt><dd className="inline text-cream/64">{exp.projectWriteup.approach}</dd></div>
+                      <div><dt className="inline font-semibold text-cream/85">Modeled result · </dt><dd className="inline text-cream/64">{exp.projectWriteup.result}</dd></div>
+                    </dl>
+                  </div>
+                ) : (
+                  <ul className="space-y-2.5 text-sm leading-relaxed text-cream/64">
+                    {exp.bullets?.map((bullet, bIndex) => <li key={bIndex} className="flex items-start gap-3"><div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" /><span>{bullet}</span></li>)}
+                  </ul>
+                )}
                 {(exp.caseStudy || exp.website) && <div className="mt-7 flex flex-wrap gap-3">
-                  {exp.caseStudy && <a href={exp.caseStudy} className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-cream">Read the write-up <span aria-hidden="true">→</span></a>}
+                  {exp.caseStudy && <a href={exp.caseStudy} className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-cream">{exp.projectWriteup ? 'Read the project write-up' : 'Read the write-up'} <span aria-hidden="true">→</span></a>}
                   {exp.website && <a href={exp.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-cream/60 transition-colors hover:text-accent">Cal Climbing website <span aria-hidden="true">↗</span></a>}
                 </div>}
               </div>
