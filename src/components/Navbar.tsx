@@ -41,8 +41,7 @@ const Navbar = ({ theme, onToggleTheme, mode, onSetMode }: NavbarProps) => {
   )
 
   const viewSwitcher = (mobile = false) => (
-    <div className={mobile ? 'py-5' : 'flex items-center gap-3'}>
-      <span className={`block font-bold uppercase tracking-[0.16em] text-cream/45 ${mobile ? 'mb-3 text-[10px]' : 'text-[9px]'}`}>Portfolio view</span>
+    <div className={mobile ? 'py-5' : ''}>
       <div role="group" aria-label="Portfolio view" className={`grid grid-cols-2 gap-1 rounded-xl border border-cream/15 bg-surface/50 p-1 ${mobile ? 'w-full' : 'w-[13rem]'}`}>
         {(['explore', 'recruiter'] as const).map(option => (
           <button
